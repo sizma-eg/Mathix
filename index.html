@@ -1,0 +1,8059 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<<<<<<< HEAD
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#09070d">
+
+    <meta name="description"
+        content="Mathix — منصة التدريب الذكي لطلاب الثانوية العامة علمي رياضة">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="icon"
+        type="image/png"
+        href="assets/mathix-logo.png">
+
+    <title>Mathix — منصة التدريب الذكي</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        :root {
+
+            --bg: #070609;
+
+            --panel: #0e0c12;
+
+            --panel2: #141019;
+
+            --border: rgba(255,255,255,.09);
+
+            --text: #f7f4fb;
+
+            --muted: #9d97a8;
+
+            --purple: #8b35ff;
+
+            --purple2: #b66cff;
+
+            --success: #51e49a;
+
+            --danger: #ff5577;
+
+            --shadow:
+                0 24px 80px rgba(0,0,0,.42);
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: "Cairo", sans-serif;
+
+            color: var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 78% 5%,
+                    rgba(139,53,255,.18),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 10% 40%,
+                    rgba(139,53,255,.08),
+                    transparent 25%
+                ),
+
+                var(--bg);
+
+            min-height: 100vh;
+
+        }
+
+
+        button,
+        input {
+
+            font-family: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        .hidden {
+
+            display: none !important;
+
+        }
+
+
+        .screen {
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================
+           LANDING
+        ========================= */
+
+
+        .landing {
+
+            display: grid;
+
+            place-items: center;
+
+            padding: 30px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .landing::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+
+            height: 500px;
+
+            border-radius: 50%;
+
+            background: rgba(139,53,255,.11);
+
+            filter: blur(90px);
+
+            top: -220px;
+
+            right: -150px;
+
+        }
+
+
+        .landing-card {
+
+            width: min(1050px,100%);
+
+            display: grid;
+
+            grid-template-columns: 1.15fr .85fr;
+
+            gap: 25px;
+
+            align-items: center;
+
+            padding: 55px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 34px;
+
+            background: rgba(14,12,18,.72);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow: var(--shadow);
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .brand img {
+
+            width: 55px;
+
+            height: 55px;
+
+            object-fit: contain;
+
+        }
+
+
+        .brand-name {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
+        }
+
+
+        .hero h1 {
+
+            font-size: clamp(38px,6vw,72px);
+
+            line-height: 1.08;
+
+            margin: 32px 0 18px;
+
+        }
+
+
+        .gradient {
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #fff,
+                    #c78bff
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+
+        }
+
+
+        .hero p {
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+            line-height: 2;
+
+            max-width: 650px;
+
+            margin: 0 0 30px;
+
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .btn {
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 13px 21px;
+
+            color: var(--text);
+
+            background: #16121c;
+
+            transition:
+                .2s transform,
+                .2s border-color,
+                .2s background;
+
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(182,108,255,.45);
+
+        }
+
+
+        .btn.primary {
+
+            border: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c22f5,
+                    #a953ff
+                );
+
+            box-shadow:
+                0 12px 35px
+                rgba(139,53,255,.25);
+
+        }
+
+
+        .hero-logo {
+
+            display: grid;
+
+            place-items: center;
+
+            min-height: 380px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.04),
+                    rgba(139,53,255,.06)
+                );
+
+        }
+
+
+        .hero-logo img {
+
+            width: min(320px,75%);
+
+            filter:
+                drop-shadow(
+                    0 0 35px
+                    rgba(139,53,255,.25)
+                );
+
+            animation:
+                float 4s ease-in-out infinite;
+
+        }
+
+
+        @keyframes float {
+
+            50% {
+
+                transform:
+                    translateY(-10px);
+
+            }
+
+        }
+
+
+        /* =========================
+           AUTH
+        ========================= */
+
+
+        .auth-wrap {
+
+            display: grid;
+
+            place-items: center;
+
+            padding: 30px;
+
+            min-height: 100vh;
+
+        }
+
+
+        .auth-box {
+
+            width: min(470px,100%);
+
+            padding: 34px;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                rgba(14,12,18,.9);
+
+            border-radius: 26px;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .auth-head {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .auth-head img {
+
+            width: 80px;
+
+            height: 80px;
+
+            object-fit: contain;
+
+        }
+
+
+        .auth-head h2 {
+
+            margin: 10px 0 5px;
+
+        }
+
+
+        .auth-head p {
+
+            color: var(--muted);
+
+            margin: 0;
+
+        }
+
+
+        .field {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            font-size: 13px;
+
+            color: var(--muted);
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .field input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            color: var(--text);
+
+            background: #09080c;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 13px;
+
+            outline: none;
+
+        }
+
+
+        .field input:focus {
+
+            border-color:
+                rgba(182,108,255,.7);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(139,53,255,.09);
+
+        }
+
+
+        .auth-message {
+
+            min-height: 22px;
+
+            color: #ff8ea5;
+
+            font-size: 13px;
+
+            margin: 10px 0;
+
+        }
+
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin: 18px 0;
+
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            height: 1px;
+
+            background: var(--border);
+
+            flex: 1;
+
+        }
+
+
+        /* =========================
+           APP
+        ========================= */
+
+
+        .app {
+
+            display: grid;
+
+            grid-template-columns: 260px 1fr;
+
+            min-height: 100vh;
+
+        }
+
+
+        .sidebar {
+
+            position: sticky;
+
+            top: 0;
+
+            height: 100vh;
+
+            padding: 22px 16px;
+
+            border-left:
+                1px solid var(--border);
+
+            background:
+                rgba(9,8,12,.82);
+
+            backdrop-filter: blur(18px);
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .side-brand {
+
+            padding:
+                5px 8px 25px;
+
+        }
+
+
+        .side-brand .brand img {
+
+            width: 45px;
+
+            height: 45px;
+
+        }
+
+
+        .nav {
+
+            display: grid;
+
+            gap: 7px;
+
+        }
+
+
+        .nav button {
+
+            width: 100%;
+
+            text-align: right;
+
+            border:
+                1px solid transparent;
+
+            background: transparent;
+
+            color: var(--muted);
+
+            padding: 12px 13px;
+
+            border-radius: 12px;
+
+        }
+
+
+        .nav button.active,
+        .nav button:hover {
+
+            color: #fff;
+
+            background: #17121e;
+
+            border-color: var(--border);
+
+        }
+
+
+        .logout {
+
+            margin-top: auto;
+
+        }
+
+
+        .main {
+
+            padding: 28px;
+
+            max-width: 1450px;
+
+            width: 100%;
+
+            margin: auto;
+
+        }
+
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .topbar h1 {
+
+            margin: 0;
+
+            font-size: 25px;
+
+        }
+
+
+        .user-chip {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 7px 12px;
+
+            border:
+                1px solid var(--border);
+
+            background: #0f0d13;
+
+            border-radius: 14px;
+
+        }
+
+
+        .avatar {
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7d29ed,
+                    #c66cff
+                );
+
+            font-weight: 800;
+
+        }
+
+
+        .welcome {
+
+            padding: 25px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,53,255,.14),
+                    rgba(255,255,255,.025)
+                );
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .welcome h2 {
+
+            margin: 0 0 7px;
+
+            font-size: 24px;
+
+        }
+
+
+        .welcome p {
+
+            margin: 0;
+
+            color: var(--muted);
+
+        }
+
+
+        .grid {
+
+            display: grid;
+
+            gap: 15px;
+
+        }
+
+
+        .stats {
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+        }
+
+
+        .stat,
+        .card {
+
+            border:
+                1px solid var(--border);
+
+            background:
+                rgba(14,12,18,.8);
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+        }
+
+
+        .stat .label {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .stat .value {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            margin-top: 7px;
+
+        }
+
+
+        .content-grid {
+
+            grid-template-columns:
+                1.3fr .7fr;
+
+            margin-top: 15px;
+
+        }
+
+
+        .card h3 {
+
+            margin:
+                0 0 16px;
+
+        }
+
+
+        .subject {
+
+            padding: 15px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .subject:last-child {
+
+            border-bottom: 0;
+
+        }
+
+
+        .subject-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .progress {
+
+            height: 8px;
+
+            background: #24202a;
+
+            border-radius: 99px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress i {
+
+            display: block;
+
+            height: 100%;
+
+            width: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7d29ed,
+                    #c66cff
+                );
+
+            border-radius: 99px;
+
+        }
+
+
+        .empty {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+        }
+
+
+        .section {
+
+            display: none;
+
+        }
+
+
+        .section.active {
+
+            display: block;
+
+        }
+
+
+        .profile-line {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .profile-line:last-child {
+
+            border-bottom: 0;
+
+        }
+
+
+        .profile-line span:first-child {
+
+            color: var(--muted);
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+
+        @media(max-width:900px) {
+
+            .landing-card {
+
+                grid-template-columns: 1fr;
+
+                padding: 35px;
+
+            }
+
+
+            .hero-logo {
+
+                min-height: 280px;
+
+            }
+
+
+            .app {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sidebar {
+
+                position: fixed;
+
+                z-index: 20;
+
+                right: 0;
+
+                left: 0;
+
+                bottom: 0;
+
+                top: auto;
+
+                height: auto;
+
+                padding: 8px 10px;
+
+                border-left: 0;
+
+                border-top:
+                    1px solid var(--border);
+
+            }
+
+
+            .side-brand,
+            .logout {
+
+                display: none;
+
+            }
+
+
+            .nav {
+
+                display: flex;
+
+                justify-content: space-around;
+
+            }
+
+
+            .nav button {
+
+                font-size: 0;
+
+                width: auto;
+
+                padding: 10px 14px;
+
+            }
+
+
+            .nav button::before {
+
+                font-size: 19px;
+
+            }
+
+
+            .nav button[data-section="dashboard"]::before {
+
+                content: "⌂";
+
+            }
+
+
+            .nav button[data-section="subjects"]::before {
+
+                content: "▦";
+
+            }
+
+
+            .nav button[data-section="profile"]::before {
+
+                content: "●";
+
+            }
+
+
+            .nav button[data-action="logout"]::before {
+
+                content: "↪";
+
+            }
+
+
+            .main {
+
+                padding:
+                    18px 15px 85px;
+
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width:520px) {
+
+            .landing {
+
+                padding: 15px;
+
+            }
+
+
+            .landing-card {
+
+                padding: 25px 18px;
+
+                border-radius: 24px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size: 40px;
+
+            }
+
+
+            .hero p {
+
+                font-size: 14px;
+
+            }
+
+
+            .hero-logo {
+
+                min-height: 220px;
+
+            }
+
+
+            .stats {
+
+                gap: 10px;
+
+            }
+
+
+            .stat {
+
+                padding: 15px;
+
+            }
+
+
+            .stat .value {
+
+                font-size: 24px;
+
+            }
+
+
+            .topbar h1 {
+
+                font-size: 20px;
+
+            }
+
+        }
+
+    </style>
+
+=======
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="theme-color" content="#080808">
+<meta name="description" content="Mathix — منصة التدريب الذكية لطلاب الثانوية العامة">
+
+<title>Mathix — Smart Learning Platform</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#060607;
+    --panel:#0d0d10;
+    --card:#111115;
+    --card2:#17171c;
+
+    --text:#f7f7fa;
+    --muted:#92929e;
+    --silver:#d7d7dd;
+
+    --purple:#9b5cff;
+    --purple2:#6e32ff;
+
+    --green:#56d69a;
+    --yellow:#e9c66b;
+    --red:#ff667d;
+
+    --line:rgba(255,255,255,.08);
+
+    --shadow:0 25px 90px rgba(0,0,0,.48);
+}
+
+
+/* RESET */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 85% 5%,
+            rgba(155,92,255,.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(255,255,255,.035),
+            transparent 25%
+        ),
+        var(--bg);
+
+    color:var(--text);
+
+    font-family:"Cairo",sans-serif;
+
+    overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* APP */
+
+.app{
+    display:grid;
+    grid-template-columns:255px 1fr;
+    min-height:100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar{
+    position:sticky;
+    top:0;
+
+    height:100vh;
+
+    background:rgba(8,8,9,.88);
+    backdrop-filter:blur(18px);
+
+    border-left:1px solid var(--line);
+
+    padding:20px 14px;
+
+    z-index:50;
+
+    overflow:auto;
+}
+
+.brand{
+    font-family:"Chakra Petch",sans-serif;
+    font-size:27px;
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    padding:8px 12px 24px;
+}
+
+.brand span{
+    color:var(--purple);
+}
+
+
+.student-mini{
+    padding:13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151519,
+            #0b0b0e
+        );
+
+    border:1px solid var(--line);
+
+    border-radius:16px;
+
+    margin-bottom:18px;
+}
+
+.mini-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #222,
+            #111
+        );
+
+    border:1px solid var(--line);
+
+    font-weight:800;
+}
+
+.student-mini strong{
+    display:block;
+    font-size:13px;
+}
+
+.student-mini small{
+    color:var(--muted);
+}
+
+
+.nav-title{
+    font-size:10px;
+    color:#686872;
+
+    margin:17px 10px 7px;
+
+    letter-spacing:1px;
+}
+
+.nav button{
+    width:100%;
+
+    border:0;
+
+    background:transparent;
+
+    color:#aaa;
+
+    text-align:right;
+
+    padding:11px 12px;
+
+    border-radius:11px;
+
+    margin:2px 0;
+
+    transition:.25s;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:rgba(155,92,255,.1);
+    color:#fff;
+}
+
+.nav button.active{
+    box-shadow:
+        inset -2px 0 var(--purple);
+}
+
+
+/* MAIN */
+
+.main{
+    min-width:0;
+}
+
+
+/* TOPBAR */
+
+.topbar{
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    border-bottom:1px solid var(--line);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:40;
+
+    background:rgba(6,6,7,.72);
+
+    backdrop-filter:blur(18px);
+}
+
+.top-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    color:#ddd;
+
+    border-radius:12px;
+}
+
+.hamb{
+    display:none;
+}
+
+.command{
+    font-family:"Chakra Petch",sans-serif;
+
+    font-size:13px;
+
+    color:#cbb7ff;
+}
+
+
+/* CONTENT */
+
+.content{
+    padding:28px;
+
+    max-width:1500px;
+
+    margin:auto;
+}
+
+
+/* PAGE */
+
+.page{
+    display:none;
+
+    animation:pageIn .45s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+
+/* HERO */
+
+.hero{
+    padding:30px;
+
+    border:1px solid var(--line);
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155,92,255,.10),
+            rgba(255,255,255,.025)
+        );
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    background:
+        rgba(155,92,255,.10);
+
+    filter:blur(80px);
+
+    left:-120px;
+    top:-140px;
+}
+
+.eyebrow{
+    color:#bda6ff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            48px
+        );
+
+    line-height:1.2;
+
+    margin:8px 0;
+}
+
+.hero h1 span{
+    color:var(--purple);
+}
+
+.hero p{
+    color:var(--muted);
+
+    max-width:760px;
+
+    line-height:1.9;
+}
+
+.hero-actions{
+    display:flex;
+
+    gap:9px;
+
+    flex-wrap:wrap;
+
+    margin-top:18px;
+}
+
+
+/* BUTTONS */
+
+.btn{
+    border:1px solid var(--line);
+
+    background:var(--card);
+
+    color:#fff;
+
+    border-radius:12px;
+
+    padding:10px 15px;
+
+    font-weight:700;
+
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+
+    border-color:
+        rgba(155,92,255,.45);
+}
+
+.btn.primary{
+    border:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple2)
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(110,50,255,.2);
+}
+
+.btn.small{
+    padding:7px 10px;
+
+    font-size:12px;
+}
+
+
+/* GRID */
+
+.grid{
+    display:grid;
+
+    gap:14px;
+}
+
+.g2{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.g3{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.g4{
+    grid-template-columns:repeat(4,1fr);
+}
+
+
+/* SECTION */
+
+.section{
+    margin-top:24px;
+}
+
+.section-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:end;
+
+    margin-bottom:13px;
+}
+
+.section-head h2{
+    font-size:23px;
+}
+
+.section-head p{
+    font-size:12px;
+
+    color:var(--muted);
+}
+
+
+/* CARD */
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            #121216,
+            #0c0c0f
+        );
+
+    border:1px solid var(--line);
+
+    border-radius:18px;
+
+    padding:18px;
+}
+
+
+/* STAT */
+
+.stat strong{
+    display:block;
+
+    font-family:"Chakra Petch",sans-serif;
+
+    font-size:29px;
+
+    margin:7px 0;
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+
+/* FEATURE */
+
+.feature-card{
+    min-height:140px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(155,92,255,.35);
+}
+
+.feature-icon{
+    font-size:25px;
+}
+
+.feature-card h3{
+    font-size:16px;
+
+    margin:8px 0 4px;
+}
+
+.feature-card p{
+    font-size:12px;
+
+    color:var(--muted);
+
+    line-height:1.7;
+}
+
+
+/* TAG */
+
+.tag{
+    display:inline-flex;
+
+    padding:4px 8px;
+
+    border:1px solid var(--line);
+
+    background:#151519;
+
+    border-radius:20px;
+
+    color:#aaa;
+
+    font-size:10px;
+}
+
+
+/* SUBJECT */
+
+.subject{
+    min-height:150px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.subject:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(155,92,255,.35);
+}
+
+.subject .emoji{
+    font-size:30px;
+}
+
+.subject h3{
+    margin:8px 0 3px;
+}
+
+.subject p{
+    font-size:12px;
+
+    color:var(--muted);
+}
+
+
+/* UNITS */
+
+.units{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:15px;
+}
+
+.unit{
+    padding:20px;
+
+    border:1px solid var(--line);
+
+    background:#0f0f13;
+
+    border-radius:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.unit:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(155,92,255,.4);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.25);
+}
+
+.unit b{
+    font-family:"Chakra Petch",sans-serif;
+
+    font-size:24px;
+}
+
+.unit small{
+    display:block;
+
+    color:var(--muted);
+
+    margin-top:5px;
+}
+
+
+/* FORM */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:12px;
+}
+
+.label{
+    display:block;
+
+    font-size:11px;
+
+    color:#aaa;
+
+    margin-bottom:5px;
+}
+
+.input,
+.select,
+.textarea{
+    width:100%;
+
+    background:#0b0b0e;
+
+    border:1px solid var(--line);
+
+    border-radius:11px;
+
+    color:#fff;
+
+    padding:11px;
+
+    outline:none;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+    border-color:
+        rgba(155,92,255,.55);
+}
+
+
+/* CHECKBOX */
+
+.check-list{
+    display:grid;
+
+    gap:7px;
+}
+
+.check{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:9px;
+
+    border:1px solid var(--line);
+
+    border-radius:10px;
+
+    background:#0c0c0f;
+
+    font-size:13px;
+}
+
+.check input{
+    accent-color:var(--purple);
+}
+
+
+/* PROGRESS */
+
+.progress-row{
+    margin:10px 0;
+}
+
+.progress-row>div:first-child{
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:12px;
+
+    margin-bottom:5px;
+}
+
+.bar{
+    height:8px;
+
+    background:#222227;
+
+    border-radius:30px;
+
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple2),
+            #c48cff
+        );
+
+    border-radius:30px;
+}
+
+
+/* HEATMAP */
+
+.heat{
+    display:grid;
+
+    grid-template-columns:
+        repeat(10,1fr);
+
+    gap:4px;
+}
+
+.heat i{
+    height:24px;
+
+    border-radius:5px;
+
+    background:#1a1a1e;
+
+    border:1px solid var(--line);
+}
+
+.heat i.mid{
+    background:
+        rgba(155,92,255,.28);
+}
+
+.heat i.on{
+    background:
+        rgba(155,92,255,.65);
+}
+
+
+/* LESSON */
+
+.lesson-list{
+    display:grid;
+
+    gap:9px;
+}
+
+.lesson{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:13px;
+
+    border:1px solid var(--line);
+
+    border-radius:12px;
+
+    background:#0d0d10;
+}
+
+.lesson-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.num{
+    width:34px;
+    height:34px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:9px;
+
+    background:
+        rgba(155,92,255,.12);
+
+    color:#c9b5ff;
+
+    font-size:12px;
+
+    font-weight:800;
+}
+
+
+/* STATUS */
+
+.status{
+    padding:4px 8px;
+
+    border-radius:20px;
+
+    font-size:10px;
+}
+
+.done{
+    background:
+        rgba(86,214,154,.10);
+
+    color:var(--green);
+}
+
+.pending{
+    background:
+        rgba(233,198,107,.10);
+
+    color:var(--yellow);
+}
+
+.weak{
+    background:
+        rgba(255,102,125,.10);
+
+    color:var(--red);
+}
+
+
+/* AI */
+
+.ai-box{
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+}
+
+.ai-orb{
+    min-width:48px;
+
+    height:48px;
+
+    border-radius:15px;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #7d42ff,
+            #211238
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(155,92,255,.25);
+}
+
+
+/* ROADMAP */
+
+.roadmap{
+    position:relative;
+}
+
+.roadmap::before{
+    content:"";
+
+    position:absolute;
+
+    right:17px;
+
+    top:10px;
+
+    bottom:10px;
+
+    width:1px;
+
+    background:
+        rgba(155,92,255,.25);
+}
+
+.road-step{
+    display:flex;
+
+    gap:15px;
+
+    position:relative;
+
+    margin:14px 0;
+}
+
+.road-dot{
+    width:35px;
+
+    height:35px;
+
+    flex:0 0 35px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    background:#15151a;
+
+    border:
+        1px solid
+        rgba(155,92,255,.3);
+
+    z-index:1;
+}
+
+
+/* TABLE */
+
+.table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:12px;
+}
+
+.table th,
+.table td{
+    padding:11px;
+
+    border-bottom:
+        1px solid var(--line);
+
+    text-align:right;
+}
+
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.76);
+
+    backdrop-filter:blur(12px);
+
+    display:none;
+
+    place-items:center;
+
+    padding:18px;
+
+    z-index:9000;
+}
+
+.modal.show{
+    display:grid;
+}
+
+.modal-box{
+    width:min(620px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #18181d,
+            #0b0b0e
+        );
+
+    border:
+        1px solid
+        rgba(155,92,255,.25);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    animation:scaleIn .3s ease;
+}
+
+.modal-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.close{
+    border:0;
+
+    background:#222;
+
+    color:#ddd;
+
+    border-radius:9px;
+
+    width:34px;
+
+    height:34px;
+}
+
+.choice-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+}
+
+.choice{
+    padding:13px;
+
+    border:1px solid var(--line);
+
+    border-radius:11px;
+
+    background:#0c0c0f;
+
+    color:white;
+
+    text-align:right;
+
+    transition:.25s;
+}
+
+.choice:hover{
+    border-color:
+        rgba(155,92,255,.45);
+
+    transform:translateY(-2px);
+}
+
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+
+    left:25px;
+
+    bottom:25px;
+
+    background:#16161b;
+
+    border:
+        1px solid
+        rgba(155,92,255,.3);
+
+    padding:13px 16px;
+
+    border-radius:13px;
+
+    box-shadow:var(--shadow);
+
+    transform:
+        translateY(30px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:9999;
+
+    font-size:12px;
+}
+
+.toast.show{
+    transform:translateY(0);
+
+    opacity:1;
+}
+
+
+/* FOOTER */
+
+.footer{
+    padding:35px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:11px;
+
+    border-top:
+        1px solid var(--line);
+
+    margin-top:35px;
+}
+
+
+/* ANIMATION */
+
+@keyframes pageIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+@keyframes scaleIn{
+
+    from{
+        opacity:0;
+        transform:scale(.92);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .app{
+        grid-template-columns:80px 1fr;
+    }
+
+    .sidebar{
+        padding:14px 8px;
+    }
+
+    .brand{
+        font-size:0;
+
+        text-align:center;
+    }
+
+    .brand::after{
+        content:"M";
+
+        font-family:"Chakra Petch";
+
+        font-size:25px;
+
+        color:var(--purple);
+    }
+
+    .student-mini .mini-row>div:last-child,
+    .nav button span,
+    .nav-title{
+        display:none;
+    }
+
+    .nav button{
+        text-align:center;
+
+        font-size:20px;
+    }
+
+    .g4{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .g3{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .app{
+        display:block;
+    }
+
+    .sidebar{
+        position:fixed;
+
+        bottom:0;
+        top:auto;
+
+        left:0;
+        right:0;
+
+        width:100%;
+
+        height:66px;
+
+        padding:7px;
+
+        border-top:
+            1px solid var(--line);
+
+        border-left:0;
+    }
+
+    .brand,
+    .student-mini,
+    .nav-title{
+        display:none;
+    }
+
+    .nav{
+        display:flex;
+
+        justify-content:
+            space-around;
+    }
+
+    .nav button{
+        width:auto;
+
+        min-width:44px;
+    }
+
+    .main{
+        padding-bottom:66px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .hamb{
+        display:block;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .g4,
+    .g3,
+    .g2,
+    .units{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding:21px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .heat{
+        grid-template-columns:
+            repeat(5,1fr);
+    }
+
+    .choice-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+</head>
+
+
+<body>
+
+<<<<<<< HEAD
+
+<!-- ======================================
+     LANDING
+====================================== -->
+
+
+<section id="landingScreen"
+         class="screen landing">
+
+    <div class="landing-card">
+
+
+        <div class="hero">
+
+
+            <div class="brand">
+
+                <img src="assets/mathix-logo.png"
+                     alt="Mathix">
+
+                <div class="brand-name">
+                    Mathix
+                </div>
+
+            </div>
+
+
+            <h1>
+
+                اتعلم بذكاء.<br>
+
+                <span class="gradient">
+                    اتطور أسرع.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                منصة التدريب الذكي لطلاب
+                الثانوية العامة – علمي رياضة.
+
+                حل، تابع مستواك، واكتشف نقاط القوة
+                والموضوعات التي تحتاج إلى مراجعة.
+
+            </p>
+
+
+            <div class="actions">
+
+                <button
+                    class="btn primary"
+                    id="startBtn">
+
+                    ابدأ الآن
+
+                </button>
+
+
+                <button
+                    class="btn"
+                    id="loginBtn">
+
+                    تسجيل الدخول
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="hero-logo">
+
+            <img
+                src="assets/mathix-logo.png"
+                alt="Mathix Logo">
+
+        </div>
+
+
+    </div>
+=======
+<div class="app">
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+<div class="brand">
+    MAT<span>H</span>IX
+</div>
+
+
+<div class="student-mini">
+
+<div class="mini-row">
+
+<div class="avatar" id="miniAvatar">
+    S
+</div>
+
+<div>
+
+<strong id="miniName">
+    Student
+</strong>
+
+<small>
+    علمي رياضة
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="nav">
+
+<div class="nav-title">
+    COMMAND CENTER
+</div>
+
+
+<button class="active" data-page="home">
+    ⌂
+    <span>الرئيسية</span>
+</button>
+
+
+<button data-page="subjects">
+    📚
+    <span>المواد</span>
+</button>
+
+
+<button data-page="practice">
+    🎯
+    <span>التدريب</span>
+</button>
+
+
+<button data-page="exams">
+    📝
+    <span>الامتحانات</span>
+</button>
+
+
+<button data-page="planner">
+    🧠
+    <span>لَمّ المتراكم</span>
+</button>
+
+
+<button data-page="brain">
+    ✦
+    <span>Mathix Brain</span>
+</button>
+
+
+<div class="nav-title">
+    PROGRESS
+</div>
+
+
+<button data-page="analytics">
+    📊
+    <span>تحليلي</span>
+</button>
+
+
+<button data-page="mistakes">
+    ⚠️
+    <span>أخطائي</span>
+</button>
+
+
+<button data-page="achievements">
+    🏆
+    <span>إنجازاتي</span>
+</button>
+
+
+<button data-page="profile">
+    👤
+    <span>حسابي</span>
+</button>
+
+
+<button data-page="settings">
+    ⚙️
+    <span>الإعدادات</span>
+</button>
+
+</div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+<button
+    class="icon-btn hamb"
+    onclick="toast('استخدم القائمة السفلية للتنقل')"
+>
+    ☰
+</button>
+
+
+<div class="command">
+    MATHIX // COMMAND CENTER
+</div>
+
+
+<div class="top-actions">
+
+<button
+    class="icon-btn"
+    onclick="openNotifications()"
+>
+    🔔
+</button>
+
+
+<button
+    class="icon-btn"
+    onclick="openSearch()"
+>
+    ⌕
+</button>
+
+</div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- ================================================= -->
+<!-- HOME -->
+<!-- ================================================= -->
+
+<section
+    class="page active"
+    id="page-home"
+>
+
+
+<div class="hero">
+
+<div class="eyebrow">
+    MATHIX BRAIN ONLINE
+</div>
+
+
+<h1>
+    ذاكر بذكاء.
+    <br>
+    <span>حل أكتر.</span>
+</h1>
+
+
+<p>
+    مركز تحكم واحد يجمع خطتك،
+    تدريباتك، أخطاءك، تقدمك،
+    الامتحانات والمراجعة الذكية.
+</p>
+
+
+<div class="hero-actions">
+
+<button
+    class="btn primary"
+    onclick="go('practice')"
+>
+    ابدأ الآن
+</button>
+
+
+<button
+    class="btn"
+    onclick="go('planner')"
+>
+    🧠 لَمّ المتراكم
+</button>
+
+
+<button
+    class="btn"
+    onclick="openStartFlow()"
+>
+    😵 مش عارف أبدأ
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- STATS -->
+
+<div class="section grid g4">
+
+
+<div class="card stat">
+
+<small>
+    Mathix Score
+</small>
+
+<strong>
+    —
+</strong>
+
+<span class="tag">
+    يحتاج بيانات فعلية
+</span>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Streak
+</small>
+
+<strong>
+    0
+</strong>
+
+<small>
+    يوم متواصل
+</small>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Mastery
+</small>
+
+<strong>
+    0%
+</strong>
+
+<small>
+    لا توجد دروس مكتملة
+</small>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Questions
+</small>
+
+<strong>
+    0
+</strong>
+
+<small>
+    سؤال محلول
+</small>
+
+</div>
+
+
+</div>
+
+
+
+<!-- MATHIX BRAIN -->
+
+<div class="section">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    What should I do now?
+</h2>
+
+<p>
+    Mathix Brain يحدد الخطوة التالية.
+</p>
+
+</div>
+
+
+<button
+    class="btn small"
+    onclick="go('brain')"
+>
+    فتح Brain
+</button>
+
+</div>
+
+
+<div class="card ai-box">
+
+<div class="ai-orb">
+    ✦
+</div>
+
+<div>
+
+<strong>
+    أضف بيانات دراستك ليقترح Mathix الخطوة التالية.
+</strong>
+
+<p
+    class="muted"
+    style="margin-top:5px"
+>
+    لا يتم اختراع نتائج أو نقاط ضعف.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- DASHBOARD FEATURES -->
+
+<div class="section">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Smart Dashboard
+</h2>
+
+<p>
+    لوحة تتغير حسب حالة الطالب.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g3">
+
+
+<div
+    class="card feature-card"
+    onclick="go('planner')"
+>
+
+<div class="feature-icon">
+    🧠
+</div>
+
+<h3>
+    Smart Planner
+</h3>
+
+<p>
+    خطة من يوم إلى 60 يوم
+    بناءً على المتراكم والوقت.
+</p>
+
+</div>
+
+
+
+<div
+    class="card feature-card"
+    onclick="go('practice')"
+>
+
+<div class="feature-icon">
+    🎯
+</div>
+
+<h3>
+    Adaptive Practice
+</h3>
+
+<p>
+    تدريب يتكيف مع بيانات الأداء.
+</p>
+
+</div>
+
+
+
+<div
+    class="card feature-card"
+    onclick="go('analytics')"
+>
+
+<div class="feature-icon">
+    📊
+</div>
+
+<h3>
+    Performance Lab
+</h3>
+
+<p>
+    تحليل الدقة والزمن والأخطاء.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ROADMAP -->
+
+<div class="section">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Roadmap
+</h2>
+
+<p>
+    مسار الدراسة داخل Mathix.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card roadmap">
+
+
+<div class="road-step">
+
+<div class="road-dot">
+    1
+</div>
+
+<div>
+
+<b>
+    Foundation
+</b>
+
+<p class="muted">
+    حدد المواد والدروس.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="road-step">
+
+<div class="road-dot">
+    2
+</div>
+
+<div>
+
+<b>
+    Practice
+</b>
+
+<p class="muted">
+    حل الأسئلة وراجع أخطاءك.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="road-step">
+
+<div class="road-dot">
+    3
+</div>
+
+<div>
+
+<b>
+    Mastery
+</b>
+
+<p class="muted">
+    ارفع مستوى إتقانك.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="road-step">
+
+<div class="road-dot">
+    4
+</div>
+
+<div>
+
+<b>
+    Exam Ready
+</b>
+
+<p class="muted">
+    محاكاة الامتحانات.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+</section>
+
+
+
+<<<<<<< HEAD
+<!-- ======================================
+     AUTH
+====================================== -->
+
+
+<section id="authScreen"
+         class="screen auth-wrap hidden">
+
+
+    <div class="auth-box">
+
+
+        <div class="auth-head">
+
+            <img
+                src="assets/mathix-logo.png"
+                alt="Mathix">
+
+
+            <h2 id="authTitle">
+                إنشاء حساب
+            </h2>
+
+
+            <p id="authSubtitle">
+                ابدأ رحلتك التعليمية مع Mathix
+            </p>
+=======
+<!-- ================================================= -->
+<!-- SUBJECTS -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-subjects"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    المواد الدراسية
+</h2>
+
+<p>
+    علمي رياضة.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g4">
+
+
+<div
+    class="card subject"
+    onclick="showUnits()"
+>
+
+<div class="emoji">
+    🇬🇧
+</div>
+
+<h3>
+    English
+</h3>
+
+<p>
+    Units 1 → 6
+</p>
+
+</div>
+
+
+<div
+    class="card subject"
+    onclick="showComing('Mathematics')"
+>
+
+<div class="emoji">
+    📐
+</div>
+
+<h3>
+    Mathematics
+</h3>
+
+<p>
+    Pure • Applied • Algebra • Calculus
+</p>
+
+</div>
+
+
+<div
+    class="card subject"
+    onclick="showComing('Physics')"
+>
+
+<div class="emoji">
+    ⚛️
+</div>
+
+<h3>
+    Physics
+</h3>
+
+<p>
+    Physics Training
+</p>
+
+</div>
+
+
+<div
+    class="card subject"
+    onclick="showComing('Chemistry')"
+>
+
+<div class="emoji">
+    🧪
+</div>
+
+<h3>
+    Chemistry
+</h3>
+
+<p>
+    Chemistry Training
+</p>
+
+</div>
+
+
+<div
+    class="card subject"
+    onclick="showComing('Arabic')"
+>
+
+<div class="emoji">
+    🇪🇬
+</div>
+
+<h3>
+    اللغة العربية
+</h3>
+
+<p>
+    الأدب • النحو • البلاغة • القصة
+</p>
+
+</div>
+
+
+</div>
+
+
+<div
+    class="card section"
+    id="unitsPanel"
+    style="display:none"
+>
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- PRACTICE -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-practice"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Question Engine
+</h2>
+
+<p>
+    كل أدوات التدريب.
+</p>
+
+</div>
+
+
+<button
+    class="btn primary"
+    onclick="startPractice()"
+>
+    اختبرني
+</button>
+
+</div>
+
+
+<div class="grid g3">
+
+
+<div
+    class="card feature-card"
+    onclick="startPractice()"
+>
+
+<div class="feature-icon">
+    🎯
+</div>
+
+<h3>
+    Adaptive Tests
+</h3>
+
+<p>
+    اختبارات قابلة للتكيف.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Mixed Practice')"
+>
+
+<div class="feature-icon">
+    🔀
+</div>
+
+<h3>
+    Mixed Practice
+</h3>
+
+<p>
+    خلط موضوعات متعددة.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Weak Topics')"
+>
+
+<div class="feature-icon">
+    🔥
+</div>
+
+<h3>
+    Weak Topic Practice
+</h3>
+
+<p>
+    تدريب على نقاط الضعف.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Time Training')"
+>
+
+<div class="feature-icon">
+    ⏱️
+</div>
+
+<h3>
+    Time Training
+</h3>
+
+<p>
+    حل تحت ضغط الوقت.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Challenge Mode')"
+>
+
+<div class="feature-icon">
+    ⚔️
+</div>
+
+<h3>
+    Challenge Mode
+</h3>
+
+<p>
+    جلسات تحدي.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Never Ending Practice')"
+>
+
+<div class="feature-icon">
+    ∞
+</div>
+
+<h3>
+    Never-Ending Practice
+</h3>
+
+<p>
+    تدريب مستمر.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Question of the Day')"
+>
+
+<div class="feature-icon">
+    ❓
+</div>
+
+<h3>
+    Question of the Day
+</h3>
+
+<p>
+    سؤال يومي.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Question Capture')"
+>
+
+<div class="feature-icon">
+    📷
+</div>
+
+<h3>
+    Question Capture
+</h3>
+
+<p>
+    رفع صورة السؤال.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Custom Collections')"
+>
+
+<div class="feature-icon">
+    📁
+</div>
+
+<h3>
+    Custom Collections
+</h3>
+
+<p>
+    مجموعات أسئلة مخصصة.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Report Question')"
+>
+
+<div class="feature-icon">
+    🚩
+</div>
+
+<h3>
+    Report Question
+</h3>
+
+<p>
+    الإبلاغ عن مشكلة.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Rate Question')"
+>
+
+<div class="feature-icon">
+    ⭐
+</div>
+
+<h3>
+    Question Quality
+</h3>
+
+<p>
+    تقييم جودة السؤال.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Explain My Mistake')"
+>
+
+<div class="feature-icon">
+    💡
+</div>
+
+<h3>
+    Explain My Mistake
+</h3>
+
+<p>
+    فهم سبب الخطأ.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="section card">
+
+<h3>
+    Practice Setup
+</h3>
+
+
+<div class="form-grid" style="margin-top:15px">
+
+
+<div>
+
+<label class="label">
+    المادة
+</label>
+
+<select class="select">
+
+<option>
+    اختر المادة
+</option>
+
+<option>
+    English
+</option>
+
+<option>
+    Mathematics
+</option>
+
+<option>
+    Physics
+</option>
+
+<option>
+    Chemistry
+</option>
+
+<option>
+    Arabic
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    Difficulty
+</label>
+
+<select class="select">
+
+<option>
+    Adaptive
+</option>
+
+<option>
+    Easy
+</option>
+
+<option>
+    Medium
+</option>
+
+<option>
+    Hard
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    Question Type
+</label>
+
+<select class="select">
+
+<option>
+    Mixed
+</option>
+
+<option>
+    MCQ
+</option>
+
+<option>
+    True / False
+</option>
+
+<option>
+    Problem
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    Questions
+</label>
+
+<input
+    class="input"
+    type="number"
+    value="10"
+    min="1"
+    max="100"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- EXAMS -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-exams"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    الامتحانات
+</h2>
+
+<p>
+    Lesson • Unit • Full Exam • Mock.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g3">
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Lesson Test')"
+>
+📖
+<h3>
+    Lesson Test
+</h3>
+<p>
+    اختبار درس.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Unit Test')"
+>
+📚
+<h3>
+    Unit Test
+</h3>
+<p>
+    اختبار وحدة.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Full Exam')"
+>
+📝
+<h3>
+    Full Exam
+</h3>
+<p>
+    امتحان شامل.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Mock Exam Builder')"
+>
+🧩
+<h3>
+    Mock Exam Builder
+</h3>
+<p>
+    ابنِ امتحانك.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Surprise Quiz')"
+>
+🎲
+<h3>
+    Surprise Quiz
+</h3>
+<p>
+    اختبار مفاجئ.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Practice Before Exam')"
+>
+🚀
+<h3>
+    Practice Before Exam
+</h3>
+<p>
+    تجهيز قبل الامتحان.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Save Resume')"
+>
+💾
+<h3>
+    Save & Resume
+</h3>
+<p>
+    حفظ الامتحان واستكماله.
+</p>
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Random Questions')"
+>
+🔀
+<h3>
+    Random Questions
+</h3>
+<p>
+    أسئلة عشوائية.
+</p>
+</div>
+
+
+</div>
+
+
+<div class="section card">
+
+<h3>
+    Full Exam History
+</h3>
+
+<p
+    class="muted"
+    style="margin-top:7px"
+>
+    لا توجد محاولات حقيقية حتى الآن.
+</p>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- PLANNER -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-planner"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    🧠 لَمّ المتراكم الذكي
+</h2>
+
+<p>
+    من يوم إلى 60 يوم.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g2">
+
+
+<div class="card">
+
+<h3>
+    اختر المتراكم
+</h3>
+
+
+<div
+    class="check-list"
+    style="margin-top:12px"
+>
+
+
+<label class="check">
+
+<input
+    type="checkbox"
+    data-backlog="English"
+>
+
+🇬🇧 English
+
+</label>
+
+
+<label class="check">
+
+<input
+    type="checkbox"
+    data-backlog="Mathematics"
+>
+
+📐 Mathematics
+
+</label>
+
+
+<label class="check">
+
+<input
+    type="checkbox"
+    data-backlog="Physics"
+>
+
+⚛️ Physics
+
+</label>
+
+
+<label class="check">
+
+<input
+    type="checkbox"
+    data-backlog="Chemistry"
+>
+
+🧪 Chemistry
+
+</label>
+
+
+<label class="check">
+
+<input
+    type="checkbox"
+    data-backlog="Arabic"
+>
+
+🇪🇬 Arabic
+
+</label>
+
+
+</div>
+
+
+<button
+    class="btn small"
+    style="margin-top:12px"
+    onclick="selectAllBacklog()"
+>
+    تحديد الكل
+</button>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h3>
+    وقتك
+</h3>
+
+
+<div
+    class="form-grid"
+    style="margin-top:12px"
+>
+
+
+<div>
+
+<label class="label">
+    مدة الخطة
+</label>
+
+<select
+    class="select"
+    id="planDays"
+>
+
+<option value="1">
+    1 يوم
+</option>
+
+<option value="7">
+    7 أيام
+</option>
+
+<option value="14">
+    14 يوم
+</option>
+
+<option value="30" selected>
+    30 يوم
+</option>
+
+<option value="60">
+    60 يوم
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    ساعات يوميًا
+</label>
+
+<input
+    class="input"
+    id="planHours"
+    type="number"
+    min=".5"
+    max="12"
+    step=".5"
+    value="3"
+>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    أيام الدراسة
+</label>
+
+<select class="select">
+
+<option>
+    كل الأيام
+</option>
+
+<option>
+    5 أيام أسبوعيًا
+</option>
+
+<option>
+    6 أيام أسبوعيًا
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label class="label">
+    أقصى جلسة
+</label>
+
+<select class="select">
+
+<option>
+    25 دقيقة
+</option>
+
+<option selected>
+    50 دقيقة
+</option>
+
+<option>
+    90 دقيقة
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<button
+    class="btn primary"
+    style="margin-top:15px;width:100%"
+    onclick="generatePlan()"
+>
+    توليد لَمّ المتراكم الذكي
+</button>
+
+
+</div>
+
+</div>
+
+
+<div
+    class="section card"
+    id="planResult"
+    style="display:none"
+>
+</div>
+
+
+<div class="section grid g3">
+
+
+<div class="card feature-card">
+
+<h3>
+    Catch-up Buffer
+</h3>
+
+<p>
+    مساحة للتأخير بدون انهيار الخطة.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Dynamic Rescheduling
+</h3>
+
+<p>
+    إعادة جدولة عند تفويت يوم.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Emergency Revision
+</h3>
+
+<p>
+    خطة مراجعة سريعة للوقت الضيق.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Cross Subject Planner
+</h3>
+
+<p>
+    توزيع أكثر من مادة.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Smart Review
+</h3>
+
+<p>
+    مراجعة حسب الأداء.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Sprint Mode
+</h3>
+
+<p>
+    جلسة مركزة قصيرة.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- MATHIX BRAIN -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-brain"
+>
+
+
+<div class="hero">
+
+<div class="eyebrow">
+    MATHIX BRAIN
+</div>
+
+
+<h1>
+    إيه الخطوة الجاية؟
+</h1>
+
+
+<p>
+    يجمع الخطة والمتراكم والمراجعة
+    والأخطاء والوقت المتاح.
+</p>
+
+
+<div class="hero-actions">
+
+<button
+    class="btn primary"
+    onclick="smartStart()"
+>
+    اختارلي مهمة
+</button>
+
+
+<button
+    class="btn"
+    onclick="openStartFlow()"
+>
+    عندي وقت قليل
+</button>
+
+</div>
+
+</div>
+
+
+<div class="section card">
+
+<div class="ai-box">
+
+<div class="ai-orb">
+    ✦
+</div>
+
+
+<div>
+
+<h3>
+    Recommendation Engine
+</h3>
+
+<p
+    class="muted"
+    id="brainText"
+    style="margin-top:6px"
+>
+    لا توجد بيانات أداء كافية
+    لإصدار توصية شخصية.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section grid g3">
+
+
+<div class="card feature-card">
+
+<h3>
+    Prerequisite Graph
+</h3>
+
+<p>
+    ربط الدروس بالمتطلبات السابقة.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Difficulty Calibration
+</h3>
+
+<p>
+    معايرة الصعوبة من بيانات الأسئلة.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Traffic-Light Lessons
+</h3>
+
+<p>
+    حالة الدرس أخضر أو أصفر أو أحمر.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Smart Start
+</h3>
+
+<p>
+    15m / 30m / 1h / 2h / 3h+.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Foundation Mode
+</h3>
+
+<p>
+    بناء الأساس قبل التقدم.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Concept Check
+</h3>
+
+<p>
+    التأكد من فهم المفهوم.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- ANALYTICS -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-analytics"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Performance Lab
+</h2>
+
+<p>
+    الأرقام تبدأ من الاستخدام الحقيقي.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g4">
+
+
+<div class="card stat">
+
+<small>
+    Accuracy
+</small>
+
+<strong>
+    —
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Average Time
+</small>
+
+<strong>
+    —
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Weak Topics
+</small>
+
+<strong>
+    0
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Exams
+</small>
+
+<strong>
+    0
+</strong>
+
+</div>
+
+
+</div>
+
+
+<div class="section grid g2">
+
+
+<div class="card">
+
+<h3>
+    Subject Heatmap
+</h3>
+
+
+<div
+    class="heat"
+    id="heatmap"
+    style="margin-top:15px"
+>
+</div>
+
+
+</div>
+
+
+<div class="card">
+
+<h3>
+    Mastery Map
+</h3>
+
+
+<div class="progress-row">
+
+<div>
+
+<span>
+    English
+</span>
+
+<span>
+    —
+</span>
+
+</div>
+
+
+<div class="bar">
+
+<div
+    class="fill"
+    style="width:0%"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div>
+
+<span>
+    Mathematics
+</span>
+
+<span>
+    —
+</span>
+
+</div>
+
+
+<div class="bar">
+
+<div
+    class="fill"
+    style="width:0%"
+>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div>
+
+<span>
+    Physics
+</span>
+
+<span>
+    —
+</span>
+
+</div>
+
+
+<div class="bar">
+
+<div
+    class="fill"
+    style="width:0%"
+>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="section grid g3">
+
+
+<div class="card feature-card">
+
+<h3>
+    Error Patterns
+</h3>
+
+<p>
+    تحليل نوع الأخطاء المتكررة.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Review Queue
+</h3>
+
+<p>
+    قائمة المراجعة الذكية.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    Weekly Report
+</h3>
+
+<p>
+    ملخص أسبوعي للنشاط الحقيقي.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- MISTAKES -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-mistakes"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Error Center
+</h2>
+
+<p>
+    مركز الأخطاء والمراجعة.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g3">
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Explain My Mistake')"
+>
+
+💡
+
+<h3>
+    Explain My Mistake
+</h3>
+
+<p>
+    شرح الخطأ.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Smart Review')"
+>
+
+🧠
+
+<h3>
+    Smart Review
+</h3>
+
+<p>
+    مراجعة حسب الاحتياج.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Retake Intelligence')"
+>
+
+🔄
+
+<h3>
+    Retake Intelligence
+</h3>
+
+<p>
+    إعادة الاختبار بذكاء.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Quick Revision Cards')"
+>
+
+🃏
+
+<h3>
+    Quick Revision Cards
+</h3>
+
+<p>
+    بطاقات مراجعة سريعة.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Formula Vault')"
+>
+
+∑
+
+<h3>
+    Formula Vault
+</h3>
+
+<p>
+    خزنة القوانين والمعادلات.
+</p>
+
+</div>
+
+
+<div
+    class="card feature-card"
+    onclick="showComing('Question Tags')"
+>
+
+🏷️
+
+<h3>
+    Question Tags
+</h3>
+
+<p>
+    تصنيف الأسئلة.
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="section card">
+
+<h3>
+    My Mistakes
+</h3>
+
+<p
+    class="muted"
+    style="margin-top:8px"
+>
+    لم يتم تسجيل أخطاء بعد.
+</p>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- ACHIEVEMENTS -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-achievements"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Achievements
+</h2>
+
+<p>
+    XP • Levels • Streaks • Badges.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g4">
+
+
+<div class="card stat">
+
+<small>
+    XP
+</small>
+
+<strong>
+    0
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Level
+</small>
+
+<strong>
+    1
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Badges
+</small>
+
+<strong>
+    0
+</strong>
+
+</div>
+
+
+<div class="card stat">
+
+<small>
+    Records
+</small>
+
+<strong>
+    0
+</strong>
+
+</div>
+
+
+</div>
+
+
+<div class="section grid g3">
+
+
+<div class="card feature-card">
+
+<h3>
+    🔥 Streak Protection
+</h3>
+
+<p>
+    حماية الـStreak.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    🎯 Daily Mission
+</h3>
+
+<p>
+    مهمة يومية.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    🏆 Badges
+</h3>
+
+<p>
+    شارات الإنجاز.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    ⚔️ Challenges
+</h3>
+
+<p>
+    تحديات.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    📈 Personal Records
+</h3>
+
+<p>
+    أرقامك القياسية الشخصية.
+</p>
+
+</div>
+
+
+<div class="card feature-card">
+
+<h3>
+    🎮 Goal System
+</h3>
+
+<p>
+    أهداف دراسية.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- PROFILE -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-profile"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    حسابي
+</h2>
+
+<p>
+    بيانات الطالب بدون كلمة المرور.
+</p>
+
+</div>
+
+
+<button
+    class="btn"
+    onclick="showComing('Edit Profile')"
+>
+    تعديل
+</button>
+
+</div>
+
+
+<div class="grid g2">
+
+
+<div class="card">
+
+<div class="mini-row">
+
+<div
+    class="avatar"
+    id="profileAvatar"
+>
+    S
+</div>
+
+
+<div>
+
+<h3 id="profileName">
+    Student
+</h3>
+
+<p class="muted">
+    علمي رياضة
+</p>
+
+</div>
+
+</div>
+
+
+<div
+    class="lesson-list"
+    style="margin-top:18px"
+>
+
+
+<div class="lesson">
+
+<span>
+    الاسم الأول
+</span>
+
+<b>
+    —
+</b>
+
+</div>
+
+
+<div class="lesson">
+
+<span>
+    الاسم الثاني
+</span>
+
+<b>
+    —
+</b>
+
+</div>
+
+
+<div class="lesson">
+
+<span>
+    الهاتف
+</span>
+
+<b>
+    —
+</b>
+
+</div>
+
+
+<div class="lesson">
+
+<span>
+    البريد
+</span>
+
+<b>
+    —
+</b>
+
+</div>
+
+
+<div class="lesson">
+
+<span>
+    Student Code
+</span>
+
+<b>
+    Mathix-XXXXXX
+</b>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+    My Exams
+</h3>
+
+<p class="muted" style="margin:7px 0 20px">
+    سجل الامتحانات سيظهر بعد الاستخدام.
+</p>
+
+
+<h3>
+    My Assignments
+</h3>
+
+<p class="muted" style="margin-top:7px">
+    الواجبات والتسليم والدرجات.
+</p>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- SETTINGS -->
+<!-- ================================================= -->
+
+<section
+    class="page"
+    id="page-settings"
+>
+
+
+<div class="section-head">
+
+<div>
+
+<h2>
+    Student Control
+</h2>
+
+<p>
+    تحكم في تجربة Mathix.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="grid g2">
+
+
+<div class="card">
+
+
+<div class="switch">
+
+<span>
+    Auto Reschedule
+</span>
+
+<input
+    type="checkbox"
+    checked
+>
+
+</div>
+
+
+<div class="switch">
+
+<span>
+    Review Reminders
+</span>
+
+<input
+    type="checkbox"
+    checked
+>
+
+</div>
+
+
+<div class="switch">
+
+<span>
+    Notifications
+</span>
+
+<input
+    type="checkbox"
+    checked
+>
+
+</div>
+
+
+<div class="switch">
+
+<span>
+    Sound Effects
+</span>
+
+<input
+    type="checkbox"
+>
+
+</div>
+
+
+<div class="switch">
+
+<span>
+    Streak Protection
+</span>
+
+<input
+    type="checkbox"
+>
+
+</div>
+
+
+<div class="switch">
+
+<span>
+    Offline Mode
+</span>
+
+<input
+    type="checkbox"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="card">
+
+<h3>
+    Data Control & Security
+</h3>
+
+<p
+    class="muted"
+    style="line-height:1.9;margin:8px 0 15px"
+>
+    النسخة الحقيقية تحتاج
+    Supabase Auth + Database + RLS
+    لحماية بيانات الطلاب.
+</p>
+
+
+<button
+    class="btn small"
+    onclick="showComing('Devices & Sessions')"
+>
+    الأجهزة والجلسات
+</button>
+
+
+<button
+    class="btn small"
+    onclick="showComing('Cloud Sync')"
+>
+    Cloud Sync
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<div class="footer">
+
+<b>
+    Mathix
+</b>
+
+— Smart Learning Platform
+
+<br>
+
+© 2026 Mathix
+
+</div>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- MODAL -->
+<!-- ================================================= -->
+
+<div
+    class="modal"
+    id="modal"
+    onclick="if(event.target===this)closeModal()"
+>
+
+<div
+    class="modal-box"
+    id="modalBox"
+>
+</div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function go(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(pageEl=>{
+            pageEl.classList.remove("active");
+        });
+
+
+    const target =
+        document.getElementById(
+            "page-" + page
+        );
+
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(button=>{
+
+            button.classList.toggle(
+                "active",
+                button.dataset.page === page
+            );
+
+        });
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+let toastTimer;
+
+function toast(message){
+
+    const element =
+        document.getElementById("toast");
+
+
+    element.textContent =
+        message;
+
+
+    element.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+        setTimeout(()=>{
+
+            element.classList.remove("show");
+
+        },2600);
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function openModal(content){
+
+    document
+        .getElementById("modalBox")
+        .innerHTML =
+        content;
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================
+   COMING SOON
+========================================= */
+
+function showComing(name){
+
+    openModal(`
+
+        <div class="modal-head">
+
+            <h3>
+                ${name}
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+        </div>
+
+
+<<<<<<< HEAD
+
+        <form id="emailForm">
+
+
+            <div class="field"
+                 id="nameField">
+
+                <label>
+                    اسم الطالب
+                </label>
+
+                <input
+                    id="nameInput"
+                    type="text"
+                    placeholder="اكتب اسمك"
+                    autocomplete="name">
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label>
+                    البريد الإلكتروني
+                </label>
+
+                <input
+                    id="emailInput"
+                    type="email"
+                    placeholder="example@gmail.com"
+                    required
+                    autocomplete="email">
+
+            </div>
+
+
+
+            <div class="field">
+
+                <label>
+                    كلمة المرور
+                </label>
+
+                <input
+                    id="passwordInput"
+                    type="password"
+                    placeholder="6 أحرف على الأقل"
+                    required
+                    minlength="6"
+                    autocomplete="new-password">
+
+            </div>
+
+=======
+        <div
+            style="
+                text-align:center;
+                padding:25px 5px;
+            "
+        >
+
+            <div
+                class="ai-orb"
+                style="
+                    margin:auto;
+                    font-size:24px;
+                "
+            >
+                🔒
+            </div>
+
+
+            <h2
+                style="
+                    margin-top:18px;
+                "
+            >
+                سيتم الفتح قريبًا
+            </h2>
+
+
+            <p
+                class="muted"
+                style="
+                    margin-top:8px;
+                    line-height:1.9;
+                "
+            >
+                هذا القسم موجود في واجهة
+                Mathix وسيتم تفعيله عند
+                إضافة البيانات والوظائف
+                الحقيقية.
+            </p>
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+
+            <button
+                class="btn primary"
+<<<<<<< HEAD
+                style="width:100%"
+                type="submit"
+                id="emailSubmit">
+
+                إنشاء الحساب
+
+            </button>
+
+
+        </form>
+
+
+
+        <div class="divider">
+            أو
+        </div>
+
+
+
+        <button
+            class="btn"
+            style="width:100%"
+            id="googleBtn">
+
+            تسجيل الدخول باستخدام Google
+
+        </button>
+
+
+
+        <div
+            class="auth-message"
+            id="authMessage">
+        </div>
+
+
+
+        <button
+            class="btn"
+            style="width:100%;border:0;background:transparent"
+            id="switchAuth">
+
+            لدي حساب بالفعل — تسجيل الدخول
+
+        </button>
+
+
+
+        <button
+            class="btn"
+            style="width:100%;border:0;background:transparent"
+            id="backBtn">
+
+            العودة
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================
+     APPLICATION
+====================================== -->
+
+
+<section id="appScreen"
+         class="screen hidden">
+
+
+    <div class="app">
+
+
+        <!-- SIDEBAR -->
+
+
+        <aside class="sidebar">
+
+
+            <div class="side-brand">
+
+                <div class="brand">
+
+                    <img
+                        src="assets/mathix-logo.png"
+                        alt="Mathix">
+
+                    <div class="brand-name">
+                        Mathix
+                    </div>
+
+                </div>
+=======
+                style="
+                    margin-top:18px;
+                "
+                onclick="closeModal()"
+            >
+                فهمت
+            </button>
+
+        </div>
+
+    `);
+
+}
+
+
+/* =========================================
+   ENGLISH UNITS
+========================================= */
+
+function showUnits(){
+
+    const panel =
+        document.getElementById(
+            "unitsPanel"
+        );
+
+
+    panel.style.display =
+        "block";
+
+
+    panel.innerHTML = `
+
+        <div class="section-head">
+
+            <div>
+
+                <h3>
+                    English — Units
+                </h3>
+
+                <p>
+                    اختر الوحدة.
+                </p>
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+            </div>
+
+
+<<<<<<< HEAD
+
+            <nav class="nav">
+
+
+                <button
+                    class="active"
+                    data-section="dashboard">
+
+                    الرئيسية
+
+                </button>
+
+
+                <button
+                    data-section="subjects">
+
+                    المواد
+
+                </button>
+
+
+                <button
+                    data-section="profile">
+
+                    حسابي
+
+                </button>
+
+
+                <button
+                    data-action="logout"
+                    class="logout">
+
+                    تسجيل الخروج
+
+                </button>
+
+
+            </nav>
+
+
+        </aside>
+
+
+
+        <!-- MAIN -->
+
+
+        <main class="main">
+
+
+            <div class="topbar">
+
+
+                <h1 id="pageTitle">
+                    لوحة التحكم
+                </h1>
+
+
+                <div class="user-chip">
+
+                    <div
+                        class="avatar"
+                        id="avatar">
+
+                        M
+
+                    </div>
+
+
+                    <span id="topName">
+                        طالب Mathix
+=======
+            <button
+                class="btn small"
+                onclick="
+                    document
+                    .getElementById('unitsPanel')
+                    .style.display='none'
+                "
+            >
+                إغلاق
+            </button>
+
+        </div>
+
+
+        <div class="units">
+
+            ${[1,2,3,4,5,6].map(unit=>`
+
+                <div
+                    class="unit"
+                    onclick="
+                        showComing(
+                            'English — Unit ${unit}'
+                        )
+                    "
+                >
+
+                    <b>
+                        Unit ${unit}
+                    </b>
+
+                    <small>
+                        English Language
+                    </small>
+
+                    <span
+                        class="tag"
+                        style="
+                            margin-top:13px;
+                        "
+                    >
+                        سيتم الفتح قريبًا
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+                    </span>
+
+                </div>
+
+<<<<<<< HEAD
+
+            </div>
+
+
+
+            <!-- DASHBOARD -->
+
+
+            <section
+                class="section active"
+                id="dashboardSection">
+
+
+                <div class="welcome">
+
+
+                    <h2>
+
+                        أهلاً،
+                        <span id="welcomeName">
+                            طالب
+                        </span>
+
+                        👋
+
+                    </h2>
+
+
+                    <p>
+                        جاهز تكمل تدريبك النهارده؟
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="grid stats">
+
+
+                    <div class="stat">
+
+                        <div class="label">
+                            مستوى الطالب
+                        </div>
+
+                        <div
+                            class="value"
+                            id="levelValue">
+
+                            Beginner
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat">
+
+                        <div class="label">
+                            التقدم العام
+                        </div>
+
+                        <div
+                            class="value"
+                            id="progressValue">
+
+                            0%
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat">
+
+                        <div class="label">
+                            تم حلها
+                        </div>
+
+                        <div
+                            class="value"
+                            id="solvedValue">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stat">
+
+                        <div class="label">
+                            XP
+                        </div>
+
+                        <div
+                            class="value"
+                            id="xpValue">
+
+                            0
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="grid content-grid">
+
+
+                    <div class="card">
+
+                        <h3>
+                            Continue Learning
+                        </h3>
+
+
+                        <div
+                            id="subjectsProgress">
+
+                            <p class="empty">
+
+                                لم تبدأ أي مادة بعد.
+
+                                من قسم المواد تقدر تبدأ
+                                أول درس.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="card">
+
+                        <h3>
+                            Today's Goal
+                        </h3>
+
+
+                        <p class="empty">
+
+                            هنضيف أهداف اليوم
+                            والـ Study Planner
+                            في المرحلة التالية.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- SUBJECTS -->
+
+
+            <section
+                class="section"
+                id="subjectsSection">
+
+
+                <div class="card">
+
+
+                    <h3>
+                        المواد
+                    </h3>
+
+
+                    <div
+                        id="subjectsList">
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- PROFILE -->
+
+
+            <section
+                class="section"
+                id="profileSection">
+
+
+                <div class="card">
+
+
+                    <h3>
+                        بيانات الطالب
+                    </h3>
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            الاسم
+                        </span>
+
+                        <strong
+                            id="profileName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong
+                            id="profileEmail">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            Student Code
+                        </span>
+
+                        <strong
+                            id="profileCode">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            المستوى
+                        </span>
+
+                        <strong
+                            id="profileLevel">
+                            Beginner
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+</section>
+
+
+
+<script type="module">
+
+
+/* ==========================================
+   FIREBASE
+========================================== */
+
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+
+/*
+=================================================
+ضع Firebase Config الخاص بمشروعك هنا
+=================================================
+*/
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCvMG9-rIdjnzQR_plZyizpQAhxQ_ASIn0",
+    authDomain: "mathix-88811.firebaseapp.com",
+    projectId: "mathix-88811",
+    storageBucket: "mathix-88811.firebasestorage.app",
+    messagingSenderId: "1043867239139",
+    appId: "1:1043867239139:web:da19abef81f052682bbbd6",
+    measurementId: "G-T17ZDVBLM2"
+};
+const firebaseReady =
+    !Object.values(firebaseConfig)
+        .some(
+            value =>
+                String(value)
+                .startsWith("YOUR_")
+        );
+
+
+
+let auth = null;
+
+let db = null;
+
+let provider = null;
+
+let currentUser = null;
+
+let profile = null;
+
+let loginMode = false;
+
+
+
+const $ = id =>
+    document.getElementById(id);
+
+
+
+/* ==========================================
+   SCREEN CONTROL
+========================================== */
+
+
+function show(screen) {
+
+
+    [
+        "landingScreen",
+        "authScreen",
+        "appScreen"
+    ]
+
+    .forEach(id => {
+
+        $(id)
+            .classList
+            .add("hidden");
+
+    });
+
+
+    $(screen)
+        .classList
+        .remove("hidden");
+=======
+            `).join("")}
+
+        </div>
+
+    `;
+
+
+    panel.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   PRACTICE
+========================================= */
+
+function startPractice(){
+
+    openModal(`
+
+        <div class="modal-head">
+
+            <h3>
+                🎯 Smart Practice
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p class="muted">
+            اختر نوع الجلسة.
+        </p>
+
+
+        <div
+            class="choice-grid"
+            style="
+                margin-top:15px;
+            "
+        >
+
+            <button
+                class="choice"
+                onclick="
+                    closeModal();
+                    toast(
+                        'Adaptive Test جاهز بعد إضافة بنك الأسئلة'
+                    )
+                "
+            >
+                🧠
+                <br>
+                Adaptive Test
+            </button>
+
+
+            <button
+                class="choice"
+                onclick="
+                    closeModal();
+                    toast(
+                        'Mixed Practice جاهز بعد إضافة الأسئلة'
+                    )
+                "
+            >
+                🔀
+                <br>
+                Mixed Practice
+            </button>
+
+
+            <button
+                class="choice"
+                onclick="
+                    closeModal();
+                    toast(
+                        'Question of the Day قريبًا'
+                    )
+                "
+            >
+                ❓
+                <br>
+                Question of the Day
+            </button>
+
+
+            <button
+                class="choice"
+                onclick="
+                    closeModal();
+                    toast(
+                        'Surprise Quiz قريبًا'
+                    )
+                "
+            >
+                🎲
+                <br>
+                Surprise Quiz
+            </button>
+
+        </div>
+
+    `);
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+}
+
+
+<<<<<<< HEAD
+
+/* ==========================================
+   AUTH MESSAGE
+========================================== */
+
+
+function setAuthMessage(message = "") {
+
+    $("authMessage")
+        .textContent = message;
+=======
+/* =========================================
+   BACKLOG
+========================================= */
+
+function selectAllBacklog(){
+
+    document
+        .querySelectorAll(
+            "[data-backlog]"
+        )
+        .forEach(input=>{
+
+            input.checked =
+                true;
+
+        });
+
+
+    toast(
+        "تم تحديد كل المواد"
+    );
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+}
+
+
+<<<<<<< HEAD
+
+/* ==========================================
+   STUDENT CODE
+========================================== */
+
+
+function randomStudentCode() {
+
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+    let code = "MX-";
+
+
+    for(let i = 0; i < 7; i++) {
+
+        code +=
+            chars[
+                Math.floor(
+                    Math.random() *
+                    chars.length
+                )
+            ];
+
+    }
+
+
+    return code;
+
+}
+
+
+
+/* ==========================================
+   FIRESTORE PROFILE
+========================================== */
+
+
+async function ensureProfile(
+    user,
+    suppliedName = ""
+) {
+
+
+    if(!db) {
+
+
+        return {
+
+            uid: user.uid,
+
+            name:
+                user.displayName ||
+                suppliedName ||
+                "طالب Mathix",
+
+            email:
+                user.email || "",
+
+            studentCode:
+                "LOCAL-" +
+                user.uid
+                    .slice(0,7)
+                    .toUpperCase(),
+
+            level:
+                "Beginner",
+
+            xp: 0,
+
+            solved: 0,
+
+            progress: 0
+
+        };
+
+    }
+
+
+
+    const ref =
+        doc(
+            db,
+            "students",
+            user.uid
+        );
+
+
+
+    const snap =
+        await getDoc(ref);
+
+
+
+    if(snap.exists()) {
+
+
+        return {
+
+            uid: user.uid,
+
+            ...snap.data()
+
+        };
+
+    }
+
+
+
+    const data = {
+
+
+        uid: user.uid,
+
+
+        name:
+            user.displayName ||
+            suppliedName ||
+            "طالب Mathix",
+
+
+        email:
+            user.email || "",
+
+
+        studentCode:
+            randomStudentCode(),
+
+
+        level:
+            "Beginner",
+
+
+        xp: 0,
+
+
+        solved: 0,
+
+
+        progress: 0,
+
+
+        createdAt:
+            serverTimestamp()
+
+    };
+
+
+
+    await setDoc(
+        ref,
+        data
+    );
+
+
+    return data;
+
+}
+
+
+
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+
+function renderDashboard() {
+
+
+    const name =
+        profile?.name ||
+        currentUser?.displayName ||
+        "طالب";
+
+
+
+    $("welcomeName")
+        .textContent =
+        name.split(" ")[0];
+
+
+
+    $("topName")
+        .textContent = name;
+
+
+
+    $("avatar")
+        .textContent =
+        name.trim().charAt(0) || "M";
+
+
+
+    $("levelValue")
+        .textContent =
+        profile?.level ||
+        "Beginner";
+
+
+
+    $("progressValue")
+        .textContent =
+        `${profile?.progress || 0}%`;
+
+
+
+    $("solvedValue")
+        .textContent =
+        profile?.solved || 0;
+
+
+
+    $("xpValue")
+        .textContent =
+        profile?.xp || 0;
+
+
+
+    $("profileName")
+        .textContent = name;
+
+
+
+    $("profileEmail")
+        .textContent =
+        profile?.email ||
+        currentUser?.email ||
+        "—";
+
+
+
+    $("profileCode")
+        .textContent =
+        profile?.studentCode ||
+        "—";
+
+
+
+    $("profileLevel")
+        .textContent =
+        profile?.level ||
+        "Beginner";
+
+
+
+    const subjects = [
+
+
+        [
+            "رياضيات",
+            "الجبر والتفاضل والتكامل",
+            "0%"
+        ],
+
+
+        [
+            "فيزياء",
+            "الميكانيكا والكهرباء",
+            "0%"
+        ],
+
+
+        [
+            "كيمياء",
+            "الدروس الأساسية",
+            "0%"
+        ],
+
+
+        [
+            "عربي",
+            "النحو والبلاغة والأدب",
+            "0%"
+        ]
+
+
+    ];
+
+
+
+    $("subjectsProgress")
+        .innerHTML =
+
+
+        subjects
+        .map(
+            ([name,desc,percent]) => `
+
+                <div class="subject">
+
+                    <div class="subject-row">
+
+                        <strong>
+                            ${name}
+                        </strong>
+
+                        <span>
+                            ${percent}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        style="
+                        color:var(--muted);
+                        font-size:12px;
+                        margin-bottom:8px;
+                        ">
+
+                        ${desc}
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <i
+                            style="
+                            width:${percent};
+                            ">
+                        </i>
+
+                    </div>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+
+
+    $("subjectsList")
+        .innerHTML =
+
+
+        subjects
+        .map(
+            ([name,desc,percent]) => `
+
+                <div class="subject">
+
+                    <div class="subject-row">
+
+                        <strong>
+                            ${name}
+                        </strong>
+
+                        <span
+                            style="
+                            color:var(--muted);
+                            ">
+
+                            ${percent}
+
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        style="
+                        color:var(--muted);
+                        font-size:13px;
+                        margin-bottom:10px;
+                        ">
+
+                        ${desc}
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <i
+                            style="
+                            width:${percent};
+                            ">
+                        </i>
+
+                    </div>
+
+                </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+
+/* ==========================================
+   FIREBASE INITIALIZATION
+========================================== */
+
+
+function initFirebase() {
+
+
+    if(!firebaseReady) {
+=======
+function generatePlan(){
+
+    const days =
+        Number(
+            document
+            .getElementById("planDays")
+            .value
+        );
+
+
+    const hours =
+        Number(
+            document
+            .getElementById("planHours")
+            .value
+        );
+
+
+    const subjects =
+        [
+            ...document
+            .querySelectorAll(
+                "[data-backlog]:checked"
+            )
+        ]
+        .map(
+            item=>
+                item.dataset.backlog
+        );
+
+
+    if(subjects.length === 0){
+
+        toast(
+            "اختر مادة أو أكثر أولًا"
+        );
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+
+        return;
+
+    }
+
+
+<<<<<<< HEAD
+
+    const app =
+        initializeApp(
+            firebaseConfig
+        );
+
+
+
+    auth =
+        getAuth(app);
+
+
+
+    db =
+        getFirestore(app);
+
+
+
+    provider =
+        new GoogleAuthProvider();
+
+
+
+    provider
+        .setCustomParameters({
+
+            prompt:
+                "select_account"
+
+        });
+
+
+
+    onAuthStateChanged(
+        auth,
+        async user => {
+
+
+            currentUser =
+                user;
+
+
+
+            if(!user) {
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                profile =
+                    await ensureProfile(
+                        user
+                    );
+
+
+                renderDashboard();
+
+
+                show(
+                    "appScreen"
+                );
+
+
+            }
+
+            catch(error) {
+
+
+                console.error(error);
+
+
+                setAuthMessage(
+                    "حصل خطأ أثناء إنشاء ملف الطالب."
+                );
+
+            }
+
+        }
+
+=======
+    const total =
+        days * hours;
+
+
+    const result =
+        document.getElementById(
+            "planResult"
+        );
+
+
+    result.style.display =
+        "block";
+
+
+    result.innerHTML = `
+
+        <div class="eyebrow">
+            PLAN GENERATED
+        </div>
+
+
+        <h3
+            style="
+                margin:7px 0;
+            "
+        >
+            خطة ${days} يوم
+        </h3>
+
+
+        <p class="muted">
+
+            المواد:
+            ${subjects.join(" • ")}
+
+            <br>
+
+            الوقت:
+            ${total} ساعة تقريبًا.
+
+        </p>
+
+
+        <div
+            class="grid g3"
+            style="
+                margin-top:15px;
+            "
+        >
+
+            ${Array
+                .from(
+                    {
+                        length:
+                            Math.min(days,6)
+                    },
+                    (_,index)=>`
+
+                    <div class="card">
+
+                        <b>
+                            Day ${index+1}
+                        </b>
+
+                        <p
+                            class="muted"
+                            style="
+                                margin-top:5px;
+                            "
+                        >
+                            ${
+                                subjects[
+                                    index %
+                                    subjects.length
+                                ]
+                            }
+
+                            —
+
+                            Study + Review
+                        </p>
+
+                    </div>
+
+                `
+                )
+                .join("")
+            }
+
+        </div>
+
+
+        <p
+            class="muted"
+            style="
+                margin-top:14px;
+            "
+        >
+            التوزيع التفصيلي سيعتمد على
+            بيانات المنهج الحقيقية ومدة
+            كل درس وصعوبته ومتطلباته.
+        </p>
+
+    `;
+
+
+    toast(
+        "تم إنشاء نموذج الخطة"
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+    );
+
+}
+
+
+<<<<<<< HEAD
+
+/* ==========================================
+   AUTH UI
+========================================== */
+
+
+function updateAuthUI() {
+
+
+    $("authTitle")
+        .textContent =
+        loginMode
+        ? "تسجيل الدخول"
+        : "إنشاء حساب";
+
+
+
+    $("authSubtitle")
+        .textContent =
+        loginMode
+        ? "ارجع وكمل رحلتك مع Mathix"
+        : "ابدأ رحلتك التعليمية مع Mathix";
+
+
+
+    $("nameField")
+        .classList
+        .toggle(
+            "hidden",
+            loginMode
+        );
+
+
+
+    $("emailSubmit")
+        .textContent =
+        loginMode
+        ? "تسجيل الدخول"
+        : "إنشاء الحساب";
+
+
+
+    $("switchAuth")
+        .textContent =
+        loginMode
+        ? "ليس لدي حساب — إنشاء حساب"
+        : "لدي حساب بالفعل — تسجيل الدخول";
+
+
+
+    $("passwordInput")
+        .setAttribute(
+            "autocomplete",
+            loginMode
+            ? "current-password"
+            : "new-password"
+        );
+
+}
+
+
+
+/* ==========================================
+   LANDING BUTTONS
+========================================== */
+
+
+$("startBtn")
+    .onclick = () => {
+
+
+        loginMode = false;
+
+        updateAuthUI();
+
+        show("authScreen");
+
+    };
+
+
+
+$("loginBtn")
+    .onclick = () => {
+
+
+        loginMode = true;
+
+        updateAuthUI();
+
+        show("authScreen");
+
+    };
+
+
+
+$("backBtn")
+    .onclick = () => {
+
+
+        setAuthMessage("");
+
+        show("landingScreen");
+
+    };
+
+
+
+$("switchAuth")
+    .onclick = () => {
+
+
+        loginMode =
+            !loginMode;
+
+
+        setAuthMessage("");
+
+
+        updateAuthUI();
+
+    };
+
+
+
+/* ==========================================
+   EMAIL AUTH
+========================================== */
+
+
+$("emailForm")
+    .addEventListener(
+        "submit",
+        async event => {
+
+
+            event.preventDefault();
+
+
+            setAuthMessage("");
+
+
+            const email =
+                $("emailInput")
+                .value
+                .trim();
+
+
+            const password =
+                $("passwordInput")
+                .value;
+
+
+            const name =
+                $("nameInput")
+                .value
+                .trim();
+
+
+
+            if(!firebaseReady) {
+
+
+                setAuthMessage(
+                    "Firebase Config لسه مش متضاف. أضف بيانات مشروع Firebase داخل الكود."
+                );
+
+
+                return;
+
+            }
+
+
+
+            try {
+
+
+                let credential;
+
+
+
+                if(loginMode) {
+
+
+                    credential =
+                        await signInWithEmailAndPassword(
+                            auth,
+                            email,
+                            password
+                        );
+
+                }
+
+
+                else {
+
+
+                    if(name.length < 2) {
+
+
+                        throw new Error(
+                            "اكتب اسم الطالب."
+                        );
+
+                    }
+
+
+
+                    credential =
+                        await createUserWithEmailAndPassword(
+                            auth,
+                            email,
+                            password
+                        );
+
+
+
+                    await updateProfile(
+                        credential.user,
+                        {
+                            displayName: name
+                        }
+                    );
+
+
+
+                    profile =
+                        await ensureProfile(
+                            {
+                                ...credential.user,
+                                displayName: name
+                            },
+                            name
+                        );
+
+
+
+                    renderDashboard();
+
+
+                    show("appScreen");
+
+                }
+
+
+            }
+
+
+            catch(error) {
+
+
+                console.error(error);
+
+
+
+                const messages = {
+
+
+                    "auth/invalid-credential":
+                        "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+
+
+                    "auth/email-already-in-use":
+                        "البريد الإلكتروني مستخدم بالفعل.",
+
+
+                    "auth/weak-password":
+                        "كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.",
+
+
+                    "auth/invalid-email":
+                        "البريد الإلكتروني غير صحيح."
+
+
+                };
+
+
+
+                setAuthMessage(
+                    messages[error.code] ||
+                    error.message ||
+                    "حصل خطأ، حاول مرة أخرى."
+                );
+
+            }
+
+
+        }
+    );
+
+
+
+/* ==========================================
+   GOOGLE LOGIN
+========================================== */
+
+
+$("googleBtn")
+    .onclick = async () => {
+
+
+        setAuthMessage("");
+
+
+        if(!firebaseReady) {
+
+
+            setAuthMessage(
+                "أضف Firebase Config داخل الملف أولاً لتفعيل تسجيل Google."
+            );
+
+
+            return;
+
+        }
+
+
+
+        try {
+
+
+            const credential =
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+
+
+            profile =
+                await ensureProfile(
+                    credential.user
+                );
+
+
+
+            renderDashboard();
+
+
+            show("appScreen");
+
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(error);
+
+
+            setAuthMessage(
+                error.message ||
+                "تعذر تسجيل الدخول باستخدام Google."
+            );
+
+        }
+
+    };
+
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+
+document
+    .querySelectorAll(
+        "[data-section]"
+    )
+    .forEach(button => {
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+
+                const target =
+                    button.dataset.section;
+
+
+
+                document
+                    .querySelectorAll(
+                        ".nav button"
+                    )
+                    .forEach(
+                        item =>
+                            item.classList
+                            .remove("active")
+                    );
+
+
+
+                button
+                    .classList
+                    .add("active");
+
+
+
+                document
+                    .querySelectorAll(
+                        ".section"
+                    )
+                    .forEach(
+                        section =>
+                            section.classList
+                            .remove("active")
+                    );
+
+
+
+                $(
+                    `${target}Section`
+                )
+                .classList
+                .add("active");
+
+
+
+                $("pageTitle")
+                    .textContent =
+
+
+                    target === "dashboard"
+                    ? "لوحة التحكم"
+
+
+                    : target === "subjects"
+                    ? "المواد"
+
+
+                    : "حسابي";
+
+
+            }
+
+=======
+/* =========================================
+   I'M NOT SURE WHERE TO START
+========================================= */
+
+function openStartFlow(){
+
+    openModal(`
+
+        <div class="modal-head">
+
+            <h3>
+                😵 مش عارف أبدأ
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p class="muted">
+            معاك كام دقيقة؟
+        </p>
+
+
+        <div
+            class="choice-grid"
+            style="
+                margin-top:15px;
+            "
+        >
+
+            ${[
+                15,
+                30,
+                60,
+                120,
+                180
+            ]
+            .map(minutes=>`
+
+                <button
+                    class="choice"
+                    onclick="
+                        startByMinutes(
+                            ${minutes}
+                        )
+                    "
+                >
+
+                    ⏱️
+                    ${minutes}
+                    دقيقة
+
+                    <br>
+
+                    <small
+                        class="muted"
+                    >
+                        ${
+                            minutes<=30
+                            ?
+                            "Quick Sprint"
+                            :
+                            minutes<=60
+                            ?
+                            "Focused Session"
+                            :
+                            "Deep Session"
+                        }
+                    </small>
+
+                </button>
+
+            `)
+            .join("")}
+
+        </div>
+
+    `);
+
+}
+
+
+function startByMinutes(minutes){
+
+    closeModal();
+
+    go("practice");
+
+    toast(
+        `Mathix اختار جلسة ${minutes} دقيقة`
+    );
+
+}
+
+
+/* =========================================
+   MATHIX BRAIN
+========================================= */
+
+function smartStart(){
+
+    toast(
+        "ابدأ جلسة تدريب ليبدأ Mathix في بناء توصيات شخصية"
+    );
+
+}
+
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+function openNotifications(){
+
+    openModal(`
+
+        <div class="modal-head">
+
+            <h3>
+                🔔 Notification Center
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <p class="muted">
+            لا توجد إشعارات جديدة حاليًا.
+        </p>
+
+    `);
+
+}
+
+
+/* =========================================
+   GLOBAL SEARCH
+========================================= */
+
+function openSearch(){
+
+    openModal(`
+
+        <div class="modal-head">
+
+            <h3>
+                Global Search
+            </h3>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <input
+            class="input"
+            placeholder="
+                ابحث عن درس، سؤال، قانون...
+            "
+            oninput="
+                searchDemo(this.value)
+            "
+        >
+
+
+        <div
+            id="searchResults"
+            style="
+                margin-top:12px;
+            "
+        >
+        </div>
+
+    `);
+
+}
+
+
+function searchDemo(value){
+
+    const result =
+        document.getElementById(
+            "searchResults"
+        );
+
+
+    if(!value){
+
+        result.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    result.innerHTML = `
+
+        <div class="card">
+
+            <b>
+                Search:
+            </b>
+
+            ${value}
+
+            <p
+                class="muted"
+                style="
+                    margin-top:5px;
+                "
+            >
+                البحث الحقيقي سيتم ربطه
+                بقاعدة بيانات Mathix.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   NAV BUTTONS
+========================================= */
+
+document
+    .querySelectorAll(".nav button")
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                go(
+                    button.dataset.page
+                );
+
+            }
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+        );
+
+    });
+
+
+<<<<<<< HEAD
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+
+document
+    .querySelector(
+        "[data-action='logout']"
+    )
+    .onclick = async () => {
+
+
+        if(auth) {
+
+            await signOut(auth);
+
+        }
+
+
+
+        currentUser = null;
+
+        profile = null;
+
+
+
+        show(
+            "landingScreen"
+        );
+
+    };
+
+
+
+/* ==========================================
+   START
+========================================== */
+
+
+initFirebase();
+
+
+
+/* ==========================================
+   SERVICE WORKER
+========================================== */
+
+
+if("serviceWorker" in navigator) {
+
+
+    window.addEventListener(
+        "load",
+        () => {
+
+
+            navigator
+                .serviceWorker
+                .register("sw.js")
+                .catch(
+                    console.warn
+                );
+
+        }
+=======
+/* =========================================
+   MODAL ESC
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   HEATMAP
+========================================= */
+
+const heatmap =
+    document.getElementById(
+        "heatmap"
+    );
+
+
+for(
+    let i=0;
+    i<50;
+    i++
+){
+
+    const cell =
+        document.createElement(
+            "i"
+        );
+
+
+    if(i % 9 === 0){
+
+        cell.classList.add(
+            "mid"
+        );
+
+    }
+
+
+    heatmap.appendChild(
+        cell
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
+    );
+
+}
+
+
+<<<<<<< HEAD
+
+</script>
+
+
+</body>
+
+</html>
+=======
+/* =========================================
+   PROFILE PLACEHOLDER
+========================================= */
+
+const savedStudent =
+    JSON.parse(
+        localStorage.getItem(
+            "mathix_student"
+        ) || "{}"
+    );
+
+
+if(savedStudent.first){
+
+    const fullName =
+        savedStudent.first +
+        " " +
+        (
+            savedStudent.second ||
+            ""
+        );
+
+
+    document.getElementById(
+        "miniName"
+    ).textContent =
+        fullName;
+
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+        fullName;
+
+
+    document.getElementById(
+        "miniAvatar"
+    ).textContent =
+        savedStudent.first[0];
+
+
+    document.getElementById(
+        "profileAvatar"
+    ).textContent =
+        savedStudent.first[0];
+
+}
+
+
+/* =========================================
+   INITIALIZATION
+========================================= */
+
+toast(
+    "مرحبًا بك في Mathix"
+);
+
+</script>
+
+</body>
+</html>
+>>>>>>> 1002d6fea19624f846be6c28bd8137787e569b24
