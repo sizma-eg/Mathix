@@ -1,4562 +1,2446 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07070b">
-<meta name="description" content="Mathix - منصة التعلم الذكي لطلاب الثانوية العامة">
 
-<title>Mathix — منصة التعلم الذكي</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#07070b"
+>
+
+<title>Mathix</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Chakra+Petch:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 :root{
-    --bg:#07070b;
-    --bg2:#0a0a10;
-    --panel:#0e0e15;
-    --panel2:#12121a;
-    --panel3:#181820;
 
-    --border:rgba(255,255,255,.075);
-    --border2:rgba(255,255,255,.12);
+  --bg:#07070b;
+  --bg2:#0b0b10;
+  --card:#101016;
+  --card2:#15151d;
 
-    --text:#f5f5f7;
-    --muted:#8d8d9b;
-    --muted2:#666673;
+  --purple:#8b5cf6;
+  --purple2:#a78bfa;
+  --purpleDark:#5b21b6;
 
-    --purple:#8b5cf6;
-    --purple2:#6d28d9;
-    --purple3:#a78bfa;
+  --text:#ffffff;
+  --muted:#92929f;
+  --border:rgba(255,255,255,.08);
 
-    --green:#22c55e;
-    --red:#ef4444;
-    --yellow:#f59e0b;
-    --blue:#3b82f6;
+  --green:#22c55e;
+  --red:#ef4444;
+  --yellow:#f59e0b;
 
-    --radius:20px;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    background:
-        radial-gradient(
-            circle at 85% -10%,
-            rgba(139,92,246,.08),
-            transparent 35%
-        ),
-        var(--bg);
 
-    color:var(--text);
-    font-family:"Cairo",sans-serif;
-    overflow-x:hidden;
+  font-family:"Cairo",sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(139,92,246,.14),
+      transparent 35%
+    ),
+    var(--bg);
+
+  color:var(--text);
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+
 }
 
 button,
 input,
 select,
 textarea{
-    font-family:inherit;
+
+  font-family:inherit;
+
 }
 
 button{
-    cursor:pointer;
-}
-
-button:disabled{
-    cursor:not-allowed;
+  cursor:pointer;
 }
 
 .hidden{
-    display:none!important;
+  display:none!important;
 }
 
 
-/* =========================================================
-   SCROLLBAR
-========================================================= */
+/* =========================
+   LANDING
+========================= */
 
-::-webkit-scrollbar{
-    width:7px;
-    height:7px;
+#landing{
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:30px;
+
 }
 
-::-webkit-scrollbar-track{
-    background:#09090d;
+.landing-box{
+
+  width:100%;
+  max-width:650px;
+
+  text-align:center;
+
 }
 
-::-webkit-scrollbar-thumb{
-    background:#292933;
-    border-radius:20px;
+.brand-logo{
+
+  width:150px;
+  height:150px;
+
+  object-fit:contain;
+
+  margin:auto;
+
+  filter:
+    drop-shadow(
+      0 0 30px
+      rgba(139,92,246,.35)
+    );
+
 }
 
-::-webkit-scrollbar-thumb:hover{
-    background:#3a3a47;
+.brand-title{
+
+  font-family:"Chakra Petch",sans-serif;
+
+  font-size:52px;
+
+  font-weight:800;
+
+  letter-spacing:2px;
+
+  margin-top:10px;
+
 }
 
+.brand-subtitle{
 
-/* =========================================================
-   GENERAL BUTTONS
-========================================================= */
+  color:var(--muted);
 
-.btn{
-    border:1px solid var(--border);
-    background:var(--panel2);
-    color:white;
+  font-size:16px;
 
-    border-radius:13px;
-    padding:11px 18px;
+  margin-top:8px;
 
-    font-size:13px;
-    font-weight:700;
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
 }
 
-.btn:hover{
-    transform:translateY(-2px);
-    border-color:rgba(139,92,246,.45);
+.start-btn{
+
+  margin-top:35px;
+
+  border:0;
+
+  padding:15px 45px;
+
+  border-radius:15px;
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purpleDark)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(139,92,246,.22);
+
+  transition:.25s;
+
 }
 
-.btn:active{
-    transform:translateY(0);
-}
+.start-btn:hover{
 
-.btn-primary{
-    border:none;
+  transform:translateY(-3px);
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--purple),
-            var(--purple2)
-        );
+  box-shadow:
+    0 20px 50px
+    rgba(139,92,246,.35);
 
-    box-shadow:
-        0 10px 30px rgba(139,92,246,.18);
-}
-
-.btn-primary:hover{
-    box-shadow:
-        0 14px 35px rgba(139,92,246,.27);
-}
-
-.btn-success{
-    color:#6ee7a0;
-    background:rgba(34,197,94,.08);
-    border-color:rgba(34,197,94,.2);
-}
-
-.btn-danger{
-    color:#f87171;
-    background:rgba(239,68,68,.08);
-    border-color:rgba(239,68,68,.2);
-}
-
-.btn-warning{
-    color:#fbbf24;
-    background:rgba(245,158,11,.08);
-    border-color:rgba(245,158,11,.2);
-}
-
-.btn-full{
-    width:100%;
-}
-
-
-/* =========================================================
-   LANDING SCREEN
-========================================================= */
-
-#landingScreen{
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    position:relative;
-    overflow:hidden;
-}
-
-.bg-orb{
-    position:absolute;
-
-    width:520px;
-    height:520px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,92,246,.17),
-            transparent 70%
-        );
-
-    filter:blur(20px);
-    pointer-events:none;
-}
-
-.bg-orb-1{
-    top:-270px;
-    right:-170px;
-}
-
-.bg-orb-2{
-    bottom:-300px;
-    left:-170px;
-}
-
-.bg-grid{
-    position:absolute;
-    inset:0;
-
-    opacity:.025;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.5) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.5) 1px,
-            transparent 1px
-        );
-
-    background-size:45px 45px;
-
-    pointer-events:none;
-}
-
-.landing{
-    width:min(1120px,100%);
-
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-
-    gap:60px;
-    align-items:center;
-
-    position:relative;
-    z-index:2;
-}
-
-.brand-large{
-    font-family:"Chakra Petch",sans-serif;
-
-    font-size:58px;
-    line-height:1;
-
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.brand-large span{
-    color:var(--purple);
-}
-
-.landing h1{
-    font-size:clamp(37px,5vw,67px);
-
-    line-height:1.08;
-
-    margin:22px 0 17px;
-
-    font-weight:900;
-}
-
-.landing h1 span{
-    color:var(--purple);
-}
-
-.landing-description{
-    color:var(--muted);
-
-    max-width:620px;
-
-    font-size:15px;
-    line-height:2;
-}
-
-.landing-actions{
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-
-    margin-top:27px;
-}
-
-.landing-actions .btn{
-    padding:13px 23px;
-}
-
-.landing-card{
-    padding:22px;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.012)
-        );
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.35);
-
-    backdrop-filter:blur(20px);
-}
-
-.logo-stage{
-    height:390px;
-
-    border-radius:24px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(139,92,246,.20),
-            transparent 48%
-        ),
-        #09090f;
-
-    border:1px solid var(--border);
-}
-
-.logo-stage::before{
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    border:1px solid rgba(139,92,246,.25);
-
-    border-radius:50%;
-
-    animation:spin 18s linear infinite;
-}
-
-.logo-stage::after{
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-    height:300px;
-
-    border:1px solid rgba(255,255,255,.045);
-
-    border-radius:50%;
-
-    animation:spinReverse 25s linear infinite;
-}
-
-.logo-big{
-    position:relative;
-    z-index:2;
-
-    font-family:"Chakra Petch",sans-serif;
-
-    font-size:110px;
-
-    font-weight:900;
-
-    letter-spacing:-8px;
-
-    text-shadow:
-        0 0 25px rgba(139,92,246,.7),
-        0 0 80px rgba(139,92,246,.25);
-}
-
-.logo-big span{
-    color:var(--purple);
-}
-
-@keyframes spin{
-    from{transform:rotate(0)}
-    to{transform:rotate(360deg)}
-}
-
-@keyframes spinReverse{
-    from{transform:rotate(360deg)}
-    to{transform:rotate(0)}
 }
 
 
-/* =========================================================
-   AUTH SCREEN
-========================================================= */
+/* =========================
+   AUTH
+========================= */
 
 #authScreen{
-    min-height:100vh;
 
-    display:none;
+  min-height:100vh;
 
-    align-items:center;
-    justify-content:center;
+  display:none;
 
-    padding:25px;
+  align-items:center;
 
-    position:relative;
+  justify-content:center;
+
+  padding:25px;
+
 }
 
-.auth-background{
-    position:absolute;
-    inset:0;
+.auth-card{
 
-    pointer-events:none;
+  width:100%;
+  max-width:450px;
 
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(139,92,246,.12),
-            transparent 40%
-        );
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.04),
+      rgba(255,255,255,.015)
+    );
+
+  border:1px solid var(--border);
+
+  border-radius:25px;
+
+  padding:30px;
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.4);
+
 }
 
-.auth-box{
-    width:min(470px,100%);
+.auth-logo-wrap{
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.035),
-            rgba(255,255,255,.012)
-        );
+  text-align:center;
 
-    border:1px solid var(--border);
+  margin-bottom:25px;
 
-    border-radius:26px;
-
-    padding:29px;
-
-    position:relative;
-    z-index:2;
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.45);
-}
-
-.auth-back{
-    border:0;
-    background:none;
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    margin-bottom:17px;
-}
-
-.auth-back:hover{
-    color:white;
 }
 
 .auth-logo{
-    text-align:center;
 
-    font-family:"Chakra Petch",sans-serif;
+  width:100px;
+  height:100px;
 
-    font-size:38px;
+  object-fit:contain;
 
-    font-weight:900;
+  filter:
+    drop-shadow(
+      0 0 25px
+      rgba(139,92,246,.4)
+    );
+
 }
 
-.auth-logo span{
-    color:var(--purple);
+.auth-brand{
+
+  font-family:"Chakra Petch",sans-serif;
+
+  font-size:28px;
+
+  font-weight:800;
+
+  margin-top:5px;
+
 }
 
-.auth-subtitle{
-    text-align:center;
+.auth-title{
 
-    color:var(--muted);
+  font-size:23px;
 
-    font-size:12px;
+  font-weight:800;
 
-    margin-top:3px;
-    margin-bottom:22px;
+  margin-bottom:5px;
+
+}
+
+.auth-description{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-bottom:22px;
+
 }
 
 .auth-tabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
 
-    gap:5px;
+  display:grid;
 
-    padding:5px;
+  grid-template-columns:1fr 1fr;
 
-    background:var(--panel2);
+  background:#09090d;
 
-    border:1px solid var(--border);
+  padding:4px;
 
-    border-radius:13px;
+  border-radius:12px;
 
-    margin-bottom:20px;
+  margin-bottom:20px;
+
 }
 
 .auth-tab{
-    border:0;
-    background:transparent;
 
-    color:var(--muted);
+  border:0;
 
-    padding:10px;
+  background:transparent;
 
-    border-radius:9px;
+  color:var(--muted);
 
-    font-size:12px;
-    font-weight:800;
+  padding:10px;
+
+  border-radius:9px;
+
 }
 
 .auth-tab.active{
-    background:var(--panel3);
-    color:white;
 
-    box-shadow:
-        0 4px 15px rgba(0,0,0,.2);
+  background:var(--purple);
+
+  color:white;
+
+  font-weight:700;
+
 }
 
-.form-group{
-    margin-bottom:14px;
+.field{
+
+  margin-bottom:15px;
+
 }
 
-.form-label{
-    display:block;
+.field label{
 
-    color:#aaa;
+  display:block;
 
-    font-size:11px;
+  font-size:13px;
 
-    margin-bottom:6px;
+  color:#cfcfd7;
+
+  margin-bottom:7px;
+
 }
 
-.input{
-    width:100%;
+.field input,
+.field select,
+.field textarea{
 
-    border:1px solid var(--border);
+  width:100%;
 
-    outline:none;
+  background:#09090e;
 
-    background:#09090e;
+  border:1px solid var(--border);
 
-    color:white;
+  color:white;
 
-    border-radius:12px;
+  padding:13px 14px;
 
-    padding:12px 13px;
+  border-radius:12px;
 
-    font-size:13px;
+  outline:none;
 
-    transition:
-        border-color .2s,
-        box-shadow .2s;
+  transition:.2s;
+
 }
 
-.input::placeholder{
-    color:#50505b;
+.field textarea{
+
+  min-height:90px;
+
+  resize:vertical;
+
 }
 
-.input:focus{
-    border-color:rgba(139,92,246,.7);
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
 
-    box-shadow:
-        0 0 0 3px rgba(139,92,246,.08);
+  border-color:
+    rgba(139,92,246,.65);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(139,92,246,.08);
+
 }
 
-.auth-submit{
-    width:100%;
-    margin-top:5px;
-}
+.primary-btn{
 
-.divider{
-    display:flex;
+  width:100%;
 
-    align-items:center;
+  border:0;
 
-    gap:10px;
+  padding:13px;
 
-    color:#5d5d68;
+  border-radius:12px;
 
-    font-size:10px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purpleDark)
+    );
 
-    margin:17px 0;
-}
+  color:white;
 
-.divider::before,
-.divider::after{
-    content:"";
+  font-weight:800;
 
-    height:1px;
-
-    background:var(--border);
-
-    flex:1;
 }
 
 .google-btn{
-    width:100%;
+
+  width:100%;
+
+  margin-top:10px;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  border:1px solid var(--border);
+
+  background:#111118;
+
+  color:white;
+
+  font-weight:700;
+
 }
 
-.auth-error{
-    min-height:18px;
+.auth-switch{
 
-    color:#f87171;
+  text-align:center;
 
-    font-size:11px;
+  color:var(--muted);
 
-    text-align:center;
+  font-size:13px;
 
-    margin-top:10px;
+  margin-top:18px;
+
+}
+
+.auth-switch button{
+
+  border:0;
+
+  background:none;
+
+  color:var(--purple2);
+
+  font-weight:700;
+
 }
 
 
-/* =========================================================
+/* =========================
    APP
-========================================================= */
+========================= */
 
-#appScreen{
-    display:none;
+#app{
 
-    min-height:100vh;
+  display:none;
+
+  min-height:100vh;
+
 }
 
 .app-layout{
-    min-height:100vh;
+
+  display:flex;
+
+  min-height:100vh;
+
 }
 
 
-/* =========================================================
+/* =========================
    SIDEBAR
-========================================================= */
+========================= */
 
 .sidebar{
-    width:258px;
 
-    position:fixed;
+  width:250px;
 
-    top:0;
-    right:0;
-    bottom:0;
+  flex-shrink:0;
 
-    z-index:100;
+  background:#09090d;
 
-    display:flex;
-    flex-direction:column;
+  border-left:1px solid var(--border);
 
-    padding:17px 13px;
+  padding:20px 14px;
 
-    background:
-        linear-gradient(
-            180deg,
-            #09090e,
-            #08080d
-        );
+  position:fixed;
 
-    border-left:1px solid var(--border);
+  right:0;
 
-    overflow:hidden;
+  top:0;
+
+  bottom:0;
+
+  overflow-y:auto;
+
+  z-index:50;
+
 }
 
 .sidebar-logo{
-    font-family:"Chakra Petch",sans-serif;
 
-    font-size:29px;
+  display:flex;
 
-    font-weight:900;
+  align-items:center;
 
-    padding:8px 9px 17px;
+  gap:10px;
+
+  padding:10px;
+
+  margin-bottom:20px;
+
+}
+
+.sidebar-logo img{
+
+  width:42px;
+  height:42px;
+
+  object-fit:contain;
+
 }
 
 .sidebar-logo span{
-    color:var(--purple);
+
+  font-family:"Chakra Petch",sans-serif;
+
+  font-size:24px;
+
+  font-weight:800;
+
 }
 
-.sidebar-user{
-    display:flex;
+.nav-title{
 
-    align-items:center;
+  color:#62626e;
 
-    gap:10px;
+  font-size:11px;
 
-    padding:10px;
+  padding:10px;
 
-    border-radius:15px;
+  margin-top:5px;
 
-    background:var(--panel2);
-
-    border:1px solid var(--border);
-
-    margin-bottom:14px;
-
-    min-width:0;
-}
-
-.avatar{
-    flex:none;
-
-    width:41px;
-    height:41px;
-
-    border-radius:12px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--purple),
-            var(--purple2)
-        );
-
-    color:white;
-
-    font-family:"Chakra Petch",sans-serif;
-
-    font-weight:900;
-}
-
-.sidebar-user-info{
-    min-width:0;
-}
-
-.sidebar-user-name{
-    font-size:12px;
-
-    font-weight:800;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-}
-
-.sidebar-user-code{
-    color:#696974;
-
-    direction:ltr;
-
-    text-align:right;
-
-    font-size:9px;
-
-    margin-top:1px;
-}
-
-.sidebar-nav{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:3px;
-
-    overflow:auto;
-
-    padding-right:1px;
-}
-
-.nav-section-title{
-    color:#4f4f5a;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    padding:10px 10px 4px;
 }
 
 .nav-btn{
-    width:100%;
 
-    display:flex;
+  width:100%;
 
-    align-items:center;
+  border:0;
 
-    gap:9px;
+  background:transparent;
 
-    border:1px solid transparent;
+  color:#a6a6b2;
 
-    border-radius:11px;
+  padding:12px;
 
-    padding:10px 11px;
+  border-radius:12px;
 
-    background:transparent;
+  display:flex;
 
-    color:#858591;
+  align-items:center;
 
-    text-align:right;
+  gap:11px;
 
-    font-size:12px;
+  text-align:right;
 
-    font-weight:600;
+  margin-bottom:3px;
 
-    transition:.18s;
+  transition:.2s;
+
 }
 
 .nav-btn:hover{
-    color:white;
 
-    background:rgba(255,255,255,.025);
+  background:#12121a;
+
+  color:white;
+
 }
 
 .nav-btn.active{
-    color:#c4b5fd;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(139,92,246,.03),
-            rgba(139,92,246,.13)
-        );
+  background:
+    rgba(139,92,246,.14);
 
-    border-color:
-        rgba(139,92,246,.15);
+  color:#c4b5fd;
+
 }
 
-.nav-icon{
-    width:22px;
+.nav-btn.subscription-nav{
 
-    flex:none;
+  color:#f0abfc;
 
-    text-align:center;
+  background:
+    rgba(217,70,239,.06);
 
-    font-size:14px;
-}
-
-.subscription-nav{
-    color:#c4b5fd;
-}
-
-.sidebar-bottom{
-    margin-top:auto;
-
-    padding-top:10px;
-}
-
-.logout-btn{
-    color:#f87171;
 }
 
 
-/* =========================================================
+/* =========================
    MAIN
-========================================================= */
+========================= */
 
 .main{
-    margin-right:258px;
 
-    min-height:100vh;
+  margin-right:250px;
 
-    min-width:0;
+  width:calc(100% - 250px);
+
+  padding:25px;
+
+  min-height:100vh;
+
 }
 
 .topbar{
-    height:70px;
 
-    position:sticky;
+  display:flex;
 
-    top:0;
+  align-items:center;
 
-    z-index:60;
+  justify-content:space-between;
 
-    display:flex;
+  margin-bottom:25px;
 
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 27px;
-
-    background:
-        rgba(7,7,11,.86);
-
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid var(--border);
 }
 
-.topbar-left{
-    display:flex;
+.topbar h1{
 
-    align-items:center;
+  font-size:25px;
 
-    gap:10px;
+  font-weight:800;
+
 }
 
-.mobile-menu{
-    display:none;
+.user-mini{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
 }
 
-.page-title{
-    font-size:17px;
+.avatar{
 
-    font-weight:800;
+  width:40px;
+  height:40px;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      #312e81
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-weight:800;
+
 }
 
-.top-actions{
-    display:flex;
 
-    align-items:center;
-
-    gap:7px;
-}
-
-.icon-btn{
-    width:39px;
-    height:39px;
-
-    border:1px solid var(--border);
-
-    background:var(--panel);
-
-    color:white;
-
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:16px;
-
-    transition:.2s;
-}
-
-.icon-btn:hover{
-    border-color:rgba(139,92,246,.4);
-
-    background:var(--panel2);
-}
-
-.content{
-    width:100%;
-
-    max-width:1500px;
-
-    margin:auto;
-
-    padding:27px;
-}
+/* =========================
+   PAGE
+========================= */
 
 .page{
-    display:none;
 
-    animation:pageIn .22s ease;
+  display:none;
+
 }
 
 .page.active{
-    display:block;
-}
 
-@keyframes pageIn{
-    from{
-        opacity:0;
-        transform:translateY(5px);
-    }
+  display:block;
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 
-/* =========================================================
-   COMMON COMPONENTS
-========================================================= */
-
-.card{
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    padding:20px;
-}
-
-.card-title{
-    font-size:14px;
-
-    font-weight:800;
-}
-
-.card-subtitle{
-    color:var(--muted);
-
-    font-size:11px;
-
-    margin-top:3px;
-}
+/* =========================
+   CARDS
+========================= */
 
 .grid{
-    display:grid;
 
-    gap:14px;
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px,1fr)
+    );
+
+  gap:15px;
+
 }
 
-.grid-2{
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
+.card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:20px;
+
 }
 
-.grid-3{
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
+.card h3{
+
+  font-size:15px;
+
+  margin-bottom:7px;
+
 }
 
-.grid-4{
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
+.card p{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  line-height:1.8;
+
 }
 
-.section-head{
-    display:flex;
+.stat{
 
-    align-items:center;
+  font-size:30px;
 
-    justify-content:space-between;
+  font-weight:900;
 
-    gap:15px;
+  font-family:"Chakra Petch",sans-serif;
 
-    margin-bottom:14px;
 }
 
-.section-head h2{
-    font-size:17px;
-}
+.section-title{
 
-.muted{
-    color:var(--muted);
-}
+  margin:25px 0 12px;
 
-.small{
-    font-size:11px;
-}
+  font-size:19px;
 
-.badge{
-    display:inline-flex;
+  font-weight:800;
 
-    align-items:center;
-
-    gap:5px;
-
-    border-radius:8px;
-
-    padding:5px 9px;
-
-    font-size:9px;
-
-    font-weight:800;
-}
-
-.badge-purple{
-    color:#c4b5fd;
-
-    background:
-        rgba(139,92,246,.12);
-}
-
-.badge-green{
-    color:#5ee98b;
-
-    background:
-        rgba(34,197,94,.1);
-}
-
-.badge-red{
-    color:#f87171;
-
-    background:
-        rgba(239,68,68,.1);
-}
-
-.badge-yellow{
-    color:#fbbf24;
-
-    background:
-        rgba(245,158,11,.1);
-}
-
-.badge-blue{
-    color:#60a5fa;
-
-    background:
-        rgba(59,130,246,.1);
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
+/* =========================
+   SUBSCRIPTION
+========================= */
 
-.hero{
-    position:relative;
+.subscription-hero{
 
-    overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(139,92,246,.18),
+      transparent 35%
+    ),
+    var(--card);
 
-    padding:26px;
+  border:1px solid var(--border);
 
-    border-radius:23px;
+  border-radius:22px;
 
-    background:
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(139,92,246,.18),
-            transparent 38%
-        ),
-        linear-gradient(
-            135deg,
-            #11111a,
-            #0b0b10
-        );
+  padding:25px;
 
-    border:1px solid var(--border);
+  margin-bottom:18px;
+
 }
 
-.hero h2{
-    font-size:24px;
+.subscription-status{
 
-    font-weight:900;
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:7px 12px;
+
+  border-radius:30px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  margin-bottom:12px;
+
 }
 
-.hero p{
-    color:var(--muted);
+.status-active{
 
-    font-size:12px;
+  background:
+    rgba(34,197,94,.12);
 
-    line-height:1.9;
+  color:#4ade80;
 
-    margin-top:4px;
 }
 
+.status-pending{
 
-/* =========================================================
-   HOME
-========================================================= */
+  background:
+    rgba(245,158,11,.12);
 
-.welcome{
-    margin-bottom:17px;
+  color:#fbbf24;
+
 }
 
-.welcome h1{
-    font-size:25px;
+.status-expired{
 
-    font-weight:900;
+  background:
+    rgba(239,68,68,.12);
+
+  color:#f87171;
+
 }
 
-.welcome h1 span{
-    color:var(--purple);
+.status-none{
+
+  background:
+    rgba(255,255,255,.06);
+
+  color:#aaa;
+
 }
 
-.welcome p{
-    color:var(--muted);
+.plan-grid{
 
-    font-size:12px;
+  display:grid;
 
-    margin-top:2px;
-}
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px,1fr)
+    );
 
-.stats{
-    display:grid;
+  gap:15px;
 
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
+  margin-top:20px;
 
-    gap:13px;
-
-    margin:15px 0;
-}
-
-.stat-card{
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:17px;
-
-    padding:17px;
-}
-
-.stat-label{
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-.stat-value{
-    font-family:"Chakra Petch",sans-serif;
-
-    font-size:27px;
-
-    font-weight:800;
-
-    margin-top:5px;
-}
-
-.home-subscription{
-    background:
-        radial-gradient(
-            circle at 0% 50%,
-            rgba(139,92,246,.13),
-            transparent 40%
-        ),
-        var(--panel);
-
-    border-color:
-        rgba(139,92,246,.17);
-}
-
-.sub-mini{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-}
-
-.sub-mini-info{
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-}
-
-.sub-icon{
-    width:47px;
-    height:47px;
-
-    border-radius:14px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:
-        rgba(139,92,246,.11);
-
-    font-size:21px;
-}
-
-.sub-mini strong{
-    display:block;
-
-    font-size:13px;
-}
-
-.sub-mini small{
-    display:block;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    margin-top:2px;
-}
-
-
-/* =========================================================
-   QUICK CARDS
-========================================================= */
-
-.quick-card{
-    padding:18px;
-
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-}
-
-.quick-icon{
-    width:44px;
-    height:44px;
-
-    border-radius:13px;
-
-    background:
-        rgba(139,92,246,.10);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:20px;
-
-    margin-bottom:11px;
-}
-
-.quick-card h3{
-    font-size:13px;
-}
-
-.quick-card p{
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.8;
-
-    margin:4px 0 12px;
-}
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress{
-    width:100%;
-
-    height:8px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:#1b1b24;
-}
-
-.progress-bar{
-    width:0;
-    height:100%;
-
-    border-radius:inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--purple2),
-            var(--purple)
-        );
-
-    transition:width .5s ease;
-}
-
-
-/* =========================================================
-   PAGE CARDS
-========================================================= */
-
-.subject-card{
-    position:relative;
-
-    padding:20px;
-
-    min-height:185px;
-
-    background:var(--panel);
-
-    border:1px solid var(--border);
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    transition:.2s;
-}
-
-.subject-card:hover{
-    transform:translateY(-3px);
-
-    border-color:
-        rgba(139,92,246,.25);
-}
-
-.subject-icon{
-    width:48px;
-    height:48px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:14px;
-
-    background:
-        rgba(139,92,246,.1);
-
-    font-size:22px;
-
-    margin-bottom:13px;
-}
-
-.subject-card h3{
-    font-size:15px;
-}
-
-.subject-card p{
-    color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.8;
-
-    margin:5px 0 14px;
-}
-
-
-/* =========================================================
-   SUBSCRIPTION PAGE
-========================================================= */
-
-.subscription-head{
-    display:flex;
-
-    align-items:flex-start;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:18px;
-}
-
-.subscription-head h1{
-    font-size:25px;
-
-    font-weight:900;
-}
-
-.subscription-head p{
-    color:var(--muted);
-
-    font-size:11px;
-
-    margin-top:3px;
-}
-
-.subscription-grid{
-    display:grid;
-
-    grid-template-columns:
-        1.2fr .8fr;
-
-    gap:14px;
-}
-
-.current-sub{
-    min-height:190px;
-
-    background:
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(139,92,246,.17),
-            transparent 40%
-        ),
-        var(--panel);
-}
-
-.current-sub-top{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:18px;
-}
-
-.current-sub-label{
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-.current-plan{
-    font-size:20px;
-
-    font-weight:900;
-
-    margin-top:2px;
-}
-
-.subscription-big-icon{
-    width:52px;
-    height:52px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:15px;
-
-    background:
-        rgba(139,92,246,.11);
-
-    font-size:23px;
-}
-
-.subscription-info{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    gap:10px;
-}
-
-.info-box{
-    padding:12px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:1px solid var(--border);
-
-    border-radius:13px;
-}
-
-.info-box small{
-    display:block;
-
-    color:#6d6d78;
-
-    font-size:9px;
-}
-
-.info-box strong{
-    display:block;
-
-    font-size:12px;
-
-    margin-top:3px;
-}
-
-.access-card{
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-}
-
-.access-card h3{
-    font-size:14px;
-}
-
-.access-card p{
-    color:var(--muted);
-
-    font-size:11px;
-
-    line-height:1.8;
-
-    margin:8px 0;
-}
-
-.plans{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,minmax(0,1fr));
-
-    gap:14px;
-
-    margin-top:14px;
 }
 
 .plan-card{
-    position:relative;
 
-    padding:20px;
+  position:relative;
 
-    border-radius:20px;
+  background:#0c0c12;
 
-    background:var(--panel);
+  border:1px solid var(--border);
 
-    border:1px solid var(--border);
+  border-radius:18px;
+
+  padding:22px;
+
+  transition:.25s;
+
+}
+
+.plan-card:hover{
+
+  transform:translateY(-3px);
+
+  border-color:
+    rgba(139,92,246,.4);
+
 }
 
 .plan-card.featured{
-    border-color:
-        rgba(139,92,246,.38);
 
-    box-shadow:
-        0 15px 50px rgba(139,92,246,.06);
+  border-color:
+    rgba(139,92,246,.5);
+
 }
 
-.plan-card h3{
-    font-size:15px;
+.plan-name{
 
-    margin-top:10px;
+  font-size:17px;
+
+  font-weight:800;
+
 }
 
 .plan-price{
-    font-family:"Chakra Petch",sans-serif;
 
-    font-size:32px;
+  font-size:34px;
 
-    font-weight:900;
+  font-weight:900;
 
-    margin:8px 0;
+  margin:12px 0;
+
+  font-family:"Chakra Petch",sans-serif;
+
 }
 
-.plan-price span{
-    font-family:Cairo,sans-serif;
+.plan-price small{
 
-    color:var(--muted);
+  font-size:13px;
 
-    font-size:10px;
+  color:var(--muted);
 
-    font-weight:500;
+  font-family:"Cairo",sans-serif;
+
 }
 
-.plan-features{
-    list-style:none;
+.plan-list{
 
-    color:var(--muted);
+  list-style:none;
 
-    font-size:10px;
+  color:#aaa;
 
-    line-height:2.2;
+  font-size:13px;
 
-    margin:8px 0 14px;
+  line-height:2;
+
+  margin-bottom:18px;
+
 }
 
-.plan-features li::before{
-    content:"✓";
+.plan-btn{
 
-    color:var(--green);
+  width:100%;
 
-    font-weight:900;
+  padding:11px;
 
-    margin-left:6px;
+  border-radius:11px;
+
+  border:1px solid var(--border);
+
+  background:#15151d;
+
+  color:white;
+
+  font-weight:800;
+
 }
 
-.vodafone-box{
-    margin-top:15px;
+.plan-btn.primary{
 
-    padding:15px;
+  background:var(--purple);
 
-    border-radius:15px;
+  border-color:var(--purple);
 
-    background:
-        rgba(239,68,68,.055);
+}
 
-    border:1px solid
-        rgba(239,68,68,.14);
+
+/* =========================
+   PAYMENT
+========================= */
+
+.payment-info{
+
+  background:
+    rgba(139,92,246,.08);
+
+  border:
+    1px solid
+    rgba(139,92,246,.18);
+
+  border-radius:15px;
+
+  padding:15px;
+
+  margin-bottom:18px;
+
 }
 
 .vodafone-number{
-    font-family:"Chakra Petch",sans-serif;
 
-    direction:ltr;
+  font-family:"Chakra Petch",sans-serif;
 
-    display:inline-block;
+  font-size:25px;
 
-    font-size:22px;
+  font-weight:900;
 
-    font-weight:800;
+  direction:ltr;
 
-    margin-top:2px;
+  text-align:center;
+
+  margin-top:7px;
+
 }
 
-.requests-title{
-    margin-top:24px;
+.copy-number{
+
+  display:block;
+
+  margin:10px auto 0;
+
+  border:1px solid var(--border);
+
+  background:#12121a;
+
+  color:white;
+
+  padding:7px 14px;
+
+  border-radius:9px;
+
 }
 
-.request-list{
-    margin-top:10px;
-}
+
+/* =========================
+   REQUESTS
+========================= */
 
 .request-item{
-    display:flex;
 
-    align-items:center;
+  padding:15px;
 
-    justify-content:space-between;
+  background:#0c0c12;
 
-    gap:15px;
+  border:1px solid var(--border);
 
-    padding:13px;
+  border-radius:14px;
 
-    border:1px solid var(--border);
+  margin-top:10px;
 
-    background:
-        rgba(255,255,255,.018);
-
-    border-radius:13px;
-
-    margin-bottom:8px;
 }
 
-.request-main strong{
-    display:block;
+.request-row{
 
-    font-size:12px;
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:6px;
+
 }
 
-.request-main small{
-    color:var(--muted);
+.request-label{
 
-    font-size:9px;
+  color:var(--muted);
+
+  font-size:12px;
+
 }
 
+.request-value{
 
-/* =========================================================
-   GENERIC PAGE
-========================================================= */
+  font-size:13px;
 
-.empty-state{
-    padding:50px 20px;
+  font-weight:700;
 
-    text-align:center;
-
-    border:1px dashed var(--border2);
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.012);
-}
-
-.empty-icon{
-    font-size:40px;
-
-    margin-bottom:8px;
-}
-
-.empty-state h3{
-    font-size:15px;
-}
-
-.empty-state p{
-    color:var(--muted);
-
-    font-size:11px;
-
-    margin-top:4px;
 }
 
 
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile-header{
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-bottom:18px;
-}
-
-.profile-avatar{
-    width:70px;
-    height:70px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--purple),
-            var(--purple2)
-        );
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-family:"Chakra Petch",sans-serif;
-
-    font-size:28px;
-
-    font-weight:900;
-}
-
-
-/* =========================================================
-   MODALS
-========================================================= */
+/* =========================
+   MODAL
+========================= */
 
 .modal-wrap{
-    position:fixed;
 
-    inset:0;
+  position:fixed;
 
-    z-index:500;
+  inset:0;
 
-    display:none;
+  background:
+    rgba(0,0,0,.72);
 
-    align-items:center;
-    justify-content:center;
+  backdrop-filter:blur(8px);
 
-    padding:18px;
+  display:none;
 
-    background:
-        rgba(0,0,0,.72);
+  align-items:center;
 
-    backdrop-filter:blur(9px);
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:100;
+
 }
 
 .modal{
-    width:min(520px,100%);
 
-    max-height:90vh;
+  width:100%;
 
-    overflow:auto;
+  max-width:470px;
 
-    padding:22px;
+  background:#101016;
 
-    border-radius:22px;
+  border:1px solid var(--border);
 
-    background:#0e0e14;
+  border-radius:22px;
 
-    border:1px solid var(--border);
+  padding:24px;
 
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.6);
+  max-height:90vh;
 
-    animation:modalIn .2s ease;
+  overflow-y:auto;
+
 }
 
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(10px) scale(.98);
-    }
+.modal-header{
 
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
+  display:flex;
 
-.modal-head{
-    display:flex;
+  align-items:center;
 
-    align-items:center;
+  justify-content:space-between;
 
-    justify-content:space-between;
+  margin-bottom:20px;
 
-    gap:10px;
-
-    margin-bottom:17px;
-}
-
-.modal-head h3{
-    font-size:17px;
 }
 
 .close-btn{
-    width:35px;
-    height:35px;
 
-    border-radius:10px;
+  width:35px;
+  height:35px;
 
-    border:1px solid var(--border);
+  border-radius:10px;
 
-    background:var(--panel2);
+  border:1px solid var(--border);
 
-    color:white;
+  background:#15151d;
 
-    font-size:20px;
+  color:white;
+
 }
 
 
-/* =========================================================
-   PAYMENT FORM
-========================================================= */
-
-.payment-summary{
-    padding:15px;
-
-    border-radius:14px;
-
-    background:
-        rgba(139,92,246,.06);
-
-    border:1px solid
-        rgba(139,92,246,.12);
-
-    margin-bottom:15px;
-}
-
-.payment-summary-row{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    font-size:11px;
-
-    margin-bottom:7px;
-}
-
-.payment-summary-row:last-child{
-    margin-bottom:0;
-}
-
-.payment-summary-row span{
-    color:var(--muted);
-}
-
-.payment-summary-row strong{
-    font-weight:800;
-}
-
-.file-input{
-    padding:9px;
-}
-
-.file-input::file-selector-button{
-    border:1px solid var(--border);
-
-    background:var(--panel2);
-
-    color:white;
-
-    border-radius:8px;
-
-    padding:7px 10px;
-
-    font-family:Cairo;
-
-    font-size:10px;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.loading-box{
-    text-align:center;
-
-    padding:20px;
-}
-
-.loading-spinner{
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    border:3px solid rgba(255,255,255,.08);
-
-    border-top-color:var(--purple);
-
-    animation:spin .8s linear infinite;
-
-    margin:0 auto 13px;
-}
-
-.loading-box h3{
-    font-size:14px;
-}
-
-.loading-box p{
-    color:var(--muted);
-
-    font-size:10px;
-
-    margin-top:4px;
-}
-
-
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
 .toast{
-    position:fixed;
 
-    left:22px;
-    bottom:22px;
+  position:fixed;
 
-    z-index:700;
+  left:50%;
 
-    max-width:360px;
+  bottom:25px;
 
-    padding:12px 16px;
+  transform:
+    translateX(-50%)
+    translateY(100px);
 
-    border-radius:13px;
+  background:#17171f;
 
-    background:#15151d;
+  border:1px solid var(--border);
 
-    border:1px solid var(--border2);
+  color:white;
 
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.4);
+  padding:12px 18px;
 
-    color:white;
+  border-radius:12px;
 
-    font-size:11px;
+  font-size:13px;
 
-    opacity:0;
+  opacity:0;
 
-    transform:translateY(20px);
+  pointer-events:none;
 
-    pointer-events:none;
+  transition:.3s;
 
-    transition:.25s;
+  z-index:200;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.35);
+
 }
 
 .toast.show{
-    opacity:1;
 
-    transform:translateY(0);
+  opacity:1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* =========================
+   MOBILE
+========================= */
 
-.footer{
-    padding:25px;
+.mobile-menu{
 
-    text-align:center;
+  display:none;
 
-    color:#4d4d57;
+  border:1px solid var(--border);
 
-    font-size:9px;
-}
+  background:#111118;
 
+  color:white;
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+  width:40px;
+  height:40px;
 
-@media(max-width:1050px){
+  border-radius:10px;
 
-    .sidebar{
-        width:225px;
-    }
-
-    .main{
-        margin-right:225px;
-    }
-
-    .stats{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .subscription-grid{
-        grid-template-columns:1fr;
-    }
-
-    .plans{
-        grid-template-columns:1fr;
-    }
-
-    .landing{
-        gap:30px;
-    }
 }
 
 @media(max-width:780px){
 
-    .sidebar{
-        transform:translateX(100%);
+  .sidebar{
 
-        transition:
-            transform .25s ease;
+    transform:
+      translateX(100%);
 
-        width:275px;
+    transition:.25s;
 
-        box-shadow:
-            -20px 0 60px rgba(0,0,0,.5);
-    }
+    box-shadow:
+      -20px 0 60px
+      rgba(0,0,0,.4);
 
-    .sidebar.open{
-        transform:translateX(0);
-    }
+  }
 
-    .main{
-        margin-right:0;
-    }
+  .sidebar.open{
 
-    .mobile-menu{
-        display:flex;
-    }
+    transform:
+      translateX(0);
 
-    .topbar{
-        padding:0 15px;
-    }
+  }
 
-    .content{
-        padding:15px;
-    }
+  .main{
 
-    .landing{
-        grid-template-columns:1fr;
+    margin-right:0;
 
-        text-align:center;
-    }
+    width:100%;
 
-    .landing-card{
-        display:none;
-    }
+    padding:16px;
 
-    .landing-description{
-        margin:auto;
-    }
+  }
 
-    .landing-actions{
-        justify-content:center;
-    }
+  .mobile-menu{
 
-    .brand-large{
-        font-size:47px;
-    }
+    display:block;
 
-    .grid-2,
-    .grid-3,
-    .grid-4{
-        grid-template-columns:1fr;
-    }
+  }
 
-    .subscription-info{
-        grid-template-columns:1fr;
-    }
+  .topbar{
 
-    .subscription-head{
-        flex-direction:column;
-    }
-}
+    gap:10px;
 
-@media(max-width:500px){
+  }
 
-    #landingScreen{
-        padding:20px;
-    }
+  .topbar h1{
 
-    .landing h1{
-        font-size:38px;
-    }
+    font-size:20px;
 
-    .landing-description{
-        font-size:13px;
-    }
+  }
 
-    .auth-box{
-        padding:22px;
-    }
+  .brand-title{
 
-    .stats{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
+    font-size:40px;
 
-        gap:9px;
-    }
+  }
 
-    .stat-card{
-        padding:14px;
-    }
+  .auth-card{
 
-    .stat-value{
-        font-size:23px;
-    }
+    padding:22px;
 
-    .sub-mini{
-        align-items:flex-start;
+  }
 
-        flex-direction:column;
-    }
-
-    .sub-mini .btn{
-        width:100%;
-    }
-
-    .request-item{
-        align-items:flex-start;
-
-        flex-direction:column;
-    }
-
-    .request-item .badge{
-        align-self:flex-start;
-    }
 }
 
 </style>
+
 </head>
 
 <body>
 
 
-<!-- ========================================================
+<!-- =====================================================
      LANDING
-========================================================= -->
+====================================================== -->
 
-<div id="landingScreen">
+<section id="landing">
 
-    <div class="bg-orb bg-orb-1"></div>
-    <div class="bg-orb bg-orb-2"></div>
-    <div class="bg-grid"></div>
+  <div class="landing-box">
 
-    <div class="landing">
+    <img
+      src="mathix-logo.png"
+      class="brand-logo"
+      alt="Mathix"
+      onerror="this.style.display='none'"
+    >
 
-        <div class="landing-content">
+    <div class="brand-title">
+      Mathix
+    </div>
 
-            <div class="brand-large">
-                Math<span>ix</span>
-            </div>
+    <div class="brand-subtitle">
+      منصتك الذكية للتدريب والتفوق
+    </div>
 
-            <h1>
-                اتعلم بذكاء.<br>
-                <span>حل أكتر.</span><br>
-                اتطور أسرع.
-            </h1>
+    <button
+      class="start-btn"
+      onclick="showAuth('login')"
+    >
+      ابدأ الآن
+    </button>
 
-            <p class="landing-description">
-                Mathix منصة تعليمية ذكية لطلاب الثانوية العامة.
-                شرح، تدريب، امتحانات وتحليل لمستواك في مكان واحد.
-            </p>
+  </div>
 
-            <div class="landing-actions">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="showAuth('signup')">
-                    ابدأ الآن
-                </button>
-
-                <button
-                    class="btn"
-                    onclick="showAuth('login')">
-                    تسجيل الدخول
-                </button>
-
-            </div>
-
-        </div>
+</section>
 
 
-        <div class="landing-card">
+<!-- =====================================================
+     AUTH
+====================================================== -->
 
-            <div class="logo-stage">
+<section id="authScreen">
 
-                <div class="logo-big">
-                    M<span>x</span>
-                </div>
+  <div class="auth-card">
 
-            </div>
+    <div class="auth-logo-wrap">
 
-        </div>
+      <!-- اللوجو رجع هنا 👇 -->
+
+      <img
+        src="mathix-logo.png"
+        class="auth-logo"
+        alt="Mathix Logo"
+        onerror="this.style.display='none'"
+      >
+
+      <div class="auth-brand">
+        Mathix
+      </div>
 
     </div>
 
-</div>
+
+    <div id="loginTitle">
+
+      <div class="auth-title">
+        تسجيل الدخول
+      </div>
+
+      <div class="auth-description">
+        ادخل لحسابك وكمل رحلتك مع Mathix
+      </div>
+
+    </div>
 
 
+    <div id="signupTitle" class="hidden">
 
-<!-- ========================================================
-     AUTH
-========================================================= -->
+      <div class="auth-title">
+        إنشاء حساب
+      </div>
 
-<div id="authScreen">
+      <div class="auth-description">
+        ابدأ أول أسبوع مجانًا
+      </div>
 
-    <div class="auth-background"></div>
+    </div>
 
-    <div class="auth-box">
+
+    <div class="auth-tabs">
+
+      <button
+        class="auth-tab active"
+        id="loginTab"
+        onclick="setAuthMode('login')"
+      >
+        تسجيل الدخول
+      </button>
+
+      <button
+        class="auth-tab"
+        id="signupTab"
+        onclick="setAuthMode('signup')"
+      >
+        حساب جديد
+      </button>
+
+    </div>
+
+
+    <form
+      id="authForm"
+      onsubmit="handleAuth(event)"
+    >
+
+      <div
+        class="field hidden"
+        id="nameField"
+      >
+
+        <label>
+          الاسم
+        </label>
+
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="اكتب اسمك"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          البريد الإلكتروني
+        </label>
+
+        <input
+          id="emailInput"
+          type="email"
+          placeholder="example@gmail.com"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          كلمة المرور
+        </label>
+
+        <input
+          id="passwordInput"
+          type="password"
+          placeholder="••••••••"
+          minlength="6"
+          required
+        >
+
+      </div>
+
+
+      <div
+        class="field hidden"
+        id="confirmPasswordField"
+      >
+
+        <label>
+          تأكيد كلمة المرور
+        </label>
+
+        <input
+          id="confirmPasswordInput"
+          type="password"
+          placeholder="••••••••"
+          minlength="6"
+        >
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        type="submit"
+        id="authSubmit"
+      >
+        تسجيل الدخول
+      </button>
+
+    </form>
+
+
+    <button
+      class="google-btn"
+      onclick="loginGoogle()"
+    >
+      🔵 الدخول باستخدام Google
+    </button>
+
+
+    <div class="auth-switch">
+
+      <span id="switchText">
+        معندكش حساب؟
+      </span>
+
+      <button
+        onclick="toggleAuthMode()"
+        id="switchButton"
+      >
+        إنشاء حساب
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     APP
+====================================================== -->
+
+<section id="app">
+
+  <div class="app-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+      <div class="sidebar-logo">
+
+        <img
+          src="mathix-logo.png"
+          alt="Mathix"
+        >
+
+        <span>
+          Mathix
+        </span>
+
+      </div>
+
+
+      <div class="nav-title">
+        الرئيسية
+      </div>
+
+
+      <button
+        class="nav-btn active"
+        data-page="home"
+        onclick="go('home')"
+      >
+        🏠
+        <span>الرئيسية</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="subjects"
+        onclick="go('subjects')"
+      >
+        📚
+        <span>المواد</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="practice"
+        onclick="go('practice')"
+      >
+        🎯
+        <span>التدريب</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="exams"
+        onclick="go('exams')"
+      >
+        📝
+        <span>الامتحانات</span>
+      </button>
+
+
+      <div class="nav-title">
+        التطور
+      </div>
+
+
+      <button
+        class="nav-btn"
+        data-page="planner"
+        onclick="go('planner')"
+      >
+        📅
+        <span>الخطة</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="analytics"
+        onclick="go('analytics')"
+      >
+        📊
+        <span>تحليلي</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="mistakes"
+        onclick="go('mistakes')"
+      >
+        ⚠️
+        <span>أخطائي</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="achievements"
+        onclick="go('achievements')"
+      >
+        🏆
+        <span>إنجازاتي</span>
+      </button>
+
+
+      <div class="nav-title">
+        الحساب
+      </div>
+
+
+      <button
+        class="nav-btn subscription-nav"
+        data-page="subscription"
+        onclick="go('subscription')"
+      >
+        💳
+        <span>اشتراكي</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="profile"
+        onclick="go('profile')"
+      >
+        👤
+        <span>الملف الشخصي</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        data-page="settings"
+        onclick="go('settings')"
+      >
+        ⚙️
+        <span>الإعدادات</span>
+      </button>
+
+
+      <button
+        class="nav-btn"
+        onclick="logout()"
+      >
+        🚪
+        <span>تسجيل الخروج</span>
+      </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+      <div class="topbar">
 
         <button
-            class="auth-back"
-            onclick="showLanding()">
-            ← الرجوع
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+        >
+          ☰
         </button>
 
 
-        <div class="auth-logo">
-            Math<span>ix</span>
-        </div>
+        <div>
 
-        <div class="auth-subtitle">
-            منصة التعلم الذكي
-        </div>
-
-
-        <div class="auth-tabs">
-
-            <button
-                id="loginTab"
-                class="auth-tab active"
-                onclick="setAuthMode('login')">
-                تسجيل الدخول
-            </button>
-
-            <button
-                id="signupTab"
-                class="auth-tab"
-                onclick="setAuthMode('signup')">
-                إنشاء حساب
-            </button>
+          <h1 id="pageTitle">
+            الرئيسية
+          </h1>
 
         </div>
 
 
-        <form id="authForm">
+        <div class="user-mini">
+
+          <div>
 
             <div
-                id="nameGroup"
-                class="form-group hidden">
-
-                <label class="form-label">
-                    اسم الطالب
-                </label>
-
-                <input
-                    id="authName"
-                    class="input"
-                    type="text"
-                    placeholder="اكتب اسمك بالكامل"
-                    autocomplete="name">
-
+              id="topUserName"
+              style="
+                font-size:13px;
+                font-weight:700;
+              "
+            >
+              الطالب
             </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    البريد الإلكتروني
-                </label>
-
-                <input
-                    id="authEmail"
-                    class="input"
-                    type="email"
-                    placeholder="example@gmail.com"
-                    autocomplete="email"
-                    required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    كلمة المرور
-                </label>
-
-                <input
-                    id="authPassword"
-                    class="input"
-                    type="password"
-                    placeholder="••••••••"
-                    minlength="6"
-                    autocomplete="current-password"
-                    required>
-
-            </div>
-
 
             <div
-                id="confirmGroup"
-                class="form-group hidden">
-
-                <label class="form-label">
-                    تأكيد كلمة المرور
-                </label>
-
-                <input
-                    id="authConfirm"
-                    class="input"
-                    type="password"
-                    placeholder="أعد كتابة كلمة المرور"
-                    autocomplete="new-password">
-
+              style="
+                color:#777783;
+                font-size:11px;
+              "
+            >
+              Mathix Student
             </div>
 
-
-            <button
-                id="authSubmit"
-                class="btn btn-primary auth-submit"
-                type="submit">
-                تسجيل الدخول
-            </button>
-
-        </form>
+          </div>
 
 
-        <div class="divider">
-            أو
+          <div
+            class="avatar"
+            id="topAvatar"
+          >
+            م
+          </div>
+
         </div>
 
+      </div>
 
-        <button
-            class="btn google-btn"
-            onclick="googleLogin()">
-            🔵 المتابعة باستخدام Google
-        </button>
+
+      <!-- HOME -->
+
+      <div
+        class="page active"
+        id="page-home"
+      >
+
+        <div class="card">
+
+          <h3>
+            أهلاً بيك 👋
+          </h3>
+
+          <p id="welcomeText">
+            جاهز تكمل تدريبك؟
+          </p>
+
+        </div>
 
 
         <div
-            id="authError"
-            class="auth-error">
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- ========================================================
-     APP
-========================================================= -->
-
-<div id="appScreen">
-
-    <div class="app-layout">
-
-
-        <!-- ================= SIDEBAR ================= -->
-
-        <aside
-            class="sidebar"
-            id="sidebar">
-
-
-            <div class="sidebar-logo">
-                Math<span>ix</span>
-            </div>
-
-
-            <div class="sidebar-user">
-
-                <div
-                    class="avatar"
-                    id="sideAvatar">
-                    M
-                </div>
-
-                <div class="sidebar-user-info">
-
-                    <div
-                        class="sidebar-user-name"
-                        id="sideName">
-                        طالب Mathix
-                    </div>
-
-                    <div
-                        class="sidebar-user-code"
-                        id="sideCode">
-                        ---
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <nav class="sidebar-nav">
-
-
-                <div class="nav-section-title">
-                    الرئيسية
-                </div>
-
-
-                <button
-                    class="nav-btn active"
-                    data-page="home"
-                    onclick="go('home')">
-
-                    <span class="nav-icon">⌂</span>
-                    <span>الرئيسية</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="subjects"
-                    onclick="go('subjects')">
-
-                    <span class="nav-icon">📚</span>
-                    <span>المواد</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="practice"
-                    onclick="go('practice')">
-
-                    <span class="nav-icon">✏️</span>
-                    <span>التدريب</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="exams"
-                    onclick="go('exams')">
-
-                    <span class="nav-icon">📝</span>
-                    <span>الامتحانات</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="planner"
-                    onclick="go('planner')">
-
-                    <span class="nav-icon">📅</span>
-                    <span>خطة المذاكرة</span>
-
-                </button>
-
-
-                <div class="nav-section-title">
-                    التحليل
-                </div>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="brain"
-                    onclick="go('brain')">
-
-                    <span class="nav-icon">🧠</span>
-                    <span>Brain</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="analytics"
-                    onclick="go('analytics')">
-
-                    <span class="nav-icon">📊</span>
-                    <span>تحليلي</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="mistakes"
-                    onclick="go('mistakes')">
-
-                    <span class="nav-icon">⚠️</span>
-                    <span>أخطائي</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="achievements"
-                    onclick="go('achievements')">
-
-                    <span class="nav-icon">🏆</span>
-                    <span>إنجازاتي</span>
-
-                </button>
-
-
-                <div class="nav-section-title">
-                    حسابي
-                </div>
-
-
-                <button
-                    class="nav-btn subscription-nav"
-                    data-page="subscription"
-                    onclick="go('subscription')">
-
-                    <span class="nav-icon">💳</span>
-                    <span>اشتراكي</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="profile"
-                    onclick="go('profile')">
-
-                    <span class="nav-icon">👤</span>
-                    <span>الملف الشخصي</span>
-
-                </button>
-
-
-                <button
-                    class="nav-btn"
-                    data-page="settings"
-                    onclick="go('settings')">
-
-                    <span class="nav-icon">⚙️</span>
-                    <span>الإعدادات</span>
-
-                </button>
-
-
-            </nav>
-
-
-            <div class="sidebar-bottom">
-
-                <button
-                    class="nav-btn logout-btn"
-                    onclick="logout()">
-
-                    <span class="nav-icon">↪</span>
-                    <span>تسجيل الخروج</span>
-
-                </button>
-
-            </div>
-
-        </aside>
-
-
-
-        <!-- ================= MAIN ================= -->
-
-        <main class="main">
-
-
-            <header class="topbar">
-
-                <div class="topbar-left">
-
-                    <button
-                        class="icon-btn mobile-menu"
-                        onclick="toggleSidebar()">
-                        ☰
-                    </button>
-
-                    <div
-                        class="page-title"
-                        id="pageTitle">
-                        الرئيسية
-                    </div>
-
-                </div>
-
-
-                <div class="top-actions">
-
-                    <button
-                        class="icon-btn"
-                        onclick="showComing('الإشعارات')">
-                        🔔
-                    </button>
-
-                </div>
-
-            </header>
-
-
-            <div class="content">
-
-
-                <!-- ====================================================
-                     HOME
-                ===================================================== -->
-
-                <section
-                    class="page active"
-                    id="page-home">
-
-
-                    <div class="welcome">
-
-                        <h1>
-                            أهلاً يا
-                            <span id="welcomeName">
-                                طالب
-                            </span>
-                            👋
-                        </h1>
-
-                        <p>
-                            جاهز تكمل طريقك مع Mathix؟
-                        </p>
-
-                    </div>
-
-
-                    <div class="hero">
-
-                        <h2>
-                            Mathix معاك خطوة بخطوة 🚀
-                        </h2>
-
-                        <p>
-                            ذاكر، حل، اختبر نفسك وشوف مستواك
-                            بيتحسن إزاي.
-                        </p>
-
-                        <div style="margin-top:15px">
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="go('subjects')">
-                                ابدأ المذاكرة
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="stats">
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                المستوى
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statLevel">
-                                Beginner
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                الأسئلة المحلولة
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statSolved">
-                                0
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                XP
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statXP">
-                                0
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                نسبة التقدم
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statProgress">
-                                0%
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- HOME SUBSCRIPTION -->
-
-                    <div class="card home-subscription">
-
-                        <div class="sub-mini">
-
-                            <div class="sub-mini-info">
-
-                                <div class="sub-icon">
-                                    💳
-                                </div>
-
-                                <div>
-
-                                    <strong
-                                        id="homeSubStatus">
-                                        جاري تحميل الاشتراك...
-                                    </strong>
-
-                                    <small
-                                        id="homeSubRemaining">
-                                        —
-                                    </small>
-
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="btn"
-                                onclick="go('subscription')">
-                                إدارة الاشتراك
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div style="height:18px"></div>
-
-
-                    <div class="section-head">
-
-                        <div>
-                            <h2>
-                                ابدأ من هنا
-                            </h2>
-
-                            <div class="muted small">
-                                أهم أقسام Mathix
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="grid grid-3">
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                📚
-                            </div>
-
-                            <h3>
-                                المواد
-                            </h3>
-
-                            <p>
-                                افتح المواد والدروس التعليمية.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="go('subjects')">
-                                فتح
-                            </button>
-
-                        </div>
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                ✏️
-                            </div>
-
-                            <h3>
-                                التدريب
-                            </h3>
-
-                            <p>
-                                حل أسئلة وتدرب على المنهج.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="go('practice')">
-                                فتح
-                            </button>
-
-                        </div>
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                📝
-                            </div>
-
-                            <h3>
-                                الامتحانات
-                            </h3>
-
-                            <p>
-                                اختبر نفسك في نماذج امتحانات.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="go('exams')">
-                                فتح
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     SUBJECTS
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-subjects">
-
-
-                    <div class="section-head">
-
-                        <div>
-
-                            <h2>
-                                المواد الدراسية
-                            </h2>
-
-                            <div class="muted small">
-                                اختار المادة وابدأ المذاكرة
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="grid grid-3">
-
-
-                        <div class="subject-card">
-
-                            <div class="subject-icon">
-                                📐
-                            </div>
-
-                            <h3>
-                                الرياضيات
-                            </h3>
-
-                            <p>
-                                الجبر، التفاضل، التكامل والهندسة.
-                            </p>
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('الرياضيات')">
-                                دخول المادة
-                            </button>
-
-                        </div>
-
-
-                        <div class="subject-card">
-
-                            <div class="subject-icon">
-                                ⚛️
-                            </div>
-
-                            <h3>
-                                الفيزياء
-                            </h3>
-
-                            <p>
-                                شرح وتدريب وأسئلة متنوعة.
-                            </p>
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('الفيزياء')">
-                                دخول المادة
-                            </button>
-
-                        </div>
-
-
-                        <div class="subject-card">
-
-                            <div class="subject-icon">
-                                🧪
-                            </div>
-
-                            <h3>
-                                الكيمياء
-                            </h3>
-
-                            <p>
-                                مراجعة وتدريب على المنهج.
-                            </p>
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('الكيمياء')">
-                                دخول المادة
-                            </button>
-
-                        </div>
-
-
-                        <div class="subject-card">
-
-                            <div class="subject-icon">
-                                📖
-                            </div>
-
-                            <h3>
-                                اللغة العربية
-                            </h3>
-
-                            <p>
-                                النحو والبلاغة والأدب والقراءة.
-                            </p>
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('العربي')">
-                                دخول المادة
-                            </button>
-
-                        </div>
-
-
-                        <div class="subject-card">
-
-                            <div class="subject-icon">
-                                🇬🇧
-                            </div>
-
-                            <h3>
-                                English
-                            </h3>
-
-                            <p>
-                                Grammar, vocabulary and practice.
-                            </p>
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('English')">
-                                دخول المادة
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     PRACTICE
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-practice">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            التدريب ✏️
-                        </h2>
-
-                        <p>
-                            حل أسئلة مخصصة لمستواك وسجل تقدمك.
-                        </p>
-
-                        <div style="margin-top:15px">
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('التدريب')">
-                                ابدأ التدريب
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="grid grid-3">
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                🎯
-                            </div>
-
-                            <h3>
-                                تدريب سريع
-                            </h3>
-
-                            <p>
-                                مجموعة أسئلة قصيرة للتدريب اليومي.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="requireAccess('التدريب السريع')">
-                                ابدأ
-                            </button>
-
-                        </div>
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                🧠
-                            </div>
-
-                            <h3>
-                                تدريب ذكي
-                            </h3>
-
-                            <p>
-                                أسئلة بناءً على مستواك ونقاط ضعفك.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="requireAccess('التدريب الذكي')">
-                                ابدأ
-                            </button>
-
-                        </div>
-
-
-                        <div class="quick-card">
-
-                            <div class="quick-icon">
-                                🔥
-                            </div>
-
-                            <h3>
-                                تحدي اليوم
-                            </h3>
-
-                            <p>
-                                تحدي يومي لتحافظ على الـ streak.
-                            </p>
-
-                            <button
-                                class="btn"
-                                onclick="requireAccess('تحدي اليوم')">
-                                ابدأ
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     EXAMS
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-exams">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            الامتحانات 📝
-                        </h2>
-
-                        <p>
-                            اختبر نفسك في نماذج تحاكي الامتحان.
-                        </p>
-
-                        <div style="margin-top:15px">
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="requireAccess('الامتحانات')">
-                                دخول الامتحانات
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="empty-state">
-
-                        <div class="empty-icon">
-                            📝
-                        </div>
-
-                        <h3>
-                            الامتحانات هتظهر هنا
-                        </h3>
-
-                        <p>
-                            سيتم إضافة نماذج الامتحانات إلى Mathix.
-                        </p>
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     PLANNER
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-planner">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            خطة المذاكرة 📅
-                        </h2>
-
-                        <p>
-                            نظم يومك وخلي مذاكرتك واضحة.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="grid grid-2">
-
-
-                        <div class="card">
-
-                            <div class="card-title">
-                                اليوم
-                            </div>
-
-                            <div class="card-subtitle">
-                                مراجعة الرياضيات
-                            </div>
-
-                            <div
-                                class="progress"
-                                style="margin-top:14px">
-
-                                <div
-                                    class="progress-bar"
-                                    style="width:35%">
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="card">
-
-                            <div class="card-title">
-                                غدًا
-                            </div>
-
-                            <div class="card-subtitle">
-                                فيزياء + كيمياء
-                            </div>
-
-                            <div
-                                class="progress"
-                                style="margin-top:14px">
-
-                                <div
-                                    class="progress-bar"
-                                    style="width:0%">
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     BRAIN
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-brain">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            Brain 🧠
-                        </h2>
-
-                        <p>
-                            نظام التحليل الذكي في Mathix
-                            يساعدك على معرفة نقاط قوتك وضعفك.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="grid grid-3">
-
-
-                        <div class="card">
-
-                            <div class="card-title">
-                                نقاط القوة
-                            </div>
-
-                            <p
-                                class="muted small"
-                                style="margin-top:8px">
-                                ستظهر بعد تسجيل نتائج التدريب.
-                            </p>
-
-                        </div>
-
-
-                        <div class="card">
-
-                            <div class="card-title">
-                                نقاط الضعف
-                            </div>
-
-                            <p
-                                class="muted small"
-                                style="margin-top:8px">
-                                سيتم تحليل الأخطاء تلقائيًا.
-                            </p>
-
-                        </div>
-
-
-                        <div class="card">
-
-                            <div class="card-title">
-                                توصيات Mathix
-                            </div>
-
-                            <p
-                                class="muted small"
-                                style="margin-top:8px">
-                                توصيات مخصصة حسب مستواك.
-                            </p>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     ANALYTICS
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-analytics">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            تحليلك 📊
-                        </h2>
-
-                        <p>
-                            تابع تطور مستواك على Mathix.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="stats">
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                الأسئلة
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="analyticsSolved">
-                                0
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                XP
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="analyticsXP">
-                                0
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                التقدم
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="analyticsProgress">
-                                0%
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-card">
-
-                            <div class="stat-label">
-                                المستوى
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="analyticsLevel">
-                                Beginner
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-title">
-                            تقدمك العام
-                        </div>
-
-                        <div
-                            class="progress"
-                            style="margin-top:13px">
-
-                            <div
-                                class="progress-bar"
-                                id="analyticsProgressBar">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     MISTAKES
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-mistakes">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            أخطائي ⚠️
-                        </h2>
-
-                        <p>
-                            راجع الأسئلة التي أخطأت فيها
-                            وحاول حلها مرة أخرى.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="empty-state">
-
-                        <div class="empty-icon">
-                            ⚠️
-                        </div>
-
-                        <h3>
-                            مفيش أخطاء مسجلة
-                        </h3>
-
-                        <p>
-                            لما تبدأ تحل الأسئلة،
-                            أخطاؤك هتتحفظ هنا.
-                        </p>
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     ACHIEVEMENTS
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-achievements">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            إنجازاتي 🏆
-                        </h2>
-
-                        <p>
-                            اجمع XP وحقق إنجازات جديدة.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="grid grid-3">
-
-
-                        <div class="card">
-
-                            <div style="font-size:32px">
-                                🌱
-                            </div>
-
-                            <div
-                                class="card-title"
-                                style="margin-top:8px">
-                                البداية
-                            </div>
-
-                            <div
-                                class="muted small"
-                                style="margin-top:3px">
-                                إنشاء حساب Mathix
-                            </div>
-
-                        </div>
-
-
-                        <div class="card">
-
-                            <div style="font-size:32px">
-                                🔥
-                            </div>
-
-                            <div
-                                class="card-title"
-                                style="margin-top:8px">
-                                المثابر
-                            </div>
-
-                            <div
-                                class="muted small"
-                                style="margin-top:3px">
-                                حل 50 سؤالًا
-                            </div>
-
-                        </div>
-
-
-                        <div class="card">
-
-                            <div style="font-size:32px">
-                                🏆
-                            </div>
-
-                            <div
-                                class="card-title"
-                                style="margin-top:8px">
-                                المحترف
-                            </div>
-
-                            <div
-                                class="muted small"
-                                style="margin-top:3px">
-                                الوصول لمستوى متقدم
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     SUBSCRIPTION
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-subscription">
-
-
-                    <div class="subscription-head">
-
-                        <div>
-
-                            <h1>
-                                اشتراكي 💳
-                            </h1>
-
-                            <p>
-                                تابع اشتراكك واختار الخطة المناسبة لك.
-                            </p>
-
-                        </div>
-
-
-                        <span
-                            id="subBadge"
-                            class="badge badge-purple">
-                            جاري التحميل...
-                        </span>
-
-                    </div>
-
-
-                    <div class="subscription-grid">
-
-
-                        <div class="card current-sub">
-
-                            <div class="current-sub-top">
-
-                                <div>
-
-                                    <div class="current-sub-label">
-                                        الخطة الحالية
-                                    </div>
-
-                                    <div
-                                        class="current-plan"
-                                        id="subPlanName">
-                                        —
-                                    </div>
-
-                                </div>
-
-
-                                <div class="subscription-big-icon">
-                                    💳
-                                </div>
-
-                            </div>
-
-
-                            <div class="subscription-info">
-
-
-                                <div class="info-box">
-
-                                    <small>
-                                        الحالة
-                                    </small>
-
-                                    <strong
-                                        id="subStatusText">
-                                        —
-                                    </strong>
-
-                                </div>
-
-
-                                <div class="info-box">
-
-                                    <small>
-                                        المتبقي
-                                    </small>
-
-                                    <strong
-                                        id="subDays">
-                                        —
-                                    </strong>
-
-                                </div>
-
-
-                                <div class="info-box">
-
-                                    <small>
-                                        ينتهي في
-                                    </small>
-
-                                    <strong
-                                        id="subEndText">
-                                        —
-                                    </strong>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="card access-card">
-
-                            <h3>
-                                حالة الوصول
-                            </h3>
-
-
-                            <div style="margin-top:9px">
-
-                                <span
-                                    id="purchaseBadge"
-                                    class="badge badge-red">
-                                    غير متاح
-                                </span>
-
-                            </div>
-
-
-                            <p id="purchaseStatusText">
-                                جاري التحقق من اشتراكك...
-                            </p>
-
-
-                            <button
-                                class="btn btn-primary"
-                                onclick="refreshSubscription()">
-                                تحديث الحالة
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="section-head"
-                         style="margin-top:23px">
-
-                        <div>
-
-                            <h2>
-                                خطط الاشتراك
-                            </h2>
-
-                            <div class="muted small">
-                                الدفع يدوي عن طريق Vodafone Cash
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="plans">
-
-
-                        <!-- FREE -->
-
-                        <div class="plan-card">
-
-                            <span
-                                class="badge badge-green">
-                                مجاني
-                            </span>
-
-                            <h3>
-                                الأسبوع المجاني
-                            </h3>
-
-                            <div class="plan-price">
-                                0
-                                <span>جنيه</span>
-                            </div>
-
-                            <ul class="plan-features">
-
-                                <li>
-                                    7 أيام كاملة
-                                </li>
-
-                                <li>
-                                    الوصول لمحتوى Mathix
-                                </li>
-
-                                <li>
-                                    بدون دفع
-                                </li>
-
-                            </ul>
-
-                            <button
-                                id="trialButton"
-                                class="btn btn-success btn-full"
-                                disabled>
-                                الأسبوع المجاني
-                            </button>
-
-                        </div>
-
-
-                        <!-- WEEKLY -->
-
-                        <div class="plan-card">
-
-                            <span
-                                class="badge badge-purple">
-                                أسبوعي
-                            </span>
-
-                            <h3>
-                                اشتراك أسبوع
-                            </h3>
-
-                            <div class="plan-price">
-                                80
-                                <span>جنيه</span>
-                            </div>
-
-                            <ul class="plan-features">
-
-                                <li>
-                                    7 أيام
-                                </li>
-
-                                <li>
-                                    الوصول للمحتوى
-                                </li>
-
-                                <li>
-                                    التدريب والامتحانات
-                                </li>
-
-                            </ul>
-
-                            <button
-                                class="btn btn-primary btn-full"
-                                onclick="openPayment('weekly')">
-                                اشترك بـ 80 جنيه
-                            </button>
-
-                        </div>
-
-
-                        <!-- MONTHLY -->
-
-                        <div
-                            class="plan-card featured">
-
-                            <span
-                                class="badge badge-purple">
-                                30 يوم
-                            </span>
-
-                            <h3>
-                                اشتراك شهري
-                            </h3>
-
-                            <div class="plan-price">
-                                250
-                                <span>جنيه</span>
-                            </div>
-
-                            <ul class="plan-features">
-
-                                <li>
-                                    30 يوم
-                                </li>
-
-                                <li>
-                                    الوصول للمحتوى
-                                </li>
-
-                                <li>
-                                    التدريب والامتحانات
-                                </li>
-
-                            </ul>
-
-                            <button
-                                class="btn btn-primary btn-full"
-                                onclick="openPayment('monthly')">
-                                اشترك بـ 250 جنيه
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="vodafone-box">
-
-                        <div
-                            class="muted small">
-                            الدفع عن طريق Vodafone Cash
-                        </div>
-
-                        <div style="margin-top:3px">
-
-                            حوّل المبلغ إلى:
-
-                            <strong
-                                class="vodafone-number">
-                                01037500636
-                            </strong>
-
-                        </div>
-
-                        <div
-                            class="muted small"
-                            style="margin-top:4px">
-
-                            بعد التحويل ارفع صورة إثبات الدفع
-                            وأرسل الطلب للمراجعة.
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="section-head requests-title">
-
-                        <div>
-
-                            <h2>
-                                طلبات الاشتراك
-                            </h2>
-
-                            <div class="muted small">
-                                الطلبات التي أرسلتها للإدارة
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        id="requestList"
-                        class="request-list">
-
-                        <div class="card">
-
-                            <div class="muted small">
-                                جاري تحميل الطلبات...
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </section>
-
-
-                <!-- ====================================================
-                     PROFILE
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-profile">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            الملف الشخصي 👤
-                        </h2>
-
-                        <p>
-                            بيانات حسابك على Mathix.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="card">
-
-                        <div class="profile-header">
-
-                            <div
-                                class="profile-avatar"
-                                id="profileAvatar">
-                                M
-                            </div>
-
-                            <div>
-
-                                <div
-                                    id="profileDisplayName"
-                                    style="font-size:17px;font-weight:900">
-                                    طالب Mathix
-                                </div>
-
-                                <div
-                                    id="profileDisplayCode"
-                                    class="muted small">
-                                    ---
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="grid grid-2">
-
-
-                            <div>
-
-                                <label class="form-label">
-                                    الاسم
-                                </label>
-
-                                <input
-                                    id="profileName"
-                                    class="input"
-                                    readonly>
-
-                            </div>
-
-
-                            <div>
-
-                                <label class="form-label">
-                                    البريد الإلكتروني
-                                </label>
-
-                                <input
-                                    id="profileEmail"
-                                    class="input"
-                                    readonly>
-
-                            </div>
-
-
-                            <div>
-
-                                <label class="form-label">
-                                    كود الطالب
-                                </label>
-
-                                <input
-                                    id="profileCode"
-                                    class="input"
-                                    readonly>
-
-                            </div>
-
-
-                            <div>
-
-                                <label class="form-label">
-                                    المستوى
-                                </label>
-
-                                <input
-                                    id="profileLevel"
-                                    class="input"
-                                    readonly>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- ====================================================
-                     SETTINGS
-                ===================================================== -->
-
-                <section
-                    class="page"
-                    id="page-settings">
-
-
-                    <div class="hero">
-
-                        <h2>
-                            الإعدادات ⚙️
-                        </h2>
-
-                        <p>
-                            إعدادات حسابك وتجربة استخدام Mathix.
-                        </p>
-
-                    </div>
-
-
-                    <div style="height:15px"></div>
-
-
-                    <div class="card">
-
-                        <div class="card-title">
-                            الحساب
-                        </div>
-
-                        <p
-                            class="muted small"
-                            style="margin-top:5px">
-
-                            يمكنك تسجيل الخروج من حسابك
-                            من هنا أو من القائمة الجانبية.
-
-                        </p>
-
-
-                        <button
-                            class="btn btn-danger"
-                            style="margin-top:14px"
-                            onclick="logout()">
-
-                            تسجيل الخروج
-
-                        </button>
-
-                    </div>
-
-                </section>
-
-
-            </div>
-
-
-            <div class="footer">
-                Mathix © 2026 — منصة التعلم الذكي
-            </div>
-
-
-        </main>
-
-    </div>
-
-</div>
-
-
-
-<!-- ========================================================
-     PAYMENT MODAL
-========================================================= -->
-
-<div
-    class="modal-wrap"
-    id="paymentModal">
-
-
-    <div class="modal">
-
-
-        <div class="modal-head">
-
-            <div>
-
-                <h3>
-                    طلب اشتراك
-                </h3>
-
-                <div class="muted small">
-                    أرسل إثبات التحويل للمراجعة
-                </div>
-
-            </div>
-
-
-            <button
-                class="close-btn"
-                onclick="closeModal('paymentModal')">
-                ×
-            </button>
-
+          class="section-title"
+        >
+          إحصائياتك
         </div>
 
 
-        <div class="payment-summary">
+        <div class="grid">
 
-
-            <div class="payment-summary-row">
-
-                <span>
-                    الخطة
-                </span>
-
-                <strong
-                    id="paymentPlanName">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="payment-summary-row">
-
-                <span>
-                    المبلغ
-                </span>
-
-                <strong
-                    id="paymentAmount">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="payment-summary-row">
-
-                <span>
-                    رقم Vodafone Cash
-                </span>
-
-                <strong
-                    style="direction:ltr">
-                    01037500636
-                </strong>
-
-            </div>
-
-
-        </div>
-
-
-        <form id="paymentForm">
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    رقم الموبايل الذي حوّلت منه
-                </label>
-
-                <input
-                    id="senderPhone"
-                    class="input"
-                    type="tel"
-                    inputmode="numeric"
-                    maxlength="11"
-                    placeholder="01xxxxxxxxx"
-                    required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    صورة إثبات الدفع
-                </label>
-
-                <input
-                    id="receiptFile"
-                    class="input file-input"
-                    type="file"
-                    accept="image/*"
-                    required>
-
-            </div>
-
-
-            <div
-                class="muted small"
-                style="
-                    line-height:1.9;
-                    margin-bottom:14px;
-                ">
-
-                لازم تكون الصورة واضحة،
-                ويظهر فيها المبلغ وبيانات التحويل.
-                الحد الأقصى لحجم الصورة 10MB.
-
-            </div>
-
-
-            <button
-                id="paymentSubmit"
-                class="btn btn-primary btn-full"
-                type="submit">
-
-                إرسال طلب الاشتراك
-
-            </button>
-
-
-        </form>
-
-
-    </div>
-
-</div>
-
-
-
-<!-- ========================================================
-     LOADING MODAL
-========================================================= -->
-
-<div
-    class="modal-wrap"
-    id="loadingModal">
-
-
-    <div class="modal">
-
-        <div class="loading-box">
-
-            <div class="loading-spinner"></div>
+          <div class="card">
 
             <h3>
-                جاري التنفيذ...
+              المستوى
             </h3>
 
-            <p>
-                من فضلك انتظر لحظات.
-            </p>
+            <div
+              class="stat"
+              id="studentLevel"
+            >
+              Beginner
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              XP
+            </h3>
+
+            <div
+              class="stat"
+              id="studentXP"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              الأسئلة المحلولة
+            </h3>
+
+            <div
+              class="stat"
+              id="studentSolved"
+            >
+              0
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              التقدم
+            </h3>
+
+            <div
+              class="stat"
+              id="studentProgress"
+            >
+              0%
+            </div>
+
+          </div>
 
         </div>
 
-    </div>
 
-</div>
+        <div
+          class="section-title"
+        >
+          اشتراكك
+        </div>
 
 
+        <div
+          class="subscription-hero"
+          id="homeSubscription"
+        >
+          جاري التحميل...
+        </div>
 
-<!-- ========================================================
-     TOAST
-========================================================= -->
+      </div>
+
+
+      <!-- SUBJECTS -->
+
+      <div
+        class="page"
+        id="page-subjects"
+      >
+
+        <div class="card">
+
+          <h3>
+            المواد الدراسية
+          </h3>
+
+          <p>
+            محتوى المواد والشرح والتدريب هيظهر هنا.
+          </p>
+
+          <button
+            class="plan-btn primary"
+            style="margin-top:15px"
+            onclick="requireAccess('المواد')"
+          >
+            دخول المواد
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRACTICE -->
+
+      <div
+        class="page"
+        id="page-practice"
+      >
+
+        <div class="card">
+
+          <h3>
+            التدريب الذكي 🎯
+          </h3>
+
+          <p>
+            حل أسئلة وتدريب حسب مستواك.
+          </p>
+
+          <button
+            class="plan-btn primary"
+            style="margin-top:15px"
+            onclick="requireAccess('التدريب')"
+          >
+            ابدأ التدريب
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- EXAMS -->
+
+      <div
+        class="page"
+        id="page-exams"
+      >
+
+        <div class="card">
+
+          <h3>
+            الامتحانات
+          </h3>
+
+          <p>
+            امتحانات وتقييمات Mathix.
+          </p>
+
+          <button
+            class="plan-btn primary"
+            style="margin-top:15px"
+            onclick="requireAccess('الامتحانات')"
+          >
+            دخول الامتحانات
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PLANNER -->
+
+      <div
+        class="page"
+        id="page-planner"
+      >
+
+        <div class="card">
+
+          <h3>
+            خطة المذاكرة 📅
+          </h3>
+
+          <p>
+            خطتك الدراسية اليومية والأسبوعية.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ANALYTICS -->
+
+      <div
+        class="page"
+        id="page-analytics"
+      >
+
+        <div class="card">
+
+          <h3>
+            التحليل 📊
+          </h3>
+
+          <p>
+            تحليلك الدراسي ونقاط القوة والضعف.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- MISTAKES -->
+
+      <div
+        class="page"
+        id="page-mistakes"
+      >
+
+        <div class="card">
+
+          <h3>
+            أخطائي ⚠️
+          </h3>
+
+          <p>
+            هنا هتلاقي الأسئلة اللي غلطت فيها.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACHIEVEMENTS -->
+
+      <div
+        class="page"
+        id="page-achievements"
+      >
+
+        <div class="card">
+
+          <h3>
+            إنجازاتي 🏆
+          </h3>
+
+          <p>
+            الشارات والإنجازات هتظهر هنا.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE -->
+
+      <div
+        class="page"
+        id="page-profile"
+      >
+
+        <div class="card">
+
+          <h3>
+            الملف الشخصي
+          </h3>
+
+          <p id="profileInfo">
+            جاري التحميل...
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SETTINGS -->
+
+      <div
+        class="page"
+        id="page-settings"
+      >
+
+        <div class="card">
+
+          <h3>
+            الإعدادات ⚙️
+          </h3>
+
+          <p>
+            إعدادات الحساب والمنصة.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SUBSCRIPTION -->
+
+      <div
+        class="page"
+        id="page-subscription"
+      >
+
+        <div
+          class="subscription-hero"
+          id="subscriptionStatusBox"
+        >
+          جاري تحميل حالة الاشتراك...
+        </div>
+
+
+        <div class="section-title">
+          اختر اشتراكك
+        </div>
+
+
+        <div class="plan-grid">
+
+
+          <div class="plan-card">
+
+            <div class="plan-name">
+              أسبوعي
+            </div>
+
+            <div class="plan-price">
+              80
+              <small>جنيه / 7 أيام</small>
+            </div>
+
+            <ul class="plan-list">
+
+              <li>✓ دخول المنصة</li>
+
+              <li>✓ التدريب</li>
+
+              <li>✓ الامتحانات</li>
+
+              <li>✓ صالح لمدة 7 أيام</li>
+
+            </ul>
+
+            <button
+              class="plan-btn primary"
+              onclick="openPayment('weekly')"
+            >
+              اشترك الآن
+            </button>
+
+          </div>
+
+
+          <div class="plan-card featured">
+
+            <div class="plan-name">
+              شهري
+            </div>
+
+            <div class="plan-price">
+              250
+              <small>جنيه / 30 يوم</small>
+            </div>
+
+            <ul class="plan-list">
+
+              <li>✓ دخول المنصة</li>
+
+              <li>✓ التدريب</li>
+
+              <li>✓ الامتحانات</li>
+
+              <li>✓ صالح لمدة 30 يوم</li>
+
+            </ul>
+
+            <button
+              class="plan-btn primary"
+              onclick="openPayment('monthly')"
+            >
+              اشترك الآن
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="section-title">
+          طلباتي السابقة
+        </div>
+
+
+        <div id="subscriptionRequests">
+
+          <div class="card">
+
+            <p>
+              جاري تحميل الطلبات...
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAYMENT MODAL
+====================================================== -->
 
 <div
-    class="toast"
-    id="toast">
-</div>
-<!-- ========================================================
-     PART 2/3 — APP LOGIC + FIREBASE + AUTH
-========================================================= -->
+  class="modal-wrap"
+  id="paymentModal"
+>
 
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3>
+        تأكيد الاشتراك
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="payment-info">
+
+      <div
+        style="
+          text-align:center;
+          color:#aaa;
+          font-size:13px;
+        "
+      >
+        حوّل المبلغ على Vodafone Cash
+      </div>
+
+      <div class="vodafone-number">
+        01037500636
+      </div>
+
+      <button
+        class="copy-number"
+        onclick="copyVodafone()"
+      >
+        نسخ الرقم
+      </button>
+
+    </div>
+
+
+    <div
+      class="card"
+      style="margin-bottom:15px"
+    >
+
+      <div class="request-row">
+
+        <span class="request-label">
+          الخطة
+        </span>
+
+        <strong id="paymentPlan">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="request-row">
+
+        <span class="request-label">
+          المبلغ
+        </span>
+
+        <strong id="paymentAmount">
+          —
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <form
+      onsubmit="submitSubscriptionRequest(event)"
+    >
+
+      <div class="field">
+
+        <label>
+          رقم الموبايل اللي حوّلت منه
+        </label>
+
+        <input
+          id="senderPhone"
+          type="tel"
+          inputmode="numeric"
+          maxlength="11"
+          placeholder="01xxxxxxxxx"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          ملاحظات اختيارية
+        </label>
+
+        <textarea
+          id="paymentNote"
+          placeholder="مثلاً وقت التحويل أو أي ملاحظة"
+        ></textarea>
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        id="submitPaymentBtn"
+        type="submit"
+      >
+        إرسال طلب الاشتراك
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
 <script type="module">
 
-/* =========================================================
-   FIREBASE IMPORTS
-========================================================= */
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    updateProfile,
-    onAuthStateChanged,
-    signOut
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
 
 import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    collection,
-    addDoc,
-    query,
-    where,
-    orderBy,
-    onSnapshot,
-    serverTimestamp,
-    Timestamp
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-import {
-    getStorage,
-    ref,
-    uploadBytes
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+  serverTimestamp,
+  Timestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-/* =========================================================
+/* =====================================================
    FIREBASE CONFIG
-========================================================= */
+====================================================== */
+
+/*
+   مهم:
+   apiKey لازم يكون الـWeb API Key الحقيقي
+   من Firebase Project Settings.
+*/
 
 const firebaseConfig = {
-    apiKey: "QW43aGNuoJZgmfjuiWS1C42UCJm2",
-    authDomain: "mathix-88811.firebaseapp.com",
-    projectId: "mathix-88811",
-    storageBucket: "mathix-88811.firebasestorage.app",
-    messagingSenderId: "1043867239139",
-    appId: "1:1043867239139:web:da19abef81f052682bbbd6"
+
+  apiKey:
+    "PUT_YOUR_REAL_FIREBASE_WEB_API_KEY_HERE",
+
+  authDomain:
+    "mathix-88811.firebaseapp.com",
+
+  projectId:
+    "mathix-88811",
+
+  storageBucket:
+    "mathix-88811.firebasestorage.app",
+
+  messagingSenderId:
+    "1043867239139",
+
+  appId:
+    "1:1043867239139:web:da19abef81f052682bbbd6"
+
 };
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-const storage = getStorage(app);
+const app =
+  initializeApp(firebaseConfig);
 
 
-/*
-   مهم جدًا:
-
-   بنستخدم Firebase App ثانية لإنشاء حساب الطالب
-   من لوحة الإدارة بدون ما نخرج الأدمن من حسابه.
-
-   الجزء الخاص بالأدمن مش هنا،
-   لكن تجهيز الـ App الثانية موجود للنظام.
-*/
-
-const studentCreatorApp =
-    initializeApp(
-        firebaseConfig,
-        "studentCreator"
-    );
-
-const studentAuth =
-    getAuth(studentCreatorApp);
+const auth =
+  getAuth(app);
 
 
-/* =========================================================
-   ADMIN UID
-========================================================= */
+const db =
+  getFirestore(app);
+
+
+const googleProvider =
+  new GoogleAuthProvider();
+
+
+/* =====================================================
+   ADMIN
+====================================================== */
 
 const ADMIN_UID =
-    "QW43aGNuoJZgmfjuiWS1C42UCJm2";
+  "QW43aGNuoJZgmfjuiWS1C42UCJm2";
 
 
-/* =========================================================
+/* =====================================================
    GLOBAL STATE
-========================================================= */
+====================================================== */
 
 let currentUser = null;
 
 let profile = null;
-
-let currentPage = "home";
-
-let authMode = "login";
 
 let profileUnsubscribe = null;
 
@@ -4564,2822 +2448,2012 @@ let requestsUnsubscribe = null;
 
 let selectedPlan = null;
 
-
-/* =========================================================
-   PAGE TITLES
-========================================================= */
-
-const pageTitles = {
-
-    home:"الرئيسية",
-
-    subjects:"المواد",
-
-    practice:"التدريب",
-
-    exams:"الامتحانات",
-
-    planner:"خطة المذاكرة",
-
-    brain:"Brain",
-
-    analytics:"تحليلي",
-
-    mistakes:"أخطائي",
-
-    achievements:"إنجازاتي",
-
-    subscription:"اشتراكي",
-
-    profile:"الملف الشخصي",
-
-    settings:"الإعدادات"
-
-};
+let currentAuthMode = "login";
 
 
-/* =========================================================
-   AUTH UI
-========================================================= */
+/* =====================================================
+   HELPERS
+====================================================== */
 
-function showLanding(){
+function $(id){
 
-    document
-        .getElementById("landingScreen")
-        .style.display = "flex";
+  return document.getElementById(id);
 
-    document
-        .getElementById("authScreen")
-        .style.display = "none";
-
-    document
-        .getElementById("appScreen")
-        .style.display = "none";
 }
 
 
-function showAuth(mode="login"){
+function escapeHTML(value){
 
-    document
-        .getElementById("landingScreen")
-        .style.display = "none";
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-    document
-        .getElementById("authScreen")
-        .style.display = "flex";
-
-    document
-        .getElementById("appScreen")
-        .style.display = "none";
-
-    setAuthMode(mode);
 }
 
-
-function setAuthMode(mode){
-
-    authMode = mode;
-
-    const loginTab =
-        document.getElementById("loginTab");
-
-    const signupTab =
-        document.getElementById("signupTab");
-
-    const nameGroup =
-        document.getElementById("nameGroup");
-
-    const confirmGroup =
-        document.getElementById("confirmGroup");
-
-    const submit =
-        document.getElementById("authSubmit");
-
-    if(mode === "login"){
-
-        loginTab.classList.add("active");
-
-        signupTab.classList.remove("active");
-
-        nameGroup.classList.add("hidden");
-
-        confirmGroup.classList.add("hidden");
-
-        submit.textContent =
-            "تسجيل الدخول";
-
-    }else{
-
-        signupTab.classList.add("active");
-
-        loginTab.classList.remove("active");
-
-        nameGroup.classList.remove("hidden");
-
-        confirmGroup.classList.remove("hidden");
-
-        submit.textContent =
-            "إنشاء الحساب";
-    }
-
-    clearAuthError();
-}
-
-
-function clearAuthError(){
-
-    const el =
-        document.getElementById("authError");
-
-    if(el){
-        el.textContent = "";
-    }
-}
-
-
-function setAuthError(message){
-
-    const el =
-        document.getElementById("authError");
-
-    if(el){
-        el.textContent = message;
-    }
-}
-
-
-/* =========================================================
-   AUTH FORM
-========================================================= */
-
-document
-    .getElementById("authForm")
-    .addEventListener(
-        "submit",
-        async function(e){
-
-            e.preventDefault();
-
-            clearAuthError();
-
-            const email =
-                document
-                    .getElementById("authEmail")
-                    .value
-                    .trim();
-
-            const password =
-                document
-                    .getElementById("authPassword")
-                    .value;
-
-            const name =
-                document
-                    .getElementById("authName")
-                    .value
-                    .trim();
-
-            const confirm =
-                document
-                    .getElementById("authConfirm")
-                    .value;
-
-
-            if(!email || !password){
-
-                setAuthError(
-                    "اكتب البريد الإلكتروني وكلمة المرور."
-                );
-
-                return;
-            }
-
-
-            if(authMode === "signup"){
-
-                if(!name){
-
-                    setAuthError(
-                        "اكتب اسم الطالب."
-                    );
-
-                    return;
-                }
-
-
-                if(password.length < 6){
-
-                    setAuthError(
-                        "كلمة المرور لازم تكون 6 أحرف على الأقل."
-                    );
-
-                    return;
-                }
-
-
-                if(password !== confirm){
-
-                    setAuthError(
-                        "كلمتا المرور غير متطابقتين."
-                    );
-
-                    return;
-                }
-
-            }
-
-
-            setAuthLoading(true);
-
-
-            try{
-
-                if(authMode === "login"){
-
-                    await signInWithEmailAndPassword(
-                        auth,
-                        email,
-                        password
-                    );
-
-                }else{
-
-                    const credential =
-                        await createUserWithEmailAndPassword(
-                            auth,
-                            email,
-                            password
-                        );
-
-                    const user =
-                        credential.user;
-
-
-                    await updateProfile(
-                        user,
-                        {
-                            displayName:name
-                        }
-                    );
-
-
-                    await createStudentProfile(
-                        user,
-                        name
-                    );
-                }
-
-
-            }catch(error){
-
-                console.error(error);
-
-                setAuthError(
-                    firebaseErrorMessage(error)
-                );
-
-            }finally{
-
-                setAuthLoading(false);
-
-            }
-
-        }
-    );
-
-
-function setAuthLoading(loading){
-
-    const button =
-        document.getElementById("authSubmit");
-
-    if(!button) return;
-
-    button.disabled = loading;
-
-    if(loading){
-
-        button.textContent =
-            "جاري التنفيذ...";
-
-    }else{
-
-        button.textContent =
-            authMode === "login"
-                ? "تسجيل الدخول"
-                : "إنشاء الحساب";
-
-    }
-}
-
-
-/* =========================================================
-   GOOGLE LOGIN
-========================================================= */
-
-window.googleLogin = async function(){
-
-    clearAuthError();
-
-    try{
-
-        const provider =
-            new GoogleAuthProvider();
-
-        const result =
-            await signInWithPopup(
-                auth,
-                provider
-            );
-
-        const user =
-            result.user;
-
-        await ensureProfile(
-            user,
-            user.displayName || ""
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        setAuthError(
-            firebaseErrorMessage(error)
-        );
-
-    }
-
-};
-
-
-/* =========================================================
-   FIREBASE ERROR TRANSLATION
-========================================================= */
-
-function firebaseErrorMessage(error){
-
-    const code =
-        error?.code || "";
-
-    const messages = {
-
-        "auth/invalid-credential":
-            "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-
-        "auth/invalid-email":
-            "البريد الإلكتروني غير صحيح.",
-
-        "auth/user-not-found":
-            "الحساب غير موجود.",
-
-        "auth/wrong-password":
-            "كلمة المرور غير صحيحة.",
-
-        "auth/email-already-in-use":
-            "البريد الإلكتروني مستخدم بالفعل.",
-
-        "auth/weak-password":
-            "كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.",
-
-        "auth/popup-closed-by-user":
-            "تم إغلاق نافذة Google.",
-
-        "auth/popup-blocked":
-            "المتصفح منع نافذة تسجيل الدخول.",
-
-        "auth/network-request-failed":
-            "في مشكلة في الاتصال بالإنترنت.",
-
-        "permission-denied":
-            "ليس لديك صلاحية لتنفيذ العملية."
-
-    };
-
-    return messages[code]
-        || error?.message
-        || "حدث خطأ غير متوقع.";
-}
-
-
-/* =========================================================
-   STUDENT CODE
-========================================================= */
-
-function generateStudentCode(){
-
-    const chars =
-        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-    let code = "MX-";
-
-    for(let i=0;i<6;i++){
-
-        code +=
-            chars[
-                Math.floor(
-                    Math.random()*chars.length
-                )
-            ];
-
-    }
-
-    return code;
-}
-
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
 
 function getDateValue(value){
 
-    if(!value) return null;
+  if(!value)
+    return null;
 
-    if(
-        typeof value.toDate === "function"
-    ){
+  if(
+    typeof value.toDate === "function"
+  ){
 
-        return value.toDate();
+    return value.toDate();
 
-    }
+  }
 
-    if(value instanceof Date){
+  if(value instanceof Date)
+    return value;
 
-        return value;
+  const date =
+    new Date(value);
 
-    }
+  return isNaN(date.getTime())
+    ? null
+    : date;
 
-    const date =
-        new Date(value);
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return null;
-
-    }
-
-    return date;
 }
 
 
 function formatDate(value){
 
-    const date =
-        getDateValue(value);
+  const date =
+    getDateValue(value);
 
-    if(!date) return "—";
+  if(!date)
+    return "غير محدد";
 
-    return new Intl.DateTimeFormat(
-        "ar-EG",
-        {
-            year:"numeric",
-            month:"long",
-            day:"numeric",
-            hour:"numeric",
-            minute:"2-digit"
-        }
-    ).format(date);
+  return date.toLocaleDateString(
+    "ar-EG",
+    {
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }
+  );
 
 }
 
 
-function daysRemaining(value){
+function formatDateTime(value){
 
-    const date =
-        getDateValue(value);
+  const date =
+    getDateValue(value);
 
-    if(!date) return 0;
+  if(!date)
+    return "غير محدد";
 
-    const diff =
-        date.getTime() - Date.now();
+  return date.toLocaleString(
+    "ar-EG",
+    {
+      year:"numeric",
+      month:"long",
+      day:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
 
-    if(diff <= 0) return 0;
+}
 
-    return Math.ceil(
-        diff /
-        (1000*60*60*24)
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+let toastTimer = null;
+
+
+function toast(message){
+
+  const el =
+    $("toast");
+
+  if(!el)
+    return;
+
+  el.textContent =
+    message;
+
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(
+      ()=>{
+        el.classList.remove("show");
+      },
+      3000
     );
 
 }
 
 
-/* =========================================================
-   CREATE NEW STUDENT PROFILE
-========================================================= */
+/* =====================================================
+   LANDING / AUTH
+====================================================== */
+
+function showLanding(){
+
+  $("landing").style.display =
+    "flex";
+
+  $("authScreen").style.display =
+    "none";
+
+  $("app").style.display =
+    "none";
+
+}
+
+
+function showAuth(mode="login"){
+
+  $("landing").style.display =
+    "none";
+
+  $("authScreen").style.display =
+    "flex";
+
+  $("app").style.display =
+    "none";
+
+  setAuthMode(mode);
+
+}
+
+
+function setAuthMode(mode){
+
+  currentAuthMode =
+    mode;
+
+
+  const login =
+    mode === "login";
+
+
+  $("loginTab")
+    .classList.toggle(
+      "active",
+      login
+    );
+
+
+  $("signupTab")
+    .classList.toggle(
+      "active",
+      !login
+    );
+
+
+  $("nameField")
+    .classList.toggle(
+      "hidden",
+      login
+    );
+
+
+  $("confirmPasswordField")
+    .classList.toggle(
+      "hidden",
+      login
+    );
+
+
+  $("loginTitle")
+    .classList.toggle(
+      "hidden",
+      !login
+    );
+
+
+  $("signupTitle")
+    .classList.toggle(
+      "hidden",
+      login
+    );
+
+
+  $("authSubmit").textContent =
+    login
+      ? "تسجيل الدخول"
+      : "إنشاء الحساب";
+
+
+  $("switchText").textContent =
+    login
+      ? "معندكش حساب؟"
+      : "عندك حساب بالفعل؟";
+
+
+  $("switchButton").textContent =
+    login
+      ? "إنشاء حساب"
+      : "تسجيل الدخول";
+
+}
+
+
+function toggleAuthMode(){
+
+  setAuthMode(
+    currentAuthMode === "login"
+      ? "signup"
+      : "login"
+  );
+
+}
+
+
+/* =====================================================
+   AUTH
+====================================================== */
+
+async function handleAuth(event){
+
+  event.preventDefault();
+
+
+  const email =
+    $("emailInput")
+      .value
+      .trim();
+
+
+  const password =
+    $("passwordInput")
+      .value;
+
+
+  if(
+    !email ||
+    !password
+  ){
+
+    toast(
+      "املأ البيانات المطلوبة."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    $("authSubmit").disabled =
+      true;
+
+
+    if(
+      currentAuthMode === "login"
+    ){
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      toast(
+        "تم تسجيل الدخول ✅"
+      );
+
+    }
+
+    else{
+
+      const name =
+        $("nameInput")
+          .value
+          .trim();
+
+
+      const confirm =
+        $("confirmPasswordInput")
+          .value;
+
+
+      if(!name){
+
+        toast(
+          "اكتب اسمك."
+        );
+
+        return;
+
+      }
+
+
+      if(password !== confirm){
+
+        toast(
+          "كلمتا المرور غير متطابقتين."
+        );
+
+        return;
+
+      }
+
+
+      const credential =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const user =
+        credential.user;
+
+
+      await updateProfile(
+        user,
+        {
+          displayName:name
+        }
+      );
+
+
+      await createStudentProfile(
+        user,
+        name
+      );
+
+
+      toast(
+        "تم إنشاء الحساب 🎉"
+      );
+
+    }
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    let message =
+      "حدث خطأ أثناء العملية.";
+
+
+    if(
+      error.code ===
+      "auth/invalid-credential"
+    ){
+
+      message =
+        "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+
+    }
+
+    else if(
+      error.code ===
+      "auth/email-already-in-use"
+    ){
+
+      message =
+        "البريد الإلكتروني مستخدم بالفعل.";
+
+    }
+
+    else if(
+      error.code ===
+      "auth/weak-password"
+    ){
+
+      message =
+        "كلمة المرور ضعيفة.";
+
+    }
+
+    else if(
+      error.code ===
+      "auth/invalid-email"
+    ){
+
+      message =
+        "البريد الإلكتروني غير صحيح.";
+
+    }
+
+
+    toast(message);
+
+  }
+
+  finally{
+
+    $("authSubmit").disabled =
+      false;
+
+  }
+
+}
+
+
+/* =====================================================
+   GOOGLE
+====================================================== */
+
+async function loginGoogle(){
+
+  try{
+
+    const result =
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
+
+
+    await createStudentProfile(
+      result.user,
+      result.user.displayName || ""
+    );
+
+
+    toast(
+      "تم تسجيل الدخول باستخدام Google ✅"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    toast(
+      "تعذر تسجيل الدخول باستخدام Google."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   STUDENT CODE
+====================================================== */
+
+function generateStudentCode(){
+
+  const random =
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
+
+  return "MX-" + random;
+
+}
+
+
+/* =====================================================
+   CREATE PROFILE
+====================================================== */
 
 async function createStudentProfile(
-    user,
-    suppliedName=""
+  user,
+  suppliedName=""
 ){
 
-    const studentRef =
-        doc(
-            db,
-            "students",
-            user.uid
-        );
-
-
-    const existing =
-        await getDoc(studentRef);
-
-
-    if(existing.exists()){
-
-        return existing.data();
-
-    }
-
-
-    /*
-       أول أسبوع مجاني.
-
-       مهم:
-       trialEnd يتم إنشاؤه هنا مرة واحدة
-       عند إنشاء الحساب.
-    */
-
-    const trialStart =
-        Timestamp.now();
-
-    const trialEnd =
-        Timestamp.fromMillis(
-            Date.now() +
-            7*24*60*60*1000
-        );
-
-
-    const name =
-        suppliedName
-        || user.displayName
-        || "طالب Mathix";
-
-
-    const data = {
-
-        uid:user.uid,
-
-        name:name,
-
-        email:user.email || "",
-
-        studentCode:
-            generateStudentCode(),
-
-        level:"Beginner",
-
-        xp:0,
-
-        solved:0,
-
-        progress:0,
-
-        subscriptionPlan:"trial",
-
-        subscriptionStatus:"active",
-
-        subscriptionStart:trialStart,
-
-        subscriptionEnd:trialEnd,
-
-        trialUsed:true,
-
-        canPurchase:true,
-
-        createdAt:
-            serverTimestamp()
-
-    };
-
-
-    await setDoc(
-        studentRef,
-        data
+  const studentRef =
+    doc(
+      db,
+      "students",
+      user.uid
     );
 
 
-    return data;
+  const snap =
+    await getDoc(studentRef);
+
+
+  if(snap.exists()){
+
+    return snap.data();
+
+  }
+
+
+  const now =
+    Date.now();
+
+
+  const trialEnd =
+    Timestamp.fromMillis(
+      now +
+      7 * 24 * 60 * 60 * 1000
+    );
+
+
+  const name =
+    suppliedName ||
+    user.displayName ||
+    "طالب Mathix";
+
+
+  const studentData = {
+
+    uid:user.uid,
+
+    name:name,
+
+    code:generateStudentCode(),
+
+    studentCode:generateStudentCode(),
+
+    email:user.email || "",
+
+    level:"Beginner",
+
+    xp:0,
+
+    solved:0,
+
+    progress:0,
+
+
+    subscriptionPlan:
+      "trial",
+
+    subscriptionStatus:
+      "active",
+
+    subscriptionStart:
+      Timestamp.fromMillis(now),
+
+    subscriptionEnd:
+      trialEnd,
+
+    trialUsed:true,
+
+    canPurchase:true,
+
+
+    createdAt:
+      serverTimestamp()
+
+  };
+
+
+  await setDoc(
+    studentRef,
+    studentData
+  );
+
+
+  return studentData;
+
 }
 
 
-/* =========================================================
-   ENSURE PROFILE
-========================================================= */
-
-async function ensureProfile(
-    user,
-    suppliedName=""
-){
-
-    if(!user) return null;
-
-
-    const studentRef =
-        doc(
-            db,
-            "students",
-            user.uid
-        );
-
-
-    const snap =
-        await getDoc(studentRef);
-
-
-    if(!snap.exists()){
-
-        return await createStudentProfile(
-            user,
-            suppliedName
-        );
-
-    }
-
-
-    return {
-        uid:user.uid,
-        ...snap.data()
-    };
-}
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(!user){
-
-            currentUser = null;
-
-            profile = null;
-
-            cleanupListeners();
-
-            showLanding();
-
-            return;
-        }
-
-
-        currentUser = user;
-
-
-        try{
-
-            const data =
-                await ensureProfile(
-                    user,
-                    user.displayName || ""
-                );
-
-
-            profile = data;
-
-
-            openApp();
-
-
-            watchStudentProfile(user);
-
-            watchSubscriptionRequests(user);
-
-            renderStudent();
-
-            renderSubscription();
-
-
-        }catch(error){
-
-            console.error(error);
-
-            showLanding();
-
-            toast(
-                "حصلت مشكلة في تحميل بيانات الحساب."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   OPEN APP
-========================================================= */
-
-function openApp(){
-
-    document
-        .getElementById("landingScreen")
-        .style.display = "none";
-
-    document
-        .getElementById("authScreen")
-        .style.display = "none";
-
-    document
-        .getElementById("appScreen")
-        .style.display = "block";
-
-    go(currentPage || "home");
-}
-
-
-/* =========================================================
-   REALTIME PROFILE
-========================================================= */
+/* =====================================================
+   PROFILE WATCH
+====================================================== */
 
 function watchStudentProfile(user){
 
-    if(profileUnsubscribe){
+  if(profileUnsubscribe){
 
-        profileUnsubscribe();
+    profileUnsubscribe();
 
-        profileUnsubscribe = null;
+  }
 
-    }
 
+  profileUnsubscribe =
+    onSnapshot(
+      doc(
+        db,
+        "students",
+        user.uid
+      ),
 
-    const studentRef =
-        doc(
-            db,
-            "students",
-            user.uid
-        );
+      snap=>{
 
+        if(!snap.exists())
+          return;
 
-    profileUnsubscribe =
-        onSnapshot(
-            studentRef,
-            function(snap){
 
-                if(!snap.exists()) return;
+        profile = {
 
+          uid:user.uid,
 
-                profile = {
-
-                    uid:user.uid,
-
-                    ...snap.data()
-
-                };
-
-
-                renderStudent();
-
-                renderSubscription();
-
-            },
-            function(error){
-
-                console.error(
-                    "Profile listener:",
-                    error
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   RENDER STUDENT
-========================================================= */
-
-function renderStudent(){
-
-    if(!profile) return;
-
-
-    const name =
-        profile.name
-        || currentUser?.displayName
-        || "طالب";
-
-
-    const firstLetter =
-        name.trim().charAt(0)
-        || "M";
-
-
-    const code =
-        profile.studentCode
-        || "—";
-
-
-    const level =
-        profile.level
-        || "Beginner";
-
-
-    const xp =
-        Number(profile.xp || 0);
-
-
-    const solved =
-        Number(profile.solved || 0);
-
-
-    const progress =
-        Math.min(
-            100,
-            Math.max(
-                0,
-                Number(profile.progress || 0)
-            )
-        );
-
-
-    setText(
-        "welcomeName",
-        name
-    );
-
-    setText(
-        "sideName",
-        name
-    );
-
-    setText(
-        "sideCode",
-        code
-    );
-
-
-    setText(
-        "statLevel",
-        level
-    );
-
-    setText(
-        "statSolved",
-        solved
-    );
-
-    setText(
-        "statXP",
-        xp
-    );
-
-    setText(
-        "statProgress",
-        progress + "%"
-    );
-
-
-    setText(
-        "analyticsSolved",
-        solved
-    );
-
-    setText(
-        "analyticsXP",
-        xp
-    );
-
-    setText(
-        "analyticsProgress",
-        progress + "%"
-    );
-
-    setText(
-        "analyticsLevel",
-        level
-    );
-
-
-    const progressBar =
-        document.getElementById(
-            "analyticsProgressBar"
-        );
-
-    if(progressBar){
-
-        progressBar.style.width =
-            progress + "%";
-
-    }
-
-
-    setText(
-        "profileDisplayName",
-        name
-    );
-
-    setText(
-        "profileDisplayCode",
-        code
-    );
-
-
-    setValue(
-        "profileName",
-        name
-    );
-
-    setValue(
-        "profileEmail",
-        profile.email
-        || currentUser?.email
-        || ""
-    );
-
-    setValue(
-        "profileCode",
-        code
-    );
-
-    setValue(
-        "profileLevel",
-        level
-    );
-
-
-    [
-        "sideAvatar",
-        "profileAvatar"
-    ].forEach(id=>{
-
-        const el =
-            document.getElementById(id);
-
-        if(el){
-
-            el.textContent =
-                firstLetter.toUpperCase();
-
-        }
-
-    });
-
-
-    renderHomeSubscription();
-
-}
-
-
-/* =========================================================
-   TEXT HELPERS
-========================================================= */
-
-function setText(id,value){
-
-    const el =
-        document.getElementById(id);
-
-    if(el){
-
-        el.textContent =
-            value ?? "";
-
-    }
-
-}
-
-
-function setValue(id,value){
-
-    const el =
-        document.getElementById(id);
-
-    if(el){
-
-        el.value =
-            value ?? "";
-
-    }
-
-}
-
-
-/* =========================================================
-   SUBSCRIPTION STATUS
-========================================================= */
-
-function getSubscriptionState(){
-
-    if(!profile){
-
-        return {
-
-            active:false,
-
-            expired:false,
-
-            pending:false,
-
-            days:0
+          ...snap.data()
 
         };
 
-    }
 
+        renderStudent();
 
-    const end =
-        getDateValue(
-            profile.subscriptionEnd
+        renderSubscription();
+
+        renderHomeSubscription();
+
+      },
+
+      error=>{
+
+        console.error(
+          "Profile listener:",
+          error
         );
 
+      }
 
-    const active =
-        profile.canPurchase === true
-        &&
-        profile.subscriptionStatus === "active"
-        &&
-        !!end
-        &&
-        end.getTime() > Date.now();
+    );
+
+}
 
 
-    const expired =
-        !!end
-        &&
-        end.getTime() <= Date.now();
+/* =====================================================
+   RENDER STUDENT
+====================================================== */
+
+function renderStudent(){
+
+  if(!profile)
+    return;
 
 
-    const pending =
-        profile.subscriptionStatus === "pending";
+  const name =
+    profile.name ||
+    currentUser?.displayName ||
+    "الطالب";
 
+
+  $("topUserName").textContent =
+    name;
+
+
+  $("welcomeText").textContent =
+    `أهلاً ${name} 👋 جاهز تكمل رحلتك مع Mathix؟`;
+
+
+  $("studentLevel").textContent =
+    profile.level || "Beginner";
+
+
+  $("studentXP").textContent =
+    profile.xp || 0;
+
+
+  $("studentSolved").textContent =
+    profile.solved || 0;
+
+
+  $("studentProgress").textContent =
+    `${profile.progress || 0}%`;
+
+
+  $("topAvatar").textContent =
+    name.charAt(0).toUpperCase();
+
+
+  $("profileInfo").innerHTML = `
+
+    <strong>
+      الاسم:
+    </strong>
+
+    ${escapeHTML(name)}
+
+    <br><br>
+
+    <strong>
+      البريد:
+    </strong>
+
+    ${escapeHTML(
+      profile.email ||
+      currentUser?.email ||
+      ""
+    )}
+
+    <br><br>
+
+    <strong>
+      كود الطالب:
+    </strong>
+
+    ${escapeHTML(
+      profile.code ||
+      profile.studentCode ||
+      "—"
+    )}
+
+  `;
+
+}
+
+
+/* =====================================================
+   SUBSCRIPTION STATE
+====================================================== */
+
+function getSubscriptionState(){
+
+  if(!profile){
 
     return {
 
-        active,
+      active:false,
 
-        expired,
+      pending:false,
 
-        pending,
+      expired:false,
 
-        days:
-            daysRemaining(
-                profile.subscriptionEnd
-            ),
+      plan:"none",
 
-        end
+      end:null
 
     };
 
-}
+  }
 
 
-/* =========================================================
-   RENDER SUBSCRIPTION
-========================================================= */
-
-function renderSubscription(){
-
-    if(!profile) return;
-
-
-    const state =
-        getSubscriptionState();
-
-
-    let planName =
-        "بدون اشتراك";
-
-
-    if(profile.subscriptionPlan === "trial"){
-
-        planName =
-            "الأسبوع المجاني";
-
-    }
-
-    else if(
-        profile.subscriptionPlan === "weekly"
-    ){
-
-        planName =
-            "اشتراك أسبوعي";
-
-    }
-
-    else if(
-        profile.subscriptionPlan === "monthly"
-    ){
-
-        planName =
-            "اشتراك شهري";
-
-    }
-
-
-    setText(
-        "subPlanName",
-        planName
+  const end =
+    getDateValue(
+      profile.subscriptionEnd
     );
 
 
-    setText(
-        "subEndText",
-        formatDate(
-            profile.subscriptionEnd
-        )
-    );
+  const expired =
+    !end ||
+    end.getTime() <= Date.now();
 
 
-    setText(
-        "subDays",
-        state.active
-            ? state.days + " يوم"
-            : "منتهي"
-    );
+  const active =
+    profile.canPurchase === true
+    &&
+    profile.subscriptionStatus === "active"
+    &&
+    !expired;
 
 
-    const badge =
-        document.getElementById(
-            "subBadge"
-        );
+  const pending =
+    profile.subscriptionStatus ===
+    "pending";
 
 
-    const statusText =
-        document.getElementById(
-            "subStatusText"
-        );
+  return {
 
+    active,
 
-    const purchaseBadge =
-        document.getElementById(
-            "purchaseBadge"
-        );
+    pending,
 
+    expired,
 
-    const purchaseText =
-        document.getElementById(
-            "purchaseStatusText"
-        );
+    plan:
+      profile.subscriptionPlan ||
+      "none",
 
+    end
 
-    if(state.active){
-
-        if(badge){
-
-            badge.className =
-                "badge badge-green";
-
-            badge.textContent =
-                "نشط";
-
-        }
-
-
-        if(statusText){
-
-            statusText.textContent =
-                "نشط";
-
-        }
-
-
-        if(purchaseBadge){
-
-            purchaseBadge.className =
-                "badge badge-green";
-
-            purchaseBadge.textContent =
-                "متاح";
-
-        }
-
-
-        if(purchaseText){
-
-            purchaseText.textContent =
-                "اشتراكك صالح حاليًا. يمكنك استخدام محتوى Mathix.";
-
-        }
-
-    }
-
-    else if(state.pending){
-
-        if(badge){
-
-            badge.className =
-                "badge badge-yellow";
-
-            badge.textContent =
-                "قيد المراجعة";
-
-        }
-
-
-        if(statusText){
-
-            statusText.textContent =
-                "طلب قيد المراجعة";
-
-        }
-
-
-        if(purchaseBadge){
-
-            purchaseBadge.className =
-                "badge badge-yellow";
-
-            purchaseBadge.textContent =
-                "انتظار الموافقة";
-
-        }
-
-
-        if(purchaseText){
-
-            purchaseText.textContent =
-                "تم إرسال طلب اشتراك، والإدارة ستراجعه.";
-
-        }
-
-    }
-
-    else{
-
-        if(badge){
-
-            badge.className =
-                "badge badge-red";
-
-            badge.textContent =
-                "منتهي";
-
-        }
-
-
-        if(statusText){
-
-            statusText.textContent =
-                "غير نشط";
-
-        }
-
-
-        if(purchaseBadge){
-
-            purchaseBadge.className =
-                "badge badge-red";
-
-            purchaseBadge.textContent =
-                "غير متاح";
-
-        }
-
-
-        if(purchaseText){
-
-            purchaseText.textContent =
-                "اشتراكك غير نشط. اختر خطة وقدم طلب اشتراك جديد.";
-
-        }
-
-    }
-
-
-    const trialButton =
-        document.getElementById(
-            "trialButton"
-        );
-
-
-    if(trialButton){
-
-        if(
-            profile.trialUsed === true
-        ){
-
-            trialButton.disabled = true;
-
-            trialButton.textContent =
-                state.active &&
-                profile.subscriptionPlan === "trial"
-                    ? "أنت تستخدم التجربة"
-                    : "تم استخدام التجربة";
-
-        }else{
-
-            trialButton.disabled = true;
-
-            trialButton.textContent =
-                "7 أيام مجانًا";
-
-        }
-
-    }
-
-
-    renderHomeSubscription();
+  };
 
 }
 
 
-/* =========================================================
-   HOME SUBSCRIPTION
-========================================================= */
-
-function renderHomeSubscription(){
-
-    if(!profile) return;
-
-
-    const state =
-        getSubscriptionState();
-
-
-    const statusEl =
-        document.getElementById(
-            "homeSubStatus"
-        );
-
-
-    const remainingEl =
-        document.getElementById(
-            "homeSubRemaining"
-        );
-
-
-    if(!statusEl || !remainingEl)
-        return;
-
-
-    if(state.active){
-
-        let plan =
-            "اشتراك نشط";
-
-
-        if(profile.subscriptionPlan === "trial"){
-
-            plan =
-                "الأسبوع المجاني نشط";
-
-        }
-
-        else if(
-            profile.subscriptionPlan === "weekly"
-        ){
-
-            plan =
-                "الاشتراك الأسبوعي نشط";
-
-        }
-
-        else if(
-            profile.subscriptionPlan === "monthly"
-        ){
-
-            plan =
-                "الاشتراك الشهري نشط";
-
-        }
-
-
-        statusEl.textContent =
-            plan;
-
-
-        remainingEl.textContent =
-            `متبقي ${state.days} يوم`;
-
-    }
-
-    else if(state.pending){
-
-        statusEl.textContent =
-            "طلب الاشتراك قيد المراجعة";
-
-        remainingEl.textContent =
-            "انتظر موافقة الإدارة";
-
-    }
-
-    else{
-
-        statusEl.textContent =
-            "لا يوجد اشتراك نشط";
-
-        remainingEl.textContent =
-            "اشترك الآن للوصول للمحتوى";
-
-    }
-
-}
-
-
-/* =========================================================
+/* =====================================================
    PURCHASE ACCESS
-========================================================= */
+====================================================== */
 
 function hasPurchaseAccess(){
 
-    const state =
-        getSubscriptionState();
+  const state =
+    getSubscriptionState();
 
-    return state.active;
+
+  return state.active;
 
 }
 
 
-window.requireAccess =
-function(feature){
+function requireAccess(feature){
 
-    if(
-        !hasPurchaseAccess()
-    ){
+  if(
+    !hasPurchaseAccess()
+  ){
 
-        go("subscription");
-
-        toast(
-            `لازم يكون عندك اشتراك صالح للوصول إلى ${feature}.`
-        );
-
-        return false;
-
-    }
-
-
-    showComing(feature);
-
-    return true;
-
-};
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-window.go =
-function(page){
-
-    if(
-        !document.getElementById(
-            "page-" + page
-        )
-    ){
-
-        page = "home";
-
-    }
-
-
-    currentPage = page;
-
-
-    document
-        .querySelectorAll(".page")
-        .forEach(el=>{
-
-            el.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    const target =
-        document.getElementById(
-            "page-" + page
-        );
-
-
-    if(target){
-
-        target.classList.add(
-            "active"
-        );
-
-    }
-
-
-    document
-        .querySelectorAll(".nav-btn[data-page]")
-        .forEach(btn=>{
-
-            btn.classList.toggle(
-                "active",
-                btn.dataset.page === page
-            );
-
-        });
-
-
-    setText(
-        "pageTitle",
-        pageTitles[page]
-        || "Mathix"
-    );
-
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    if(
-        window.innerWidth <= 780
-    ){
-
-        sidebar?.classList.remove(
-            "open"
-        );
-
-    }
-
-};
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-window.toggleSidebar =
-function(){
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-    sidebar?.classList.toggle(
-        "open"
-    );
-
-};
-
-
-/* =========================================================
-   COMING SOON
-========================================================= */
-
-window.showComing =
-function(feature){
+    go("subscription");
 
     toast(
-        `${feature} هيتفعل مع إضافة المحتوى والبيانات.`
+      "لازم يكون عندك اشتراك صالح للوصول إلى " +
+      feature
     );
 
-};
+    return false;
+
+  }
 
 
-/* =========================================================
-   MODALS
-========================================================= */
+  toast(
+    `سيتم فتح ${feature} قريبًا 🔥`
+  );
 
-window.openModal =
-function(id){
+  return true;
 
-    const modal =
-        document.getElementById(id);
-
-    if(modal){
-
-        modal.style.display =
-            "flex";
-
-    }
-
-};
+}
 
 
-window.closeModal =
-function(id){
+/* =====================================================
+   SUBSCRIPTION RENDER
+====================================================== */
 
-    const modal =
-        document.getElementById(id);
+function subscriptionStatusHTML(){
 
-    if(modal){
-
-        modal.style.display =
-            "none";
-
-    }
-
-};
+  const state =
+    getSubscriptionState();
 
 
-/* =========================================================
-   PAYMENT PLAN
-========================================================= */
+  if(state.active){
 
-window.openPayment =
-function(plan){
-
-    if(!currentUser){
-
-        showAuth("login");
-
-        return;
-
-    }
+    const planName =
+      state.plan === "trial"
+        ? "التجربة المجانية"
+        : state.plan === "weekly"
+          ? "الاشتراك الأسبوعي"
+          : state.plan === "monthly"
+            ? "الاشتراك الشهري"
+            : "اشتراك نشط";
 
 
-    selectedPlan = plan;
+    return `
+
+      <div
+        class="subscription-status status-active"
+      >
+        🟢 اشتراك نشط
+      </div>
+
+      <h2>
+        ${planName}
+      </h2>
+
+      <p style="
+        margin-top:7px;
+        color:#aaa;
+      ">
+        ينتهي في
+        <strong style="color:white">
+          ${formatDate(
+            state.end
+          )}
+        </strong>
+      </p>
+
+    `;
+
+  }
 
 
-    let name = "";
+  if(state.pending){
 
-    let amount = 0;
+    return `
+
+      <div
+        class="subscription-status status-pending"
+      >
+        🟡 قيد المراجعة
+      </div>
+
+      <h2>
+        طلب الاشتراك قيد المراجعة
+      </h2>
+
+      <p style="
+        margin-top:7px;
+        color:#aaa;
+      ">
+        انتظر موافقة الإدارة على طلب الدفع.
+      </p>
+
+    `;
+
+  }
 
 
-    if(plan === "weekly"){
+  if(state.expired){
 
-        name =
-            "اشتراك أسبوعي";
+    return `
 
-        amount = 80;
+      <div
+        class="subscription-status status-expired"
+      >
+        🔴 منتهي
+      </div>
 
-    }
+      <h2>
+        انتهى اشتراكك
+      </h2>
 
-    else if(plan === "monthly"){
+      <p style="
+        margin-top:7px;
+        color:#aaa;
+      ">
+        اختر إحدى الخطط لتجديد اشتراكك.
+      </p>
 
-        name =
-            "اشتراك شهري";
+    `;
 
-        amount = 250;
+  }
 
-    }
 
-    else{
+  return `
 
+    <div
+      class="subscription-status status-none"
+    >
+      ⚪ بدون اشتراك
+    </div>
+
+    <h2>
+      اشترك في Mathix
+    </h2>
+
+  `;
+
+}
+
+
+function renderSubscription(){
+
+  const box =
+    $("subscriptionStatusBox");
+
+
+  if(!box)
+    return;
+
+
+  box.innerHTML =
+    subscriptionStatusHTML();
+
+}
+
+
+function renderHomeSubscription(){
+
+  const box =
+    $("homeSubscription");
+
+
+  if(!box)
+    return;
+
+
+  const state =
+    getSubscriptionState();
+
+
+  if(state.active){
+
+    box.innerHTML = `
+
+      <div
+        class="subscription-status status-active"
+      >
+        🟢 ${state.plan === "trial"
+          ? "التجربة المجانية"
+          : "اشتراك نشط"}
+      </div>
+
+      <h3>
+        اشتراكك فعال
+      </h3>
+
+      <p style="
+        margin-top:7px;
+      ">
+        تاريخ الانتهاء:
+        ${formatDate(state.end)}
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  if(state.pending){
+
+    box.innerHTML = `
+
+      <div
+        class="subscription-status status-pending"
+      >
+        🟡 قيد المراجعة
+      </div>
+
+      <h3>
+        طلبك بيتراجع حاليًا
+      </h3>
+
+      <p>
+        هنحدث حالتك بمجرد موافقة الإدارة.
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML = `
+
+    <div
+      class="subscription-status status-expired"
+    >
+      🔴 الاشتراك غير فعال
+    </div>
+
+    <h3>
+      محتاج اشتراك علشان تكمل
+    </h3>
+
+    <p>
+      اختار الخطة المناسبة من صفحة اشتراكي.
+    </p>
+
+  `;
+
+}
+
+
+/* =====================================================
+   PAYMENT
+====================================================== */
+
+function openPayment(plan){
+
+  if(
+    plan !== "weekly" &&
+    plan !== "monthly"
+  ){
+
+    return;
+
+  }
+
+
+  const state =
+    getSubscriptionState();
+
+
+  if(state.pending){
+
+    toast(
+      "عندك طلب اشتراك قيد المراجعة بالفعل."
+    );
+
+    return;
+
+  }
+
+
+  selectedPlan =
+    plan;
+
+
+  const isWeekly =
+    plan === "weekly";
+
+
+  $("paymentPlan").textContent =
+    isWeekly
+      ? "أسبوعي — 7 أيام"
+      : "شهري — 30 يوم";
+
+
+  $("paymentAmount").textContent =
+    isWeekly
+      ? "80 جنيه"
+      : "250 جنيه";
+
+
+  $("senderPhone").value =
+    "";
+
+
+  $("paymentNote").value =
+    "";
+
+
+  $("paymentModal").style.display =
+    "flex";
+
+}
+
+
+function closeModal(){
+
+  $("paymentModal").style.display =
+    "none";
+
+  selectedPlan =
+    null;
+
+}
+
+
+function copyVodafone(){
+
+  navigator.clipboard
+    .writeText(
+      "01037500636"
+    )
+    .then(
+      ()=>{
         toast(
-            "الخطة غير صحيحة."
+          "تم نسخ رقم Vodafone Cash ✅"
         );
-
-        return;
-
-    }
-
-
-    setText(
-        "paymentPlanName",
-        name
+      }
+    )
+    .catch(
+      ()=>{
+        toast(
+          "رقم Vodafone Cash: 01037500636"
+        );
+      }
     );
 
+}
 
-    setText(
-        "paymentAmount",
-        amount + " جنيه"
+
+/* =====================================================
+   SUBSCRIPTION REQUEST
+====================================================== */
+
+async function submitSubscriptionRequest(event){
+
+  event.preventDefault();
+
+
+  if(!currentUser){
+
+    toast(
+      "سجل الدخول أولاً."
     );
 
+    return;
 
-    document
-        .getElementById(
-            "senderPhone"
-        )
-        .value = "";
+  }
 
 
-    document
-        .getElementById(
-            "receiptFile"
-        )
-        .value = "";
+  if(
+    selectedPlan !== "weekly" &&
+    selectedPlan !== "monthly"
+  ){
 
-
-    openModal(
-        "paymentModal"
+    toast(
+      "اختار خطة صحيحة."
     );
 
-};
+    return;
 
+  }
 
-/* =========================================================
-   PAYMENT FORM
-========================================================= */
 
-document
-    .getElementById("paymentForm")
-    .addEventListener(
-        "submit",
-        async function(e){
+  const phone =
+    $("senderPhone")
+      .value
+      .trim();
 
-            e.preventDefault();
 
+  if(
+    !/^01\d{9}$/.test(phone)
+  ){
 
-            if(!currentUser){
-
-                closeModal(
-                    "paymentModal"
-                );
-
-                showAuth("login");
-
-                return;
-
-            }
-
-
-            if(
-                !selectedPlan
-            ){
-
-                toast(
-                    "اختار خطة أولًا."
-                );
-
-                return;
-
-            }
-
-
-            const phone =
-                document
-                    .getElementById(
-                        "senderPhone"
-                    )
-                    .value
-                    .trim();
-
-
-            const file =
-                document
-                    .getElementById(
-                        "receiptFile"
-                    )
-                    .files[0];
-
-
-            if(
-                !/^01[0-9]{9}$/.test(
-                    phone
-                )
-            ){
-
-                toast(
-                    "رقم التحويل لازم يكون 11 رقم ويبدأ بـ 01."
-                );
-
-                return;
-
-            }
-
-
-            if(!file){
-
-                toast(
-                    "ارفع صورة إثبات الدفع."
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !file.type.startsWith(
-                    "image/"
-                )
-            ){
-
-                toast(
-                    "مسموح برفع صور فقط."
-                );
-
-                return;
-
-            }
-
-
-            if(
-                file.size >
-                10 * 1024 * 1024
-            ){
-
-                toast(
-                    "حجم الصورة أكبر من 10MB."
-                );
-
-                return;
-
-            }
-
-
-            const amount =
-                selectedPlan === "weekly"
-                    ? 80
-                    : 250;
-
-
-            const paymentButton =
-                document.getElementById(
-                    "paymentSubmit"
-                );
-
-
-            paymentButton.disabled =
-                true;
-
-            paymentButton.textContent =
-                "جاري رفع الإثبات...";
-
-
-            try{
-
-
-                const safeName =
-                    file.name
-                        .replace(
-                            /[^a-zA-Z0-9._-]/g,
-                            "_"
-                        );
-
-
-                const receiptPath =
-                    `subscriptionReceipts/${currentUser.uid}/${Date.now()}_${safeName}`;
-
-
-                const storageRef =
-                    ref(
-                        storage,
-                        receiptPath
-                    );
-
-
-                await uploadBytes(
-                    storageRef,
-                    file,
-                    {
-                        contentType:
-                            file.type
-                    }
-                );
-
-
-                paymentButton.textContent =
-                    "جاري إرسال الطلب...";
-
-
-                await addDoc(
-                    collection(
-                        db,
-                        "subscriptionRequests"
-                    ),
-                    {
-
-                        uid:
-                            currentUser.uid,
-
-                        studentId:
-                            currentUser.uid,
-
-                        studentName:
-                            profile?.name
-                            || currentUser.displayName
-                            || "طالب",
-
-                        email:
-                            currentUser.email
-                            || "",
-
-                        plan:
-                            selectedPlan,
-
-                        amount:
-                            amount,
-
-                        paymentMethod:
-                            "vodafone_cash",
-
-                        vodafoneCashNumber:
-                            "01037500636",
-
-                        senderPhone:
-                            phone,
-
-                        receiptPath:
-                            receiptPath,
-
-                        status:
-                            "pending",
-
-                        createdAt:
-                            serverTimestamp()
-
-                    }
-                );
-
-
-                closeModal(
-                    "paymentModal"
-                );
-
-
-                toast(
-                    "تم إرسال طلب الاشتراك بنجاح. ✅"
-                );
-
-
-                selectedPlan =
-                    null;
-
-
-            }catch(error){
-
-                console.error(
-                    error
-                );
-
-                toast(
-                    firebaseErrorMessage(
-                        error
-                    )
-                );
-
-            }finally{
-
-                paymentButton.disabled =
-                    false;
-
-                paymentButton.textContent =
-                    "إرسال طلب الاشتراك";
-
-            }
-
-        }
+    toast(
+      "رقم التحويل لازم يكون 11 رقم ويبدأ بـ 01."
     );
 
+    return;
 
-/* =========================================================
-   SUBSCRIPTION REQUESTS REALTIME
-========================================================= */
+  }
 
-function watchSubscriptionRequests(user){
 
-    if(requestsUnsubscribe){
+  const amount =
+    selectedPlan === "weekly"
+      ? 80
+      : 250;
 
-        requestsUnsubscribe();
 
-        requestsUnsubscribe = null;
+  const plan =
+    selectedPlan;
 
-    }
+
+  const note =
+    $("paymentNote")
+      .value
+      .trim();
+
+
+  const btn =
+    $("submitPaymentBtn");
+
+
+  try{
+
+    btn.disabled =
+      true;
+
+    btn.textContent =
+      "جاري إرسال الطلب...";
+
+
+    const requestData = {
+
+      uid:
+        currentUser.uid,
+
+      studentId:
+        currentUser.uid,
+
+      studentName:
+        profile?.name ||
+        currentUser.displayName ||
+        "طالب Mathix",
+
+      email:
+        currentUser.email ||
+        "",
+
+      plan:
+
+        plan,
+
+      amount:
+
+        amount,
+
+      paymentMethod:
+        "vodafone_cash",
+
+      vodafoneCashNumber:
+        "01037500636",
+
+      senderPhone:
+        phone,
+
+      note:
+        note,
+
+      status:
+        "pending",
+
+      createdAt:
+        serverTimestamp()
+
+    };
+
+
+    await addDoc(
+      collection(
+        db,
+        "subscriptionRequests"
+      ),
+      requestData
+    );
 
 
     /*
-       نستخدم query بسيطة على uid.
-
-       ترتيب الطلبات يتم في JavaScript
-       حتى لا نحتاج Composite Index.
+      مهم:
+      الطالب لا يعدل subscriptionStatus بنفسه.
+      الإدارة هي اللي توافق وتفعل الاشتراك.
     */
 
-    const requestsQuery =
-        query(
-            collection(
-                db,
-                "subscriptionRequests"
-            ),
-            where(
-                "uid",
-                "==",
-                user.uid
-            )
-        );
+
+    closeModal();
 
 
-    requestsUnsubscribe =
-        onSnapshot(
-            requestsQuery,
-            function(snapshot){
-
-                const requests =
-                    snapshot.docs.map(
-                        item=>({
-
-                            id:item.id,
-
-                            ...item.data()
-
-                        })
-                    );
+    toast(
+      "تم إرسال طلب الاشتراك بنجاح ✅"
+    );
 
 
-                requests.sort(
-                    (a,b)=>{
+    go(
+      "subscription"
+    );
 
-                        const aTime =
-                            getDateValue(
-                                a.createdAt
-                            )?.getTime()
-                            || 0;
+  }
 
-                        const bTime =
-                            getDateValue(
-                                b.createdAt
-                            )?.getTime()
-                            || 0;
+  catch(error){
 
-                        return bTime - aTime;
+    console.error(error);
 
-                    }
-                );
+    toast(
+      "حصل خطأ أثناء إرسال الطلب."
+    );
 
+  }
 
-                renderRequests(
-                    requests
-                );
+  finally{
 
-            },
-            function(error){
+    btn.disabled =
+      false;
 
-                console.error(
-                    "Requests listener:",
-                    error
-                );
+    btn.textContent =
+      "إرسال طلب الاشتراك";
 
-
-                const list =
-                    document.getElementById(
-                        "requestList"
-                    );
-
-
-                if(list){
-
-                    list.innerHTML = `
-                        <div class="card">
-                            <div class="muted small">
-                                تعذر تحميل طلبات الاشتراك.
-                            </div>
-                        </div>
-                    `;
-
-                }
-
-            }
-        );
+  }
 
 }
 
 
-/* =========================================================
-   RENDER REQUESTS
-========================================================= */
+/* =====================================================
+   SUBSCRIPTION REQUESTS LISTENER
+====================================================== */
 
-function renderRequests(
-    requests
-){
+function watchSubscriptionRequests(user){
 
-    const list =
-        document.getElementById(
-            "requestList"
+  if(requestsUnsubscribe){
+
+    requestsUnsubscribe();
+
+  }
+
+
+  const q =
+    query(
+      collection(
+        db,
+        "subscriptionRequests"
+      ),
+
+      where(
+        "uid",
+        "==",
+        user.uid
+      )
+    );
+
+
+  requestsUnsubscribe =
+    onSnapshot(
+      q,
+
+      snapshot=>{
+
+        const container =
+          $("subscriptionRequests");
+
+
+        if(!container)
+          return;
+
+
+        const requests =
+          [];
+
+
+        snapshot.forEach(
+          item=>{
+
+            requests.push({
+
+              id:item.id,
+
+              ...item.data()
+
+            });
+
+          }
         );
 
 
-    if(!list) return;
+        requests.sort(
+          (a,b)=>{
+
+            const aTime =
+              getDateValue(
+                a.createdAt
+              )?.getTime() || 0;
 
 
-    if(!requests.length){
+            const bTime =
+              getDateValue(
+                b.createdAt
+              )?.getTime() || 0;
 
-        list.innerHTML = `
+
+            return bTime-aTime;
+
+          }
+        );
+
+
+        if(!requests.length){
+
+          container.innerHTML = `
+
             <div class="card">
-                <div class="muted small">
-                    لا توجد طلبات اشتراك حتى الآن.
-                </div>
+
+              <p>
+                مفيش طلبات اشتراك حتى الآن.
+              </p>
+
             </div>
-        `;
 
-        return;
+          `;
 
-    }
+          return;
 
-
-    list.innerHTML =
-        requests.map(
-            request=>{
-
-                let plan =
-                    request.plan === "weekly"
-                        ? "أسبوعي"
-                        : "شهري";
+        }
 
 
-                let badgeClass =
-                    "badge-yellow";
+        container.innerHTML =
+          requests
+            .map(
+              request=>{
 
-                let status =
-                    "قيد المراجعة";
+                const status =
+                  request.status;
 
 
-                if(
-                    request.status ===
-                    "approved"
-                ){
+                let statusHTML =
+                  `<span class="subscription-status status-pending">
+                    🟡 قيد المراجعة
+                  </span>`;
 
-                    badgeClass =
-                        "badge-green";
 
-                    status =
-                        "تمت الموافقة";
+                if(status === "approved"){
+
+                  statusHTML =
+                    `<span class="subscription-status status-active">
+                      🟢 مقبول
+                    </span>`;
 
                 }
 
-                else if(
-                    request.status ===
-                    "rejected"
-                ){
 
-                    badgeClass =
-                        "badge-red";
+                if(status === "rejected"){
 
-                    status =
-                        "مرفوض";
+                  statusHTML =
+                    `<span class="subscription-status status-expired">
+                      🔴 مرفوض
+                    </span>`;
 
                 }
 
 
                 return `
 
-                    <div class="request-item">
+                  <div class="request-item">
 
-                        <div class="request-main">
+                    <div class="request-row">
 
-                            <strong>
-                                اشتراك ${plan}
-                                — ${request.amount || "—"} جنيه
-                            </strong>
+                      <span class="request-label">
+                        الخطة
+                      </span>
 
-                            <small>
-                                ${formatDate(
-                                    request.createdAt
-                                )}
-                            </small>
-
-                        </div>
-
-                        <span class="badge ${badgeClass}">
-                            ${status}
-                        </span>
+                      <span class="request-value">
+                        ${
+                          request.plan === "weekly"
+                            ? "أسبوعي"
+                            : "شهري"
+                        }
+                      </span>
 
                     </div>
 
+
+                    <div class="request-row">
+
+                      <span class="request-label">
+                        المبلغ
+                      </span>
+
+                      <span class="request-value">
+                        ${request.amount} جنيه
+                      </span>
+
+                    </div>
+
+
+                    <div class="request-row">
+
+                      <span class="request-label">
+                        رقم التحويل
+                      </span>
+
+                      <span
+                        class="request-value"
+                        dir="ltr"
+                      >
+                        ${escapeHTML(
+                          request.senderPhone
+                        )}
+                      </span>
+
+                    </div>
+
+
+                    <div
+                      style="
+                        margin-top:10px;
+                      "
+                    >
+                      ${statusHTML}
+                    </div>
+
+
+                    <div
+                      style="
+                        color:#666;
+                        font-size:11px;
+                        margin-top:5px;
+                      "
+                    >
+                      ${formatDateTime(
+                        request.createdAt
+                      )}
+                    </div>
+
+                  </div>
+
                 `;
 
-            }
-        ).join("");
+              }
+            )
+            .join("");
+
+      },
+
+      error=>{
+
+        console.error(
+          "Requests listener:",
+          error
+        );
+
+        $("subscriptionRequests").innerHTML = `
+
+          <div class="card">
+
+            <p>
+              تعذر تحميل الطلبات حاليًا.
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    );
 
 }
 
 
-/* =========================================================
-   REFRESH SUBSCRIPTION
-========================================================= */
+/* =====================================================
+   NAVIGATION
+====================================================== */
 
-window.refreshSubscription =
-function(){
+const pageTitles = {
 
-    if(!profile){
+  home:"الرئيسية",
 
-        toast(
-            "جاري تحميل بيانات الحساب..."
+  subjects:"المواد",
+
+  practice:"التدريب",
+
+  exams:"الامتحانات",
+
+  planner:"الخطة",
+
+  analytics:"تحليلي",
+
+  mistakes:"أخطائي",
+
+  achievements:"إنجازاتي",
+
+  subscription:"اشتراكي",
+
+  profile:"الملف الشخصي",
+
+  settings:"الإعدادات"
+
+};
+
+
+function go(page){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      item=>{
+        item.classList.remove(
+          "active"
+        );
+      }
+    );
+
+
+  const target =
+    $("page-" + page);
+
+
+  if(target){
+
+    target.classList.add(
+      "active"
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(
+      button=>{
+
+        button.classList.toggle(
+          "active",
+          button.dataset.page === page
         );
 
-        return;
+      }
+    );
 
-    }
 
+  $("pageTitle").textContent =
+    pageTitles[page] ||
+    "Mathix";
+
+
+  $("sidebar")
+    .classList.remove(
+      "open"
+    );
+
+
+  if(page === "subscription"){
 
     renderSubscription();
 
-    toast(
-        "تم تحديث حالة الاشتراك."
+  }
+
+}
+
+
+function toggleSidebar(){
+
+  $("sidebar")
+    .classList.toggle(
+      "open"
     );
 
-};
+}
 
 
-/* =========================================================
+/* =====================================================
    LOGOUT
-========================================================= */
+====================================================== */
 
-window.logout =
-async function(){
+async function logout(){
 
-    try{
+  try{
 
-        await signOut(auth);
+    await signOut(auth);
 
-        currentUser = null;
+    toast(
+      "تم تسجيل الخروج."
+    );
 
-        profile = null;
+  }
 
-        cleanupListeners();
+  catch(error){
 
-        showLanding();
+    console.error(error);
 
-    }catch(error){
+  }
 
-        console.error(error);
-
-        toast(
-            firebaseErrorMessage(
-                error
-            )
-        );
-
-    }
-
-};
+}
 
 
-/* =========================================================
-   CLEANUP
-========================================================= */
+/* =====================================================
+   AUTH STATE
+====================================================== */
 
-function cleanupListeners(){
+onAuthStateChanged(
+  auth,
 
-    if(profileUnsubscribe){
+  async user=>{
+
+    if(!user){
+
+      currentUser =
+        null;
+
+      profile =
+        null;
+
+
+      if(profileUnsubscribe){
 
         profileUnsubscribe();
 
-        profileUnsubscribe = null;
+        profileUnsubscribe =
+          null;
 
-    }
+      }
 
 
-    if(requestsUnsubscribe){
+      if(requestsUnsubscribe){
 
         requestsUnsubscribe();
 
-        requestsUnsubscribe = null;
+        requestsUnsubscribe =
+          null;
+
+      }
+
+
+      showLanding();
+
+      return;
 
     }
 
-}
+
+    currentUser =
+      user;
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+    try{
 
-let toastTimer = null;
-
-
-window.toast =
-function(message){
-
-    const el =
-        document.getElementById(
-            "toast"
-        );
+      await createStudentProfile(
+        user,
+        user.displayName || ""
+      );
 
 
-    if(!el) return;
+      $("landing").style.display =
+        "none";
 
 
-    el.textContent =
-        message;
+      $("authScreen").style.display =
+        "none";
 
 
-    el.classList.add(
-        "show"
-    );
+      $("app").style.display =
+        "block";
 
 
-    clearTimeout(
-        toastTimer
-    );
+      go("home");
 
 
-    toastTimer =
-        setTimeout(
-            function(){
-
-                el.classList.remove(
-                    "show"
-                );
-
-            },
-            3200
-        );
-
-};
+      watchStudentProfile(
+        user
+      );
 
 
-/* =========================================================
-   CLOSE MODAL BY BACKDROP
-========================================================= */
+      watchSubscriptionRequests(
+        user
+      );
 
-document
-    .querySelectorAll(".modal-wrap")
-    .forEach(modal=>{
+    }
 
-        modal.addEventListener(
-            "click",
-            function(e){
+    catch(error){
 
-                if(e.target === modal){
+      console.error(error);
 
-                    modal.style.display =
-                        "none";
+      toast(
+        "تعذر تحميل بيانات حسابك."
+      );
 
-                }
+    }
 
-            }
-        );
+  }
 
-    });
+);
 
 
-/* =========================================================
-   PHONE INPUT
-========================================================= */
+/* =====================================================
+   MODAL CLICK OUTSIDE
+====================================================== */
 
-const senderPhone =
-    document.getElementById(
-        "senderPhone"
-    );
+$("paymentModal")
+  .addEventListener(
+    "click",
+    event=>{
 
+      if(
+        event.target ===
+        $("paymentModal")
+      ){
 
-if(senderPhone){
+        closeModal();
 
-    senderPhone.addEventListener(
-        "input",
-        function(){
+      }
 
-            this.value =
-                this.value
-                    .replace(
-                        /\D/g,
-                        ""
-                    )
-                    .slice(
-                        0,
-                        11
-                    );
-
-        }
-    );
-
-}
+    }
+  );
 
 
-/* =========================================================
-   INITIAL UI
-========================================================= */
+/* =====================================================
+   ESC
+====================================================== */
 
-showLanding();
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key === "Escape"){
+
+      closeModal();
+
+    }
+
+  }
+);
 
 
-/* =========================================================
-   EXPOSE HELPERS
-========================================================= */
+/* =====================================================
+   EXPIRY REFRESH
+====================================================== */
+
+setInterval(
+  ()=>{
+
+    if(profile){
+
+      renderSubscription();
+
+      renderHomeSubscription();
+
+    }
+
+  },
+  60 * 1000
+);
+
+
+/* =====================================================
+   EXPOSE FUNCTIONS
+====================================================== */
 
 window.showLanding =
-    showLanding;
+  showLanding;
 
 window.showAuth =
-    showAuth;
+  showAuth;
 
 window.setAuthMode =
-    setAuthMode;
+  setAuthMode;
 
-window.openModal =
-    openModal;
+window.toggleAuthMode =
+  toggleAuthMode;
 
-window.closeModal =
-    closeModal;
+window.handleAuth =
+  handleAuth;
 
-window.refreshSubscription =
-    refreshSubscription;
+window.loginGoogle =
+  loginGoogle;
 
-</script>
-<!-- ========================================================
-     PART 3/3 — SUBSCRIPTION WATCH + EXPIRY + FINALIZATION
-========================================================= -->
+window.logout =
+  logout;
 
-<script type="module">
+window.go =
+  go;
 
-/* =========================================================
-   AUTOMATIC SUBSCRIPTION EXPIRY CHECK
-========================================================= */
-
-let expiryTimer = null;
-
-function startSubscriptionExpiryWatcher(){
-
-    if(expiryTimer){
-
-        clearInterval(expiryTimer);
-
-    }
-
-    /*
-       نراجع حالة الاشتراك كل دقيقة.
-       لو انتهى الاشتراك، الواجهة تتحدث فورًا.
-    */
-
-    expiryTimer =
-        setInterval(
-            function(){
-
-                if(!profile) return;
-
-                const state =
-                    getSubscriptionState();
-
-                if(
-                    profile.subscriptionStatus === "active"
-                    &&
-                    !state.active
-                ){
-
-                    renderSubscription();
-
-                    renderHomeSubscription();
-
-                }
-
-            },
-            60 * 1000
-        );
-
-}
-
-
-/* =========================================================
-   STOP EXPIRY WATCHER
-========================================================= */
-
-function stopSubscriptionExpiryWatcher(){
-
-    if(expiryTimer){
-
-        clearInterval(
-            expiryTimer
-        );
-
-        expiryTimer = null;
-
-    }
-
-}
-
-
-/* =========================================================
-   RE-CHECK SUBSCRIPTION WHEN TAB BECOMES ACTIVE
-========================================================= */
-
-document.addEventListener(
-    "visibilitychange",
-    function(){
-
-        if(
-            document.visibilityState === "visible"
-        ){
-
-            if(profile){
-
-                renderSubscription();
-
-                renderHomeSubscription();
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   START WATCHER
-========================================================= */
-
-startSubscriptionExpiryWatcher();
-
-
-/* =========================================================
-   PREVENT SUBSCRIPTION PURCHASE WHILE PENDING
-========================================================= */
-
-const originalOpenPayment =
-    window.openPayment;
-
+window.toggleSidebar =
+  toggleSidebar;
 
 window.openPayment =
-function(plan){
+  openPayment;
 
-    if(!currentUser){
+window.closeModal =
+  closeModal;
 
-        showAuth("login");
+window.submitSubscriptionRequest =
+  submitSubscriptionRequest;
 
-        return;
+window.copyVodafone =
+  copyVodafone;
 
-    }
-
-
-    /*
-       لو فيه طلب قيد المراجعة،
-       نسمح للطالب يشوف الخطط لكن لا نكرر الطلب
-       طالما عنده طلب pending.
-    */
-
-    if(
-        profile &&
-        profile.subscriptionStatus === "pending"
-    ){
-
-        toast(
-            "عندك بالفعل طلب اشتراك قيد المراجعة."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        plan !== "weekly" &&
-        plan !== "monthly"
-    ){
-
-        toast(
-            "الخطة غير صحيحة."
-        );
-
-        return;
-
-    }
-
-
-    originalOpenPayment(plan);
-
-};
-
-
-/* =========================================================
-   PAYMENT FILE PREVIEW INFO
-========================================================= */
-
-const receiptInput =
-    document.getElementById(
-        "receiptFile"
-    );
-
-
-if(receiptInput){
-
-    receiptInput.addEventListener(
-        "change",
-        function(){
-
-            const file =
-                this.files?.[0];
-
-
-            if(!file) return;
-
-
-            if(
-                !file.type.startsWith(
-                    "image/"
-                )
-            ){
-
-                this.value = "";
-
-                toast(
-                    "اختار صورة فقط."
-                );
-
-                return;
-
-            }
-
-
-            if(
-                file.size >
-                10 * 1024 * 1024
-            ){
-
-                this.value = "";
-
-                toast(
-                    "حجم الصورة يجب ألا يتجاوز 10MB."
-                );
-
-                return;
-
-            }
-
-
-            toast(
-                "تم اختيار إثبات الدفع."
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   ONLINE / OFFLINE STATUS
-========================================================= */
-
-window.addEventListener(
-    "offline",
-    function(){
-
-        toast(
-            "أنت الآن غير متصل بالإنترنت."
-        );
-
-    }
-);
-
-
-window.addEventListener(
-    "online",
-    function(){
-
-        toast(
-            "تم استعادة الاتصال بالإنترنت. ✅"
-        );
-
-
-        if(profile){
-
-            renderSubscription();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MOBILE SIDEBAR CLOSE
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(e){
-
-        if(
-            window.innerWidth > 780
-        ){
-
-            return;
-
-        }
-
-
-        const sidebar =
-            document.getElementById(
-                "sidebar"
-            );
-
-
-        const menuButton =
-            document.querySelector(
-                ".mobile-menu"
-            );
-
-
-        if(
-            sidebar &&
-            sidebar.classList.contains(
-                "open"
-            ) &&
-            !sidebar.contains(e.target) &&
-            !menuButton?.contains(e.target)
-        ){
-
-            sidebar.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ESCAPE CLOSE MODALS
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key !== "Escape")
-            return;
-
-
-        document
-            .querySelectorAll(
-                ".modal-wrap"
-            )
-            .forEach(modal=>{
-
-                modal.style.display =
-                    "none";
-
-            });
-
-    }
-);
-
-
-/* =========================================================
-   CLEANUP BEFORE PAGE UNLOAD
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(){
-
-        stopSubscriptionExpiryWatcher();
-
-        if(profileUnsubscribe){
-
-            profileUnsubscribe();
-
-        }
-
-        if(requestsUnsubscribe){
-
-            requestsUnsubscribe();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   AUTH SCREEN DEFAULT STATE
-========================================================= */
-
-setAuthMode("login");
-
-
-/* =========================================================
-   FINAL SAFETY
-========================================================= */
+window.requireAccess =
+  requireAccess;
 
 window.hasPurchaseAccess =
-function(){
+  hasPurchaseAccess;
 
-    return hasPurchaseAccess();
+</script>
+<script>
 
-};
+/* =====================================================
+   FINAL UI SAFETY
+====================================================== */
+
+(function(){
+
+  /*
+    إغلاق الـSidebar عند الضغط على رابط
+    في الموبايل.
+  */
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(
+      button=>{
+
+        button.addEventListener(
+          "click",
+          ()=>{
+
+            if(
+              window.innerWidth <= 780
+            ){
+
+              document
+                .getElementById(
+                  "sidebar"
+                )
+                ?.classList
+                .remove("open");
+
+            }
+
+          }
+        );
+
+      }
+    );
 
 
-/* =========================================================
-   DEBUG HELPER
-   يظهر فقط في Console للمطور.
-========================================================= */
+  /*
+    منع إرسال أرقام غير رقمية
+    في رقم التحويل.
+  */
 
-window.MathixDebug = {
+  const phone =
+    document.getElementById(
+      "senderPhone"
+    );
 
-    getUser:function(){
 
-        return currentUser;
+  if(phone){
 
-    },
+    phone.addEventListener(
+      "input",
+      ()=>{
 
-    getProfile:function(){
+        phone.value =
+          phone.value
+            .replace(
+              /\D/g,
+              ""
+            )
+            .slice(
+              0,
+              11
+            );
 
-        return profile;
+      }
+    );
 
-    },
+  }
 
-    getSubscription:function(){
 
-        return getSubscriptionState();
-
-    },
-
-    refresh:function(){
-
-        renderStudent();
-
-        renderSubscription();
-
-    }
-
-};
-
+})();
 
 </script>
 
 
-<!-- ========================================================
-     END OF MATHIX
-========================================================= -->
-
 </body>
+
 </html>
