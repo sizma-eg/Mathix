@@ -3131,9 +3131,17 @@ let subjectsUnsubscribe = null;
 
 let curriculumUnsubscribe = null;
 
+let purchasesUnsubscribe = null;
+
+let purchaseRequestsUnsubscribe = null;
+
 let subjects = [];
 
 let lessons = [];
+
+let purchases = [];
+
+let purchaseRequests = [];
 
 
 /* =========================================================
@@ -3498,6 +3506,8 @@ async function openApp(){
   setupSubjects();
 
   setupCurriculum();
+
+  setupPurchaseAccess();
 
   loadWallet();
 
@@ -4366,6 +4376,254 @@ function setupCurriculum(){
 
 
 /* =========================================================
+   LESSON PURCHASE ACCESS
+========================================================= */
+
+function setupPurchaseAccess(){
+
+  if(!currentUser)
+    return;
+
+  if(purchasesUnsubscribe){
+    purchasesUnsubscribe();
+    purchasesUnsubscribe = null;
+  }
+
+  if(purchaseRequestsUnsubscribe){
+    purchaseRequestsUnsubscribe();
+    purchaseRequestsUnsubscribe = null;
+  }
+
+  const purchasesQuery = query(
+    collection(db,"purchases"),
+    where("uid","==",currentUser.uid)
+  );
+
+  purchasesUnsubscribe = onSnapshot(
+    purchasesQuery,
+    snapshot => {
+      purchases = snapshot.docs.map(item => ({
+        id:item.id,
+        ...item.data()
+      }));
+      renderCurriculum();
+    },
+    error => {
+      console.error("PURCHASES:",error);
+      purchases = [];
+      renderCurriculum();
+    }
+  );
+
+  const requestsQuery = query(
+    collection(db,"purchaseRequests"),
+    where("uid","==",currentUser.uid)
+  );
+
+  purchaseRequestsUnsubscribe = onSnapshot(
+    requestsQuery,
+    snapshot => {
+      purchaseRequests = snapshot.docs.map(item => ({
+        id:item.id,
+        ...item.data()
+      }));
+      renderCurriculum();
+    },
+    error => {
+      console.error("PURCHASE REQUESTS:",error);
+      purchaseRequests = [];
+      renderCurriculum();
+    }
+  );
+}
+
+function isLessonOwned(lessonId){
+  if(!currentUser || !lessonId)
+    return false;
+
+  return purchases.some(item =>
+    item.uid === currentUser.uid &&
+    item.lessonId === lessonId &&
+    String(item.status || "completed").toLowerCase() === "completed"
+  );
+}
+
+function getLessonPurchaseRequest(lessonId){
+  if(!currentUser || !lessonId)
+    return null;
+
+  return purchaseRequests
+    .filter(item =>
+      item.uid === currentUser.uid &&
+      item.lessonId === lessonId
+    )
+    .sort((a,b) =>
+      timestampValue(b.createdAt) - timestampValue(a.createdAt)
+    )[0] || null;
+}
+
+function hasPendingPurchaseRequest(lessonId){
+  const request = getLessonPurchaseRequest(lessonId);
+  return request?.status === "pending";
+}
+
+window.requestLessonPurchase = async function(lessonId){
+
+  if(!currentUser){
+    showToast("يجب تسجيل الدخول أولًا.");
+    return;
+  }
+
+  const lesson = lessons.find(item => item.id === lessonId);
+
+  if(!lesson){
+    showToast("الدرس غير موجود.");
+    return;
+  }
+
+  if(String(lesson.accessType || "free").toLowerCase() !== "paid"){
+    openLesson(lessonId);
+    return;
+  }
+
+  if(isLessonOwned(lessonId)){
+    openLesson(lessonId);
+    return;
+  }
+
+  if(hasPendingPurchaseRequest(lessonId)){
+    showToast("تم إرسال طلب شراء هذا الدرس بالفعل وهو قيد المراجعة.");
+    return;
+  }
+
+  const price = Number(lesson.price || 0);
+
+  if(!Number.isFinite(price) || price <= 0){
+    showToast("سعر الدرس غير صحيح.");
+    return;
+  }
+
+  const balance = Number(
+    profile?.balance ??
+    profile?.wallet ??
+    0
+  );
+
+  if(balance < price){
+    $("modalBox").innerHTML = `
+      <div class="modal-head">
+        <div>
+          <div class="muted" style="font-size:9px">MATHIX / WALLET</div>
+          <h3>الرصيد غير كافٍ</h3>
+        </div>
+        <button class="close" onclick="closeModal()">×</button>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <p style="line-height:1.9;color:#aaa">
+          سعر الدرس: <strong style="color:#fff">${price.toLocaleString("ar-EG")} جنيه</strong><br>
+          رصيدك الحالي: <strong style="color:#fff">${balance.toLocaleString("ar-EG")} جنيه</strong>
+        </p>
+      </div>
+      <button class="btn" style="width:100%" onclick="closeModal();go('wallet')">
+        شحن الرصيد
+      </button>
+    `;
+    openModal();
+    return;
+  }
+
+  const title = lesson.title || lesson.name || "الدرس";
+
+  $("modalBox").innerHTML = `
+    <div class="modal-head">
+      <div>
+        <div class="muted" style="font-size:9px">MATHIX / PURCHASE</div>
+        <h3>شراء الدرس</h3>
+      </div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <h3 style="margin-bottom:8px">${escapeHTML(title)}</h3>
+      <p class="muted" style="line-height:1.9">
+        سيتم إرسال طلب الشراء للإدارة. بعد الموافقة سيتم خصم السعر من رصيدك وفتح الفيديو تلقائيًا.
+      </p>
+      <div class="meta" style="margin-top:12px">
+        <span class="badge purple">${price.toLocaleString("ar-EG")} جنيه</span>
+        <span class="badge green">رصيدك: ${balance.toLocaleString("ar-EG")} جنيه</span>
+      </div>
+    </div>
+
+    <button
+      class="btn"
+      id="confirmLessonPurchase"
+      style="width:100%"
+      onclick="confirmLessonPurchase('${escapeHTML(lessonId)}')"
+    >
+      إرسال طلب الشراء
+    </button>
+  `;
+
+  openModal();
+};
+
+window.confirmLessonPurchase = async function(lessonId){
+
+  const lesson = lessons.find(item => item.id === lessonId);
+  if(!lesson || !currentUser)
+    return;
+
+  if(isLessonOwned(lessonId)){
+    closeModal();
+    openLesson(lessonId);
+    return;
+  }
+
+  if(hasPendingPurchaseRequest(lessonId)){
+    closeModal();
+    showToast("طلب الشراء قيد المراجعة بالفعل.");
+    return;
+  }
+
+  const price = Number(lesson.price || 0);
+  const button = $("confirmLessonPurchase");
+
+  if(!Number.isFinite(price) || price <= 0){
+    showToast("سعر الدرس غير صحيح.");
+    return;
+  }
+
+  if(button){
+    button.disabled = true;
+    button.textContent = "جاري إرسال الطلب...";
+  }
+
+  try{
+    await addDoc(
+      collection(db,"purchaseRequests"),
+      {
+        uid:currentUser.uid,
+        lessonId:lesson.id,
+        lessonTitle:lesson.title || lesson.name || "درس",
+        price,
+        status:"pending",
+        createdAt:serverTimestamp()
+      }
+    );
+
+    closeModal();
+    showToast("تم إرسال طلب الشراء. انتظر موافقة الإدارة.");
+  }catch(error){
+    console.error("PURCHASE REQUEST:",error);
+    showToast(firebaseErrorMessage(error));
+    if(button){
+      button.disabled = false;
+      button.textContent = "إرسال طلب الشراء";
+    }
+  }
+};
+
+/* =========================================================
    CURRICULUM
 ========================================================= */
 
@@ -4538,188 +4796,79 @@ function lessonType(
 
 function renderCurriculum(){
 
-  const container =
-    $("curriculumList");
-
-
-  if(!container)
-    return;
-
+  const container = $("curriculumList");
+  if(!container) return;
 
   $("lessonCount").textContent =
     `${lessons.length.toLocaleString("ar-EG")} درس`;
 
-
   if(!lessons.length){
-
     container.innerHTML = `
-
-      <div class="empty">
-
-        لا توجد دروس منشورة حاليًا.
-
-      </div>
-
+      <div class="empty">لا توجد دروس منشورة حاليًا.</div>
     `;
-
     return;
-
   }
 
+  container.innerHTML = lessons.map((lesson,index) => {
 
-  container.innerHTML =
-    lessons
-      .map(
-        (lesson,index) => {
+    const type = lessonType(lesson);
+    const title = lesson.title || lesson.name || `الدرس ${index+1}`;
+    const subject = getSubjectName(lesson.subjectId || lesson.subject);
+    const paid = String(lesson.accessType || "free").toLowerCase() === "paid";
+    const owned = paid && isLessonOwned(lesson.id);
+    const pending = paid && !owned && hasPendingPurchaseRequest(lesson.id);
+    const price = Number(lesson.price || 0);
 
-          const type =
-            lessonType(
-              lesson
-            );
+    let badge = type === "youtube" ? "YouTube" : type === "pdf" ? "PDF" : "نص";
+    let badgeClass = type === "youtube" ? "blue" : type === "pdf" ? "red" : "";
 
+    let accessBadge = "مجاني";
+    let accessClass = "green";
 
-          let badge =
-            "نص";
+    if(paid){
+      accessBadge = owned ? "مملوك" : pending ? "قيد المراجعة" : `${price.toLocaleString("ar-EG")} جنيه`;
+      accessClass = owned ? "green" : pending ? "yellow" : "purple";
+    }
 
+    let buttonText = "فتح الدرس";
+    let buttonClass = "btn";
 
-          let badgeClass =
-            "";
+    if(paid && !owned){
+      buttonText = pending ? "قيد المراجعة" : `شراء — ${price.toLocaleString("ar-EG")} جنيه`;
+      buttonClass = pending ? "btn secondary" : "btn";
+    }
 
+    return `
+      <article class="lesson-card">
+        <div class="lesson-top">
+          <div>
+            <div class="muted" style="font-size:9px">
+              الدرس ${ (index+1).toLocaleString("ar-EG") }
+            </div>
+            <h3>${escapeHTML(title)}</h3>
+          </div>
+          <span class="badge ${badgeClass}">${badge}</span>
+        </div>
 
-          if(type === "pdf"){
+        <p>
+          ${escapeHTML(lesson.description || subject || "درس من منهج Mathix")}
+        </p>
 
-            badge =
-              "PDF";
-
-            badgeClass =
-              "red";
-
-          }
-
-
-          if(type === "youtube"){
-
-            badge =
-              "YouTube";
-
-            badgeClass =
-              "blue";
-
-          }
-
-
-          const title =
-            lesson.title ||
-            lesson.name ||
-            `الدرس ${index+1}`;
-
-
-          const subject =
-            getSubjectName(
-              lesson.subjectId ||
-              lesson.subject
-            );
-
-
-          return `
-
-            <article
-              class="lesson-card"
-            >
-
-              <div class="lesson-top">
-
-                <div>
-
-                  <div
-                    class="muted"
-                    style="font-size:9px"
-                  >
-
-                    الدرس
-                    ${(
-                      index + 1
-                    ).toLocaleString("ar-EG")}
-
-                  </div>
-
-                  <h3>
-
-                    ${escapeHTML(
-                      title
-                    )}
-
-                  </h3>
-
-                </div>
-
-
-                <span
-                  class="badge ${badgeClass}"
-                >
-
-                  ${badge}
-
-                </span>
-
-              </div>
-
-
-              <p>
-
-                ${escapeHTML(
-                  lesson.description ||
-                  subject ||
-                  "درس من منهج Mathix"
-                )}
-
-              </p>
-
-
-              <div class="meta">
-
-                ${
-                  subject
-                    ? `
-                      <span class="badge">
-                        ${escapeHTML(
-                          subject
-                        )}
-                      </span>
-                    `
-                    : ""
-                }
-
-
-                <button
-                  class="btn"
-                  style="
-                    padding:7px 12px;
-                    font-size:10px;
-                  "
-                  onclick="
-                    openLesson(
-                      '${escapeHTML(
-                        lesson.id
-                      )}'
-                    )
-                  "
-                >
-
-                  فتح الدرس
-
-                </button>
-
-              </div>
-
-            </article>
-
-          `;
-
-        }
-      )
-      .join("");
-
+        <div class="meta">
+          ${subject ? `<span class="badge">${escapeHTML(subject)}</span>` : ""}
+          <span class="badge ${accessClass}">${accessBadge}</span>
+          <button
+            class="${buttonClass}"
+            style="padding:7px 12px;font-size:10px;"
+            ${pending ? "disabled" : ""}
+            onclick="${paid && !owned ? `requestLessonPurchase('${escapeHTML(lesson.id)}')` : `openLesson('${escapeHTML(lesson.id)}')`}"
+          >
+            ${buttonText}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
 }
 
 
@@ -4727,273 +4876,76 @@ function renderCurriculum(){
    OPEN LESSON
 ========================================================= */
 
-window.openLesson =
-  function(id){
-
-    const lesson =
-      lessons.find(
-        item =>
-          item.id === id
-      );
-
-
-    if(!lesson)
-      return;
-
-
-    const type =
-      lessonType(
-        lesson
-      );
-
-
-    const title =
-      lesson.title ||
-      lesson.name ||
-      "الدرس";
-
-
-    const description =
-      lesson.description ||
-      "";
-
-
-    let body = "";
-
-
-    /* TEXT */
-
-    if(type === "text"){
-
-      const content =
-        lesson.content ||
-        lesson.text ||
-        "";
-
-
-      body = `
-
-        <div class="lesson-content">
-
-          ${escapeHTML(
-            content
-          )}
-
-        </div>
-
-
-        <div
-          style="
-            display:flex;
-            justify-content:flex-start;
-            margin-top:10px;
-          "
-        >
-
-          <button
-            class="btn secondary"
-            onclick="
-              copyText(
-                ${JSON.stringify(
-                  content
-                )}
-              )
-            "
-          >
-
-            نسخ الشرح
-
-          </button>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* PDF */
-
-    if(type === "pdf"){
-
-      const url =
-        lesson.pdfUrl ||
-        lesson.content ||
-        "";
-
-
-      body = `
-
-        <div class="pdf-box">
-
-          <div class="empty">
-
-            <div
-              style="
-                font-size:35px;
-                margin-bottom:8px;
-              "
-            >
-              📄
-            </div>
-
-            هذا الدرس متاح
-            بصيغة PDF خارجية.
-
-          </div>
-
-
-          ${
-            url
-              ? `
-                <a
-                  class="btn"
-                  href="${escapeHTML(
-                    url
-                  )}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-
-                  فتح ملف PDF
-
-                </a>
-              `
-              : `
-                <div class="empty">
-                  رابط PDF غير متاح.
-                </div>
-              `
-          }
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* YOUTUBE */
-
-    if(type === "youtube"){
-
-      const url =
-        lesson.youtubeUrl ||
-        lesson.content ||
-        "";
-
-
-      const youtubeId =
-        lesson.youtubeId ||
-        getYoutubeId(url);
-
-
-      body = `
-
-        ${
-          youtubeId
-            ? `
-              <div class="lesson-content">
-
-                <iframe
-                  src="https://www.youtube.com/embed/${escapeHTML(
-                    youtubeId
-                  )}?rel=0"
-                  title="${escapeHTML(
-                    title
-                  )}"
-                  allow="
-                    accelerometer;
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    gyroscope;
-                    picture-in-picture;
-                    web-share
-                  "
-                  allowfullscreen
-                ></iframe>
-
-              </div>
-            `
-            : `
-              <div class="empty">
-
-                رابط YouTube غير صالح.
-
-              </div>
-            `
-        }
-
-      `;
-
-    }
-
-
-    $("modalBox").innerHTML = `
-
-      <div class="modal-head">
-
-        <div>
-
-          <div
-            class="muted"
-            style="font-size:9px"
-          >
-            درس Mathix
-          </div>
-
-          <h3>
-
-            ${escapeHTML(
-              title
-            )}
-
-          </h3>
-
-        </div>
-
-
-        <button
-          class="close"
-          onclick="closeModal()"
-        >
-          ×
-        </button>
-
+window.openLesson = function(id){
+
+  const lesson = lessons.find(item => item.id === id);
+  if(!lesson) return;
+
+  const paid = String(lesson.accessType || "free").toLowerCase() === "paid";
+
+  if(paid && !isLessonOwned(id)){
+    requestLessonPurchase(id);
+    return;
+  }
+
+  const type = lessonType(lesson);
+  const title = lesson.title || lesson.name || "الدرس";
+  const description = lesson.description || "";
+  let body = "";
+
+  if(type === "text"){
+    const content = lesson.content || lesson.text || "";
+    body = `
+      <div class="lesson-content">${escapeHTML(content)}</div>
+      <div style="display:flex;justify-content:flex-start;margin-top:10px;">
+        <button class="btn secondary" onclick="copyText(${JSON.stringify(content)})">نسخ الشرح</button>
       </div>
-
-
-      ${
-        description
-          ? `
-            <p
-              class="muted"
-              style="
-                font-size:11px;
-                line-height:1.8;
-                margin-bottom:12px;
-              "
-            >
-
-              ${escapeHTML(
-                description
-              )}
-
-            </p>
-          `
-          : ""
-      }
-
-
-      ${body}
-
     `;
+  }
 
+  if(type === "pdf"){
+    const url = lesson.pdfUrl || lesson.content || "";
+    body = `
+      <div class="pdf-box">
+        <div class="empty" style="margin-bottom:12px">
+          <div style="font-size:35px;margin-bottom:8px">📄</div>
+          هذا الدرس متاح بصيغة PDF خارجية.
+        </div>
+        ${url ? `<a class="btn" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">فتح ملف PDF</a>` : `<div class="empty">رابط PDF غير متاح.</div>`}
+      </div>
+    `;
+  }
 
-    openModal();
+  if(type === "youtube"){
+    const url = lesson.youtubeUrl || lesson.content || "";
+    const youtubeId = lesson.youtubeId || getYoutubeId(url);
+    body = youtubeId ? `
+      <div class="lesson-content">
+        <iframe
+          src="https://www.youtube.com/embed/${escapeHTML(youtubeId)}?rel=0"
+          title="${escapeHTML(title)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    ` : `<div class="empty">رابط YouTube غير صالح.</div>`;
+  }
 
-  };
+  $("modalBox").innerHTML = `
+    <div class="modal-head">
+      <div>
+        <div class="muted" style="font-size:9px">درس Mathix</div>
+        <h3>${escapeHTML(title)}</h3>
+      </div>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    ${description ? `<p class="muted" style="font-size:11px;line-height:1.8;margin-bottom:12px;">${escapeHTML(description)}</p>` : ""}
+    ${paid ? `<div class="meta" style="margin-bottom:12px"><span class="badge green">تم الشراء</span></div>` : ""}
+    ${body}
+  `;
+
+  openModal();
+};
 
 
 /* =========================================================
@@ -6186,6 +6138,8 @@ function loadAll(){
 
   setupCurriculum();
 
+  setupPurchaseAccess();
+
   loadWallet();
 
 }
@@ -6228,6 +6182,24 @@ function cleanupListeners(){
   }
 
 
+  if(purchasesUnsubscribe){
+
+    purchasesUnsubscribe();
+
+    purchasesUnsubscribe = null;
+
+  }
+
+
+  if(purchaseRequestsUnsubscribe){
+
+    purchaseRequestsUnsubscribe();
+
+    purchaseRequestsUnsubscribe = null;
+
+  }
+
+
   if(walletUnsubscribe){
 
     walletUnsubscribe();
@@ -6258,6 +6230,10 @@ function cleanupListeners(){
   subjects = [];
 
   lessons = [];
+
+  purchases = [];
+
+  purchaseRequests = [];
 
   profile = null;
 
