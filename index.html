@@ -4088,13 +4088,53 @@ async function loadWallet(){
    * على محفظته.
    */
 
-  const walletRef =
-   doc(
-    db,
-    "wallets",
-    currentUser.uid
-   );
+  const walletRef = doc(
+  db,
+  "wallets",
+  currentUser.uid
+);
 
+if(walletUnsubscribe){
+  walletUnsubscribe();
+}
+
+walletUnsubscribe = onSnapshot(
+  walletRef,
+  snap => {
+
+    let balance = 0;
+
+    if(snap.exists()){
+
+      const data = snap.data();
+
+      balance = Number(
+        data.balance || 0
+      );
+
+    }
+
+    const balanceElement =
+      $("walletBalance");
+
+    if(balanceElement){
+
+      balanceElement.textContent =
+        `${balance} جنيه`;
+
+    }
+
+  },
+
+  error => {
+
+    console.error(
+      "Wallet realtime:",
+      error
+    );
+
+  }
+);
 
   const walletSnap =
    await getDoc(walletRef);
