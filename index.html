@@ -4871,7 +4871,8 @@ window.openLesson = function(id){
   const lesson = lessons.find(item => item.id === id);
   if(!lesson) return;
 
-  const paid = String(lesson.accessType || "free").toLowerCase() === "paid";
+  const paid =
+    String(lesson.accessType || "free").toLowerCase() === "paid";
 
   if(paid && !isLessonOwned(id)){
     requestLessonPurchase(id);
@@ -4881,92 +4882,169 @@ window.openLesson = function(id){
   const type = lessonType(lesson);
   const title = lesson.title || lesson.name || "الدرس";
   const description = lesson.description || "";
+
   let body = "";
 
   if(type === "text"){
-    const content = lesson.content || lesson.text || "";
+
+    const content =
+      lesson.content ||
+      lesson.text ||
+      "";
+
     body = `
-      <div class="lesson-content">${escapeHTML(content)}</div>
+      <div class="lesson-content">
+        ${escapeHTML(content)}
+      </div>
+
       <div style="display:flex;justify-content:flex-start;margin-top:10px;">
-        <button class="btn secondary" onclick="copyText(${JSON.stringify(content)})">نسخ الشرح</button>
+        <button
+          class="btn secondary"
+          onclick="copyText(${JSON.stringify(content)})"
+        >
+          نسخ الشرح
+        </button>
       </div>
     `;
+
   }
 
-  if(type === "pdf"){
-    const url = lesson.pdfUrl || lesson.content || "";
+  else if(type === "pdf"){
+
+    const url =
+      lesson.pdfUrl ||
+      lesson.content ||
+      "";
+
     body = `
       <div class="pdf-box">
-        <div class="empty" style="margin-bottom:12px">
-          <div style="font-size:35px;margin-bottom:8px">📄</div>
+
+        <div
+          class="empty"
+          style="margin-bottom:12px"
+        >
+          <div
+            style="font-size:35px;margin-bottom:8px"
+          >
+            📄
+          </div>
+
           هذا الدرس متاح بصيغة PDF خارجية.
         </div>
-        ${url ? `<a class="btn" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">فتح ملف PDF</a>` : `<div class="empty">رابط PDF غير متاح.</div>`}
+
+        ${
+          url
+            ? `
+              <a
+                class="btn"
+                href="${escapeHTML(url)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                فتح ملف PDF
+              </a>
+            `
+            : `
+              <div class="empty">
+                رابط PDF غير متاح.
+              </div>
+            `
+        }
+
       </div>
     `;
-  }if(type === "youtube"){
 
-  const youtubeId =
-    lesson.youtubeId ||
-    getYoutubeId(
-      lesson.youtubeUrl ||
+  }
+
+  else if(type === "youtube"){
+
+    const youtubeId =
+      lesson.youtubeId ||
+      getYoutubeId(
+        lesson.youtubeUrl ||
+        lesson.videoUrl ||
+        lesson.content ||
+        ""
+      );
+
+    body = youtubeId
+      ? `
+        <div class="lesson-content">
+
+          <div class="lesson-video">
+
+            <iframe
+              src="https://www.youtube.com/embed/${encodeURIComponent(youtubeId)}"
+              title="${escapeHTML(title)}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+
+          </div>
+
+        </div>
+      `
+      : `
+        <div class="empty">
+          رابط فيديو YouTube غير موجود.
+        </div>
+      `;
+
+  }
+
+  else if(type === "video"){
+
+    const videoUrl =
       lesson.videoUrl ||
       lesson.content ||
-      ""
-    );
+      "";
 
-  body = youtubeId ? `
-    <div class="lesson-content">
-      <div class="lesson-video">
-        <iframe
-          src="https://www.youtube.com/embed/${encodeURIComponent(youtubeId)}"
-          title="${escapeHTML(title)}"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+    body = videoUrl
+      ? `
+        <div class="lesson-content">
+
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            title="${escapeHTML(title)}"
+            style="width:100%;max-width:100%;border-radius:16px;"
+          >
+
+            <source
+              src="${escapeHTML(videoUrl)}"
+              type="video/mp4"
+            >
+
+            متصفحك لا يدعم تشغيل الفيديو.
+
+          </video>
+
+        </div>
+      `
+      : `
+        <div class="empty">
+          رابط الفيديو غير موجود.
+        </div>
+      `;
+
+  }
+
+  else{
+
+    body = `
+      <div class="empty">
+        محتوى الدرس غير متاح.
       </div>
-    </div>
-  ` : `
-    <div class="empty">
-      رابط فيديو YouTube غير موجود.
-    </div>
-  `;
+    `;
 
-}
+  }
 
-else if(type === "video"){
+  openModal();
 
-  const videoUrl =
-    lesson.videoUrl ||
-    lesson.content ||
-    "";
-
-  body = videoUrl ? `
-    <div class="lesson-content">
-      <video
-        controls
-        playsinline
-        preload="metadata"
-        title="${escapeHTML(title)}"
-        style="width:100%; max-width:100%; border-radius:16px;"
-      >
-        <source
-          src="${escapeHTML(videoUrl)}"
-          type="video/mp4"
-        >
-        متصفحك لا يدعم تشغيل الفيديو.
-      </video>
-    </div>
-  ` : `
-    <div class="empty">
-      رابط الفيديو غير موجود.
-    </div>
-  `;
-
-}
-
+};
 /* =========================================================
    MODAL
 ========================================================= */
