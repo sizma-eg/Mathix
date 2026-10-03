@@ -4046,219 +4046,224 @@ function showExamsList(){
 /* =========================
    WALLET
 ========================= */
-
 async function loadWallet(){
 
- if(!currentUser)
-  return;
+  if(!currentUser)
+    return;
 
+  const balanceElement =
+    $("walletBalance");
 
- const balanceElement =
-  $("walletBalance");
+  const transactionsElement =
+    $("walletTransactions");
 
- const transactionsElement =
-  $("walletTransactions");
+  if(balanceElement){
+    balanceElement.textContent =
+      "جاري التحميل...";
+  }
 
+  if(transactionsElement){
+    transactionsElement.innerHTML = `
+      <div class="card">
+        <p>جاري تحميل العمليات...</p>
+      </div>
+    `;
+  }
 
- if(balanceElement){
+  try{
 
-  balanceElement.textContent =
-   "جاري التحميل...";
+    /* =========================
+       REALTIME WALLET BALANCE
+       ========================= */
 
- }
+    const walletRef = doc(
+      db,
+      "wallets",
+      currentUser.uid
+    );
 
-
- if(transactionsElement){
-
-  transactionsElement.innerHTML = `
-   <div class="card">
-    <p>جاري تحميل العمليات...</p>
-   </div>
-  `;
-
- }
-
-
- try{
-
-  /*
-   * تحميل رصيد الطالب
-   *
-   * الطالب لديه صلاحية read فقط
-   * على محفظته.
-   */
-
-  const walletRef = doc(
-  db,
-  "wallets",
-  currentUser.uid
-);
-
-if(walletUnsubscribe){
-  walletUnsubscribe();
-}
-
-walletUnsubscribe = onSnapshot(
-  walletRef,
-  snap => {
-
-    let balance = 0;
-
-    if(snap.exists()){
-
-      const data = snap.data();
-
-      balance = Number(
-        data.balance || 0
-      );
-
+    if(walletUnsubscribe){
+      walletUnsubscribe();
     }
 
-    const balanceElement =
-      $("walletBalance");
+    walletUnsubscribe = onSnapshot(
+      walletRef,
+
+      snap => {
+
+        let balance = 0;
+
+        if(snap.exists()){
+
+          const data = snap.data();
+
+          balance = Number(
+            data.balance || 0
+          );
+
+        }
+
+        const balanceElement =
+          $("walletBalance");
+
+        if(balanceElement){
+
+          balanceElement.textContent =
+            `${balance} جنيه`;
+
+        }
+
+      },
+
+      error => {
+
+        console.error(
+          "Wallet realtime:",
+          error
+        );
+
+        if(balanceElement){
+
+          balanceElement.textContent =
+            "0 جنيه";
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       REALTIME TRANSACTIONS
+       ========================= */
+
+    const transactionsQuery = query(
+
+      collection(
+        db,
+        "walletTransactions"
+      ),
+
+      where(
+        "uid",
+        "==",
+        currentUser.uid
+      )
+
+    );
+
+
+    if(walletTransactionsUnsubscribe){
+      walletTransactionsUnsubscribe();
+    }
+
+
+    walletTransactionsUnsubscribe =
+      onSnapshot(
+
+        transactionsQuery,
+
+        snapshot => {
+
+          const transactions = [];
+
+
+          snapshot.forEach(item => {
+
+            transactions.push({
+
+              id: item.id,
+
+              ...item.data()
+
+            });
+
+          });
+
+
+          /* ترتيب الأحدث أولًا */
+
+          transactions.sort(
+            (a,b) => {
+
+              const aTime =
+                a.createdAt?.toMillis
+                  ? a.createdAt.toMillis()
+                  : 0;
+
+              const bTime =
+                b.createdAt?.toMillis
+                  ? b.createdAt.toMillis()
+                  : 0;
+
+              return bTime - aTime;
+
+            }
+          );
+
+
+          renderWalletTransactions(
+            transactions
+          );
+
+        },
+
+        error => {
+
+          console.error(
+            "Wallet transactions realtime:",
+            error
+          );
+
+          if(transactionsElement){
+
+            transactionsElement.innerHTML = `
+              <div class="card">
+                <p>
+                  تعذر تحميل سجل العمليات.
+                </p>
+              </div>
+            `;
+
+          }
+
+        }
+
+      );
+
+
+  }
+  catch(error){
+
+    console.error(
+      "Wallet:",
+      error
+    );
+
 
     if(balanceElement){
 
       balanceElement.textContent =
-        `${balance} جنيه`;
+        "0 جنيه";
 
     }
 
-  },
 
-  error => {
+    if(transactionsElement){
 
-    console.error(
-      "Wallet realtime:",
-      error
-    );
+      transactionsElement.innerHTML = `
+        <div class="card">
+          <p>
+            تعذر تحميل بيانات المحفظة.
+          </p>
+        </div>
+      `;
 
-  }
-);
-
-  const walletSnap =
-   await getDoc(walletRef);
-
-
-  let balance = 0;
-
-
-  if(walletSnap.exists()){
-
-   const data =
-    walletSnap.data();
-
-   balance =
-    Number(
-     data.balance || 0
-    );
+    }
 
   }
-
-
-  if(balanceElement){
-
-   balanceElement.textContent =
-    `${balance} جنيه`;
-
-  }
-
-
-  /* تحميل سجل العمليات */
-
-  const transactionsSnap =
-   await getDocs(
-
-    query(
-     collection(
-      db,
-      "walletTransactions"
-     ),
-
-     where(
-      "uid",
-      "==",
-      currentUser.uid
-     )
-    )
-
-   );
-
-
-  const transactions=[];
-
-
-  transactionsSnap.forEach(item=>{
-
-   transactions.push({
-
-    id:item.id,
-
-    ...item.data()
-
-   });
-
-  });
-
-
-  transactions.sort(
-   (a,b)=>{
-
-    const aTime =
-     a.createdAt?.toMillis
-     ?a.createdAt.toMillis()
-     :0;
-
-    const bTime =
-     b.createdAt?.toMillis
-     ?b.createdAt.toMillis()
-     :0;
-
-    return bTime-aTime;
-
-   }
-  );
-
-
-  renderWalletTransactions(
-   transactions
-  );
-
-
- }
- catch(error){
-
-  console.error(
-   "Wallet:",
-   error
-  );
-
-
-  if(balanceElement){
-
-   balanceElement.textContent =
-    "0 جنيه";
-
-  }
-
-
-  if(transactionsElement){
-
-   transactionsElement.innerHTML = `
-    <div class="card">
-     <p>
-      تعذر تحميل بيانات المحفظة.
-     </p>
-    </div>
-   `;
-
-  }
-
- }
 
 }
-
-
 /* =========================
    RENDER TRANSACTIONS
 ========================= */
