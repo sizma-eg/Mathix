@@ -4904,8 +4904,44 @@ window.openLesson = function(id){
         ${url ? `<a class="btn" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">فتح ملف PDF</a>` : `<div class="empty">رابط PDF غير متاح.</div>`}
       </div>
     `;
-  }if(type === "video"){
-  const videoUrl = lesson.videoUrl || lesson.content || "";
+  }if(type === "youtube"){
+
+  const youtubeId =
+    lesson.youtubeId ||
+    getYoutubeId(
+      lesson.youtubeUrl ||
+      lesson.videoUrl ||
+      lesson.content ||
+      ""
+    );
+
+  body = youtubeId ? `
+    <div class="lesson-content">
+      <div class="lesson-video">
+        <iframe
+          src="https://www.youtube.com/embed/${encodeURIComponent(youtubeId)}"
+          title="${escapeHTML(title)}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
+  ` : `
+    <div class="empty">
+      رابط فيديو YouTube غير موجود.
+    </div>
+  `;
+
+}
+
+else if(type === "video"){
+
+  const videoUrl =
+    lesson.videoUrl ||
+    lesson.content ||
+    "";
 
   body = videoUrl ? `
     <div class="lesson-content">
@@ -4916,7 +4952,10 @@ window.openLesson = function(id){
         title="${escapeHTML(title)}"
         style="width:100%; max-width:100%; border-radius:16px;"
       >
-        <source src="${escapeHTML(videoUrl)}" type="video/mp4">
+        <source
+          src="${escapeHTML(videoUrl)}"
+          type="video/mp4"
+        >
         متصفحك لا يدعم تشغيل الفيديو.
       </video>
     </div>
@@ -4925,10 +4964,8 @@ window.openLesson = function(id){
       رابط الفيديو غير موجود.
     </div>
   `;
-}
-  openModal();
-};
 
+}
 
 /* =========================================================
    MODAL
