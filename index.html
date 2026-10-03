@@ -1117,8 +1117,14 @@ button{
    </button>
 
    <div class="nav-title">
-    الحساب
-   </div>
+ الحساب
+</div>
+
+<button class="nav-btn"
+ data-page="wallet"
+ onclick="go('wallet')">
+ 💰 <span>المحفظة</span>
+</button>
 
    <button class="nav-btn subscription-nav"
     data-page="subscription"
@@ -1533,6 +1539,75 @@ button{
 
    </div>
 
+   <!-- WALLET -->
+
+<div
+ class="page"
+ id="page-wallet">
+
+ <div class="card"
+  style="
+   background:
+    radial-gradient(
+     circle at 80% 20%,
+     rgba(139,92,246,.22),
+     transparent 45%
+    ),
+    var(--card);
+   padding:25px;
+  ">
+
+  <p
+   style="
+    color:#aaa;
+    font-size:13px;
+   "
+  >
+   رصيدك الحالي
+  </p>
+
+  <div
+   id="walletBalance"
+   style="
+    font-size:42px;
+    font-weight:900;
+    font-family:'Chakra Petch',sans-serif;
+    margin-top:5px;
+   "
+  >
+   0 جنيه
+  </div>
+
+  <button
+   class="primary-btn"
+   style="
+    margin-top:18px;
+    max-width:220px;
+   "
+   onclick="openWalletTopup()"
+  >
+   ➕ شحن المحفظة
+  </button>
+
+ </div>
+
+
+ <div class="section-title">
+  📜 سجل العمليات
+ </div>
+
+ <div id="walletTransactions">
+
+  <div class="card">
+   <p>
+    جاري تحميل العمليات...
+   </p>
+  </div>
+
+ </div>
+
+</div>
+
    <!-- SUBSCRIPTION -->
 
    <div
@@ -1726,6 +1801,123 @@ button{
  </div>
 
 </div>
+<!-- WALLET TOPUP MODAL -->
+
+<div
+ class="modal-wrap"
+ id="walletTopupModal">
+
+ <div class="modal">
+
+  <div class="modal-header">
+
+   <h3>
+    شحن المحفظة 💰
+   </h3>
+
+   <button
+    class="close-btn"
+    onclick="closeWalletTopup()"
+   >
+    ✕
+   </button>
+
+  </div>
+
+
+  <div class="payment-info">
+
+   <div
+    style="
+     text-align:center;
+     color:#aaa;
+     font-size:13px;
+    "
+   >
+    حوّل المبلغ على Vodafone Cash
+   </div>
+
+   <div class="vodafone-number">
+    01037500636
+   </div>
+
+   <button
+    class="copy-number"
+    onclick="copyVodafone()"
+   >
+    نسخ الرقم
+   </button>
+
+  </div>
+
+
+  <form
+   onsubmit="submitWalletTopup(event)"
+  >
+
+   <div class="field">
+
+    <label>
+     المبلغ
+    </label>
+
+    <input
+     id="walletTopupAmount"
+     type="number"
+     min="1"
+     step="1"
+     placeholder="مثال: 100"
+     required
+    >
+
+   </div>
+
+
+   <div class="field">
+
+    <label>
+     رقم الموبايل اللي حوّلت منه
+    </label>
+
+    <input
+     id="walletTopupPhone"
+     type="tel"
+     inputmode="numeric"
+     maxlength="11"
+     placeholder="01xxxxxxxxx"
+     required
+    >
+
+   </div>
+
+
+   <div class="field">
+
+    <label>
+     ملاحظات
+    </label>
+
+    <textarea
+     id="walletTopupNote"
+     placeholder="وقت التحويل أو أي ملاحظة"
+    ></textarea>
+
+   </div>
+
+
+   <button
+    class="primary-btn"
+    id="walletTopupBtn"
+    type="submit"
+   >
+    إرسال طلب الشحن
+   </button>
+
+  </form>
+
+ </div>
+
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1789,6 +1981,8 @@ let profile=null;
 
 let profileUnsubscribe=null;
 let requestsUnsubscribe=null;
+let walletUnsubscribe=null;
+let walletTransactionsUnsubscribe=null;
 
 let selectedPlan=null;
 
@@ -3849,6 +4043,563 @@ function showExamsList(){
  selectedExam=null;
 }
 
+/* =========================
+   WALLET
+========================= */
+
+async function loadWallet(){
+
+ if(!currentUser)
+  return;
+
+
+ const balanceElement =
+  $("walletBalance");
+
+ const transactionsElement =
+  $("walletTransactions");
+
+
+ if(balanceElement){
+
+  balanceElement.textContent =
+   "جاري التحميل...";
+
+ }
+
+
+ if(transactionsElement){
+
+  transactionsElement.innerHTML = `
+   <div class="card">
+    <p>جاري تحميل العمليات...</p>
+   </div>
+  `;
+
+ }
+
+
+ try{
+
+  /*
+   * تحميل رصيد الطالب
+   *
+   * الطالب لديه صلاحية read فقط
+   * على محفظته.
+   */
+
+  const walletRef =
+   doc(
+    db,
+    "wallets",
+    currentUser.uid
+   );
+
+
+  const walletSnap =
+   await getDoc(walletRef);
+
+
+  let balance = 0;
+
+
+  if(walletSnap.exists()){
+
+   const data =
+    walletSnap.data();
+
+   balance =
+    Number(
+     data.balance || 0
+    );
+
+  }
+
+
+  if(balanceElement){
+
+   balanceElement.textContent =
+    `${balance} جنيه`;
+
+  }
+
+
+  /* تحميل سجل العمليات */
+
+  const transactionsSnap =
+   await getDocs(
+
+    query(
+     collection(
+      db,
+      "walletTransactions"
+     ),
+
+     where(
+      "uid",
+      "==",
+      currentUser.uid
+     )
+    )
+
+   );
+
+
+  const transactions=[];
+
+
+  transactionsSnap.forEach(item=>{
+
+   transactions.push({
+
+    id:item.id,
+
+    ...item.data()
+
+   });
+
+  });
+
+
+  transactions.sort(
+   (a,b)=>{
+
+    const aTime =
+     a.createdAt?.toMillis
+     ?a.createdAt.toMillis()
+     :0;
+
+    const bTime =
+     b.createdAt?.toMillis
+     ?b.createdAt.toMillis()
+     :0;
+
+    return bTime-aTime;
+
+   }
+  );
+
+
+  renderWalletTransactions(
+   transactions
+  );
+
+
+ }
+ catch(error){
+
+  console.error(
+   "Wallet:",
+   error
+  );
+
+
+  if(balanceElement){
+
+   balanceElement.textContent =
+    "0 جنيه";
+
+  }
+
+
+  if(transactionsElement){
+
+   transactionsElement.innerHTML = `
+    <div class="card">
+     <p>
+      تعذر تحميل بيانات المحفظة.
+     </p>
+    </div>
+   `;
+
+  }
+
+ }
+
+}
+
+
+/* =========================
+   RENDER TRANSACTIONS
+========================= */
+
+function renderWalletTransactions(
+ transactions
+){
+
+ const container =
+  $("walletTransactions");
+
+
+ if(!container)
+  return;
+
+
+ if(!transactions.length){
+
+  container.innerHTML = `
+
+   <div class="card empty-state">
+
+    لا توجد عمليات في المحفظة حتى الآن.
+
+   </div>
+
+  `;
+
+  return;
+
+ }
+
+
+ container.innerHTML =
+  transactions.map(
+   transaction=>{
+
+    const isCredit =
+     transaction.type === "credit";
+
+
+    const amount =
+     Number(
+      transaction.amount || 0
+     );
+
+
+    const balanceAfter =
+     Number(
+      transaction.balanceAfter || 0
+     );
+
+
+    const date =
+     transaction.createdAt
+     ? formatDateTime(
+        transaction.createdAt
+       )
+     : "—";
+
+
+    return `
+
+     <div
+      class="request-item"
+      style="
+       border-right:
+        3px solid
+        ${
+         isCredit
+         ? "#22c55e"
+         : "#ef4444"
+        };
+      "
+     >
+
+      <div
+       style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:15px;
+       "
+      >
+
+       <div>
+
+        <div
+         style="
+          font-weight:800;
+          font-size:14px;
+         "
+        >
+
+         ${
+          isCredit
+          ? "➕ إضافة رصيد"
+          : "➖ خصم من الرصيد"
+         }
+
+        </div>
+
+
+        <div
+         style="
+          color:#777;
+          font-size:11px;
+          margin-top:4px;
+         "
+        >
+
+         ${escapeHTML(
+          transaction.reason ||
+          "عملية محفظة"
+         )}
+
+        </div>
+
+       </div>
+
+
+       <div
+        style="
+         font-size:19px;
+         font-weight:900;
+         direction:ltr;
+         color:
+          ${
+           isCredit
+           ? "#4ade80"
+           : "#f87171"
+          };
+        "
+       >
+
+        ${
+         isCredit
+         ? "+"
+         : "-"
+        }${amount} جنيه
+
+       </div>
+
+      </div>
+
+
+      <div
+       style="
+        display:flex;
+        justify-content:space-between;
+        margin-top:12px;
+        color:#777;
+        font-size:11px;
+       "
+      >
+
+       <span>
+        الرصيد بعد العملية:
+        ${balanceAfter} جنيه
+       </span>
+
+       <span>
+        ${date}
+       </span>
+
+      </div>
+
+     </div>
+
+    `;
+
+   }
+  ).join("");
+
+}
+
+
+/* =========================
+   OPEN TOPUP
+========================= */
+
+function openWalletTopup(){
+
+ if(!currentUser){
+
+  toast(
+   "سجل الدخول أولًا."
+  );
+
+  return;
+
+ }
+
+
+ $("walletTopupAmount").value="";
+ $("walletTopupPhone").value="";
+ $("walletTopupNote").value="";
+
+
+ $("walletTopupModal")
+  .style.display="flex";
+
+}
+
+
+/* =========================
+   CLOSE TOPUP
+========================= */
+
+function closeWalletTopup(){
+
+ $("walletTopupModal")
+  .style.display="none";
+
+}
+
+
+/* =========================
+   SUBMIT TOPUP REQUEST
+========================= */
+
+async function submitWalletTopup(
+ event
+){
+
+ event.preventDefault();
+
+
+ if(!currentUser){
+
+  toast(
+   "سجل الدخول أولًا."
+  );
+
+  return;
+
+ }
+
+
+ const amount =
+  Number(
+   $("walletTopupAmount")
+    .value
+  );
+
+
+ const phone =
+  $("walletTopupPhone")
+   .value
+   .trim();
+
+
+ const note =
+  $("walletTopupNote")
+   .value
+   .trim();
+
+
+ if(
+  !Number.isFinite(amount) ||
+  amount <= 0
+ ){
+
+  toast(
+   "اكتب مبلغ صحيح."
+  );
+
+  return;
+
+ }
+
+
+ if(!/^01\d{9}$/.test(phone)){
+
+  toast(
+   "رقم التحويل لازم يكون 11 رقم ويبدأ بـ 01."
+  );
+
+  return;
+
+ }
+
+
+ const btn =
+  $("walletTopupBtn");
+
+
+ try{
+
+  btn.disabled=true;
+
+  btn.textContent=
+   "جاري إرسال الطلب...";
+
+
+  await addDoc(
+
+   collection(
+    db,
+    "walletRequests"
+   ),
+
+   {
+
+    uid:
+     currentUser.uid,
+
+    studentId:
+     currentUser.uid,
+
+    studentName:
+     profile?.name ||
+     currentUser.displayName ||
+     "طالب Mathix",
+
+    email:
+     currentUser.email ||
+     "",
+
+    amount:
+
+     amount,
+
+    paymentMethod:
+     "vodafone_cash",
+
+    vodafoneCashNumber:
+     "01037500636",
+
+    senderPhone:
+     phone,
+
+    note:
+     note,
+
+    status:
+     "pending",
+
+    createdAt:
+     serverTimestamp()
+
+   }
+
+  );
+
+
+  closeWalletTopup();
+
+
+  toast(
+   "تم إرسال طلب شحن المحفظة ✅"
+  );
+
+
+  loadWallet();
+
+
+ }
+ catch(error){
+
+  console.error(
+   "Wallet topup:",
+   error
+  );
+
+
+  toast(
+   "تعذر إرسال طلب الشحن."
+  );
+
+ }
+ finally{
+
+  btn.disabled=false;
+
+  btn.textContent=
+   "إرسال طلب الشحن";
+
+ }
+
+}
 
 /* NAVIGATION */
 
@@ -3862,12 +4613,12 @@ const pageTitles={
  analytics:"تحليلي",
  mistakes:"أخطائي",
  achievements:"إنجازاتي",
+ wallet:"المحفظة",
  subscription:"اشتراكي",
  profile:"الملف الشخصي",
  settings:"الإعدادات"
 
 };
-
 function go(page){
 
  document
@@ -3903,6 +4654,9 @@ function go(page){
 
  if(page==="subscription")
   renderSubscription();
+
+  if(page==="wallet")
+ loadWallet();
 
  if(page==="subjects")
   renderSubjects();
@@ -3962,6 +4716,16 @@ onAuthStateChanged(
     requestsUnsubscribe();
     requestsUnsubscribe=null;
    }
+
+   if(walletUnsubscribe){
+ walletUnsubscribe();
+ walletUnsubscribe=null;
+}
+
+if(walletTransactionsUnsubscribe){
+ walletTransactionsUnsubscribe();
+ walletTransactionsUnsubscribe=null;
+}
 
    showLanding();
 
@@ -4061,6 +4825,10 @@ window.toggleSidebar=toggleSidebar;
 
 window.openPayment=openPayment;
 window.closeModal=closeModal;
+window.loadWallet=loadWallet;
+window.openWalletTopup=openWalletTopup;
+window.closeWalletTopup=closeWalletTopup;
+window.submitWalletTopup=submitWalletTopup;
 window.submitSubscriptionRequest=
  submitSubscriptionRequest;
 window.copyVodafone=copyVodafone;
