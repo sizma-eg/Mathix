@@ -4759,34 +4759,24 @@ function getYoutubeId(url){
 /* =========================================================
    LESSON TYPE
 ========================================================= */
+function lessonType(lesson){
 
-function lessonType(
-  lesson
-){
+  const type = String(
+    lesson.contentType ||
+    lesson.type ||
+    ""
+  ).toLowerCase();
 
-  const type =
-    String(
-      lesson.contentType ||
-      lesson.type ||
-      ""
-    ).toLowerCase();
-
-
-  if(
-    type === "pdf"
-  )
+  if(type === "pdf")
     return "pdf";
 
-
-  if(
-    type === "youtube" ||
-    type === "video"
-  )
+  if(type === "youtube")
     return "youtube";
 
+  if(type === "video")
+    return "video";
 
   return "text";
-
 }
 
 
@@ -4914,36 +4904,28 @@ window.openLesson = function(id){
         ${url ? `<a class="btn" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">فتح ملف PDF</a>` : `<div class="empty">رابط PDF غير متاح.</div>`}
       </div>
     `;
-  }
+  }if(type === "video"){
+  const videoUrl = lesson.videoUrl || lesson.content || "";
 
-  if(type === "youtube"){
-    const url = lesson.youtubeUrl || lesson.content || "";
-    const youtubeId = lesson.youtubeId || getYoutubeId(url);
-    body = youtubeId ? `
-      <div class="lesson-content">
-        <iframe
-          src="https://www.youtube.com/embed/${escapeHTML(youtubeId)}?rel=0"
-          title="${escapeHTML(title)}"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      </div>
-    ` : `<div class="empty">رابط YouTube غير صالح.</div>`;
-  }
-
-  $("modalBox").innerHTML = `
-    <div class="modal-head">
-      <div>
-        <div class="muted" style="font-size:9px">درس Mathix</div>
-        <h3>${escapeHTML(title)}</h3>
-      </div>
-      <button class="close" onclick="closeModal()">×</button>
+  body = videoUrl ? `
+    <div class="lesson-content">
+      <video
+        controls
+        playsinline
+        preload="metadata"
+        title="${escapeHTML(title)}"
+        style="width:100%; max-width:100%; border-radius:16px;"
+      >
+        <source src="${escapeHTML(videoUrl)}" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
     </div>
-    ${description ? `<p class="muted" style="font-size:11px;line-height:1.8;margin-bottom:12px;">${escapeHTML(description)}</p>` : ""}
-    ${paid ? `<div class="meta" style="margin-bottom:12px"><span class="badge green">تم الشراء</span></div>` : ""}
-    ${body}
+  ` : `
+    <div class="empty">
+      رابط الفيديو غير موجود.
+    </div>
   `;
-
+}
   openModal();
 };
 
